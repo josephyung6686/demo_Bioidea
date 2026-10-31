@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Obtimize pipeline proposals</title>
+<style>
+:root{--bg:#f6f7fa;--ink:#0f1a2b;--ink2:#4a576c;--ink3:#7c879a;--blue:#3f7fe6;--amber:#b5720f;--line:#e3e6ec}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);padding:48px 24px 80px;line-height:1.5}
+.wrap{max-width:1240px;margin:0 auto}
+h1{font-size:34px;font-weight:500;letter-spacing:-.02em}
+.intro{color:var(--ink2);margin-top:10px;max-width:70ch}
+h2{font-size:22px;font-weight:600;margin:56px 0 4px}
+.sub{color:var(--ink2);font-size:14.5px}
+.row{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}
+.opt{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px}
+.tag{display:inline-block;font-size:12px;font-weight:600;color:#fff;background:var(--ink);border-radius:4px;padding:2px 8px}
+.opt h3{font-size:15.5px;font-weight:600;margin-top:10px}
+.opt p{font-size:13.5px;color:var(--ink2);margin-top:4px}
+.model{font-size:12px;color:var(--blue);margin-top:8px}
+.mock{margin-top:12px;height:210px;border:1px solid var(--line);border-radius:8px;background:#fbfbfd;padding:12px;font-size:11px;overflow:hidden;position:relative}
+.cur{font-size:11px;font-weight:600;color:var(--amber);margin-left:6px}
+/* mock primitives */
+.t{display:grid;gap:0}
+.t div{display:grid;grid-template-columns:1.4fr 1fr .8fr .8fr;gap:6px;padding:6px 4px;border-bottom:1px solid var(--line)}
+.t div:first-child{font-weight:600;color:var(--ink3);text-transform:uppercase;font-size:9.5px}
+.ok{color:var(--blue);font-weight:600}.warn{color:var(--amber);font-weight:600}
+.bar{height:4px;background:var(--line);border-radius:2px;margin-top:6px}.bar i{display:block;height:100%;background:var(--blue);border-radius:2px}
+.tiles{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.tile{height:58px;border:1px solid var(--line);border-radius:6px;background:#fff}
+.hub{margin:44px auto 0;width:max-content;padding:5px 12px;border:1px solid var(--line);border-radius:999px;background:#fff;font-weight:600}
+.tl{position:relative;margin-top:30px;height:2px;background:var(--line)}
+.tl span{position:absolute;top:-22px;transform:translateX(-50%);font-size:10px;color:var(--ink3)}
+.tl i{position:absolute;top:-5px;width:12px;height:12px;border-radius:50%;background:#fff;border:2px solid var(--blue);transform:translateX(-50%)}
+.chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:34px}
+.chips b{font-weight:500;border:1px solid var(--line);border-radius:4px;padding:2px 6px;background:#fff}
+.rec{border:1px solid var(--line);border-radius:6px;background:#fff;padding:10px}
+.rec h4{font-size:13px}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:3px 12px;margin-top:8px}
+.kv b{color:var(--ink3);font-weight:500}
+.lnk{margin-top:8px;display:flex;gap:4px;flex-wrap:wrap}
+.lnk span{border-bottom:1px solid var(--blue);color:var(--blue)}
+.mx{display:grid;grid-template-columns:50px repeat(5,1fr);gap:3px}
+.mx b{font-weight:600;color:var(--ink3);font-size:9.5px}
+.mx i{height:22px;border-radius:3px;background:#e9eefb}
+.mx i.h{background:var(--blue)}.mx i.w{background:#f3dfbe}
+svg{display:block;width:100%;height:100%}
+.score{font-size:34px;font-weight:500}
+.ck{display:grid;gap:6px;margin-top:8px}
+.ck div{display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:4px}
+.plate{display:grid;grid-template-columns:repeat(6,16px);gap:6px}
+.plate i{width:16px;height:16px;border-radius:50%;border:1.5px solid #cfd4dd;background:#fff}
+.plate i.b{background:var(--blue);border-color:var(--blue)}.plate i.a{background:var(--amber);border-color:var(--amber)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px;height:100%}
+.doc h4{font-size:12.5px}.doc div{border-bottom:1px solid var(--line);padding:5px 0;display:grid;grid-template-columns:28px 1fr}
+.bubble{background:#e9eefb;border-radius:8px;padding:6px 8px;margin-left:auto;width:70%}
+.ans{margin-top:8px;line-height:1.6}.ans sup{color:var(--blue);font-weight:600}
+.src{display:flex;gap:4px;margin-top:8px}.src span{border:1px solid var(--line);border-radius:4px;padding:2px 5px;background:#fff}
+.search{border:1px solid var(--line);border-radius:6px;background:#fff;padding:7px 9px;color:var(--ink3)}
+.note{display:flex;gap:10px;align-items:flex-start;margin-top:10px}
+.note .ln{width:2px;align-self:stretch;background:var(--blue)}
+.note p{font-size:12px;color:var(--ink2);margin:0}
+.pick{margin-top:56px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px}
+.pick p{color:var(--ink2);font-size:14.5px;margin-top:6px}
+@media (max-width:900px){.row{grid-template-columns:1fr}}
+</style>
+</head>
+<body><div class="wrap">
+<h1>Obtimize pipeline: design proposals</h1>
+<p class="intro">Structure is locked: one vertical flow, Ingest → Understand → Diagnose → Optimize → Ask, joined by a single line with short notes explaining each hand-off. Flat white cards. Below are three designs for each step. Pick one letter per step (for example "1B, 2B, 3A, 4C, 5B, connector A") and I will build exactly that.</p>
+
+<h2>1 · Ingest</h2><p class="sub">How the lab's files come in.</p>
+<div class="row">
+  <div class="opt"><span class="tag">1A</span><span class="cur">current</span><h3>Materials into a hub</h3><p>Real file previews (flow plot, microscope image, plate map) linked by lines into one Obtimize node.</p><div class="model">Approach: product-visual hero, as in Isomorphic Labs</div>
+    <div class="mock"><div class="tiles"><div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div></div><div class="hub">Obtimize · 5 of 5 linked</div></div></div>
+  <div class="opt"><span class="tag">1B</span><h3>Source table with live status</h3><p>A clean table: file, type, facts extracted, fingerprint. Rows fill in as they're read. Reads like real software.</p><div class="model">Approach: data-product tables, as in Benchling</div>
+    <div class="mock"><div class="t"><div><span>Source</span><span>Type</span><span>Facts</span><span>Status</span></div><div><span>CD31_d10_R07.fcs</span><span>Flow</span><span>14</span><span class="ok">Linked</span></div><div><span>d6_R09_01.tif</span><span>Image</span><span>3</span><span class="ok">Linked</span></div><div><span>plate_map_oct.csv</span><span>Plate</span><span>24</span><span class="ok">Linked</span></div><div><span>protocol_v3.docx</span><span>Protocol</span><span>9</span><span>Reading</span></div></div><div class="bar"><i style="width:72%"></i></div></div></div>
+  <div class="opt"><span class="tag">1C</span><h3>Experiment timeline</h3><p>Files placed on a timeline of the lab's runs, so you see history forming. Extracted facts appear under each date.</p><div class="model">Approach: editorial timeline, as in Manas AI</div>
+    <div class="mock"><div class="tl"><i style="left:8%"></i><span style="left:8%">Aug</span><i style="left:38%"></i><span style="left:38%">Sep</span><i style="left:68%"></i><span style="left:68%">Oct</span><i style="left:92%"></i><span style="left:92%">Nov</span></div><div class="chips"><b>Run 05 · CHIR 3 µM</b><b>Run 07 · VEGF 100</b><b>Protocol v3</b><b>Run 09 · lot B</b><b>Run 14 · no outcome</b></div></div></div>
+</div>
+
+<h2>2 · Understand (the brain)</h2><p class="sub">How we show the lab's connected memory. The current node graph is option 2A.</p>
+<div class="row">
+  <div class="opt"><span class="tag">2A</span><span class="cur">current</span><h3>Node graph</h3><p>Dots and lines you can drag. Shows "connectedness" but is hard to read quickly.</p><div class="model">Approach: knowledge-graph tools (Obsidian-style)</div>
+    <div class="mock"><svg viewBox="0 0 300 180"><g stroke="#cfd4dd"><line x1="80" y1="60" x2="150" y2="90"/><line x1="150" y1="90" x2="220" y2="60"/><line x1="150" y1="90" x2="150" y2="150"/><line x1="80" y1="60" x2="60" y2="130"/></g><g fill="#3f7fe6"><circle cx="80" cy="60" r="7"/><circle cx="220" cy="60" r="7"/><circle cx="150" cy="150" r="7"/></g><circle cx="150" cy="90" r="5" fill="#7c879a"/><circle cx="60" cy="130" r="5" fill="#b5720f"/></svg></div></div>
+  <div class="opt"><span class="tag">2B</span><h3>Experiment record</h3><p>One run shown as a structured record: conditions, cells, protocol, result and sources, with links to related runs. Instantly readable.</p><div class="model">Approach: notebook entries, as in Benchling</div>
+    <div class="mock"><div class="rec"><h4>Run 09 · iPSC → endothelial</h4><div class="kv"><b>CHIR</b><span>4 µM</span><b>VEGF</b><span>100 ng/mL</span><b>Cells</b><span>Line A, passage 18</span><b>Coating</b><span>Lot B</span><b>Result</b><span>CD31+ low</span></div><div class="lnk">Compared with <span>Run 07</span><span>Protocol v3</span></div></div></div></div>
+  <div class="opt"><span class="tag">2C</span><h3>Run × condition matrix</h3><p>Every run as a row, every condition as a column. Shared values light up, so patterns jump out without a graph.</p><div class="model">Approach: dense data views, as in Isomorphic Labs</div>
+    <div class="mock"><div class="mx"><b></b><b>CHIR</b><b>VEGF</b><b>Lot</b><b>P</b><b>Out</b><b>Run 05</b><i></i><i></i><i></i><i></i><i class="w"></i><b>Run 07</b><i class="h"></i><i class="h"></i><i></i><i></i><i class="h"></i><b>Run 09</b><i class="h"></i><i class="h"></i><i class="w"></i><i class="w"></i><i></i><b>Run 12</b><i></i><i class="h"></i><i></i><i></i><i class="h"></i><b>Run 14</b><i class="h"></i><i></i><i></i><i></i><i class="w"></i></div></div></div>
+</div>
+
+<h2>3 · Diagnose</h2><p class="sub">How problems are shown before anyone relies on the data.</p>
+<div class="row">
+  <div class="opt"><span class="tag">3A</span><span class="cur">current</span><h3>Issue list beside the brain</h3><p>Priority-ranked issues; clicking one highlights it in the brain view.</p><div class="model">Approach: inbox-style triage</div>
+    <div class="mock"><div class="ck"><div><span>Missing outcome · Run 14</span><span class="warn">High</span></div><div><span>Dose mismatch · Run 12</span><span class="warn">High</span></div><div><span>Assay v1 vs v2 · Run 05</span><span>Medium</span></div><div><span>Repeats Run 05 · Run 16</span><span>Medium</span></div><div><span>12 unlabeled photos</span><span>Low</span></div></div></div></div>
+  <div class="opt"><span class="tag">3B</span><h3>Flags inline on the records</h3><p>Issues appear directly on the run table, at the exact cell that's wrong, with a one-line explanation on hover.</p><div class="model">Approach: inline validation, as in Benchling</div>
+    <div class="mock"><div class="t"><div><span>Run</span><span>VEGF</span><span>Assay</span><span>Outcome</span></div><div><span>05</span><span>25</span><span class="warn">v1 ⚑</span><span>low</span></div><div><span>07</span><span>100</span><span>v2</span><span>high</span></div><div><span>12</span><span class="warn">100 ⚑</span><span>v2</span><span>high</span></div><div><span>14</span><span>50</span><span>v2</span><span class="warn">missing ⚑</span></div></div></div></div>
+  <div class="opt"><span class="tag">3C</span><h3>Data health summary</h3><p>One headline score with checks grouped by type. Good for executives and buyers at a glance.</p><div class="model">Approach: summary dashboards, as in Manas AI</div>
+    <div class="mock"><div class="score">82<span style="font-size:14px;color:#7c879a"> / 100 ready</span></div><div class="ck"><div><span>Outcomes recorded</span><span class="warn">5 of 6</span></div><div><span>Assays comparable</span><span class="warn">4 of 5</span></div><div><span>Doses verified</span><span class="warn">5 of 6</span></div><div><span>Images labeled</span><span class="warn">38 of 50</span></div></div></div></div>
+</div>
+
+<h2>4 · Optimize (the engine)</h2><p class="sub">How the next round and the benchmarks are presented.</p>
+<div class="row">
+  <div class="opt"><span class="tag">4A</span><span class="cur">current</span><h3>Plate + benchmarks</h3><p>A well plate with the next wells lit, the list of conditions, and benchmark results beside it.</p><div class="model">Approach: lab-native visuals</div>
+    <div class="mock"><div class="two"><div><div class="plate"><i></i><i></i><i></i><i class="a"></i><i></i><i></i><i></i><i></i><i class="b"></i><i class="b"></i><i class="b"></i><i></i><i></i><i></i><i class="b"></i><i class="b"></i><i class="b"></i><i></i><i></i><i></i><i></i><i class="a"></i><i></i><i></i></div></div><svg viewBox="0 0 140 100"><path d="M5 95 L35 50 L60 25 L80 18 L135 16" fill="none" stroke="#3f7fe6" stroke-width="2"/><path d="M5 95 L40 75 L75 52 L105 32 L135 18" fill="none" stroke="#9aa3b5" stroke-width="2"/></svg></div></div></div>
+  <div class="opt"><span class="tag">4B</span><h3>Design-space map</h3><p>The CHIR × VEGF map from the hero, larger: past runs, the robust region, and the recommended wells with reasons.</p><div class="model">Approach: scientific figure, as in Isomorphic Labs</div>
+    <div class="mock"><svg viewBox="0 0 300 180"><defs><radialGradient id="g"><stop offset="0" stop-color="#3f7fe6" stop-opacity=".8"/><stop offset="1" stop-color="#3f7fe6" stop-opacity="0"/></radialGradient></defs><rect width="300" height="180" fill="#fff"/><circle cx="170" cy="80" r="70" fill="url(#g)"/><ellipse cx="170" cy="80" rx="45" ry="32" fill="none" stroke="#0f1a2b" stroke-dasharray="4 4"/><g fill="#0f1a2b"><circle cx="60" cy="140" r="3"/><circle cx="100" cy="60" r="3"/><circle cx="230" cy="150" r="3"/><circle cx="250" cy="40" r="3"/></g><g fill="none" stroke="#3f7fe6" stroke-width="2"><circle cx="150" cy="70" r="6"/><circle cx="190" cy="95" r="6"/><circle cx="170" cy="60" r="6"/></g></svg></div></div>
+  <div class="opt"><span class="tag">4C</span><h3>Next-round plan document</h3><p>A ready-to-run plan: each well, its conditions and one line on why it was chosen, plus an export button.</p><div class="model">Approach: deliverable-first, as in Benchling</div>
+    <div class="mock doc"><h4>Round 6 plan · 8 wells</h4><div><b>B3</b><span>CHIR 3.0 µM · VEGF 100 · tests lower edge</span></div><div><b>B5</b><span>CHIR 4.0 µM · VEGF 100 · tests upper edge</span></div><div><b>C4</b><span>CHIR 3.5 µM · VEGF 120 · most informative</span></div><div><b class="warn">A4</b><span>Replicate Run 14 · outcome missing</span></div><div><b class="warn">D4</b><span>Lot B control · separates lot from passage</span></div></div></div>
+</div>
+
+<h2>5 · Ask</h2><p class="sub">How scientists question the lab's history.</p>
+<div class="row">
+  <div class="opt"><span class="tag">5A</span><span class="cur">current</span><h3>Chat with citations</h3><p>A conversation: question, thinking steps, source cards, answer with numbered citations.</p><div class="model">Approach: AI assistants</div>
+    <div class="mock"><div class="bubble">Why did Run 09 underperform Run 07?</div><div class="ans">Run 09 used coating lot B<sup>1</sup> and passage 18<sup>2</sup>.</div><div class="src"><span>1 run_sheet_09</span><span>2 cell_log</span></div></div></div>
+  <div class="opt"><span class="tag">5B</span><h3>Search with an answer card</h3><p>One search bar; the answer appears as a card with sources listed beside it. Feels like a research tool, not a chatbot.</p><div class="model">Approach: Perplexity-style search</div>
+    <div class="mock"><div class="search">Have we tried VEGF above 50 ng/mL?</div><div class="two" style="height:auto;margin-top:8px"><div class="rec">Yes, 3 runs at 100 ng/mL<sup style="color:#3f7fe6">1-3</sup>. Runs 07 and 12 gave high purity.</div><div class="ck"><div><span>run_sheet_07</span></div><div><span>run_sheet_09</span></div><div><span>dilution_R12</span></div></div></div></div></div>
+  <div class="opt"><span class="tag">5C</span><h3>Question gallery</h3><p>Four example questions as cards; click one to expand its cited answer in place. Simpler and scannable.</p><div class="model">Approach: FAQ-style, as in Manas AI</div>
+    <div class="mock"><div class="ck"><div><span>Have we tried VEGF above 50?</span><span>+</span></div><div><span>Why did Run 09 underperform?</span><span>+</span></div><div><span>What should we run next?</span><span>+</span></div><div><span>What data is missing?</span><span>+</span></div></div></div></div>
+</div>
+
+<h2>Connector notes</h2><p class="sub">The single line between steps, with Manas-style notes explaining each hand-off.</p>
+<div class="row">
+  <div class="opt"><span class="tag">CA</span><h3>Side notes on the line</h3><p>A short note sits beside the line at each hand-off.</p>
+    <div class="mock"><div class="note"><span class="ln"></span><p><b>Files become facts.</b> Each source is fingerprinted, then its conditions and results are extracted.</p></div><div class="note"><span class="ln"></span><p><b>Facts get checked.</b> Gaps are flagged before anything is optimized.</p></div></div></div>
+  <div class="opt"><span class="tag">CB</span><h3>Numbered captions</h3><p>A small numbered caption centered on the line, like figure captions in a paper.</p>
+    <div class="mock" style="text-align:center"><div style="width:2px;height:40px;background:#3f7fe6;margin:0 auto"></div><p style="margin:8px 0;font-size:12px"><b>1 → 2</b> · 5 sources became 86 linked facts</p><div style="width:2px;height:40px;background:#3f7fe6;margin:0 auto"></div><p style="margin-top:8px;font-size:12px"><b>2 → 3</b> · 5 issues flagged before optimizing</p></div></div>
+  <div class="opt"><span class="tag">CC</span><h3>Live counters</h3><p>Numbers on the line count up as you scroll past, showing data flowing through the system.</p>
+    <div class="mock" style="text-align:center"><div style="width:2px;height:30px;background:#3f7fe6;margin:0 auto"></div><div class="score" style="font-size:26px">86</div><p style="font-size:12px;color:#4a576c">linked facts</p><div style="width:2px;height:30px;background:#3f7fe6;margin:0 auto"></div><div class="score" style="font-size:26px">5</div><p style="font-size:12px;color:#4a576c">issues found</p></div></div>
+</div>
+
+<div class="pick"><b>How to choose</b><p>Reply with one letter per row, e.g. "1B, 2B, 3B, 4C, 5B, CA". You can also mix, e.g. "2B but keep the graph as a toggle".</p></div>
+</div></body></html>
