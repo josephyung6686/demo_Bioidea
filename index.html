@@ -1109,6 +1109,45 @@ body,body *:not(.ph):not(i),button,input,textarea,select,svg text{font-family:"I
 .ag-next:not(:has(.ag-step)){opacity:1}
 .ag-next:not(:has(.ag-step)) .ag-h{opacity:0}
 @media (max-width:960px){.agent{grid-template-columns:1fr}.agent .ag-log,.agent .ag-iss,.agent .ag-next{grid-column:1;border-left:0;padding-left:0}.brain-grid .stagebox{height:380px}}
+
+/* graph wide on the left, compact agent column on the right */
+.brain-grid{grid-template-columns:1.7fr 1fr;align-items:start}
+.brain-grid .stagebox{height:470px;min-height:470px}
+.agent{margin-top:0;display:block;padding:14px 16px}
+.agent .ag-iss,.agent .ag-next{border-left:0;padding-left:0}
+.agent::before{left:-17px;top:50%;width:16px;height:2px;margin:0;background:repeating-linear-gradient(90deg,var(--accent) 0 6px,transparent 6px 10px);background-size:10px 2px;animation:dashright .6s linear infinite}
+.agent::after{left:-6px;top:50%;margin:-5px 0 0}
+.ag-head b{font-size:13.5px}.ag-head button{font-size:12px}
+.ag-log{font-size:11.5px;gap:4px;margin-top:8px}
+.ag-line i{width:10px;height:10px}
+.ag-iss .diag{gap:4px;margin-top:10px}
+.ag-iss .dg{padding:6px 10px}.ag-iss .dg b{font-size:12.5px}.ag-iss .dg span{font-size:11px}
+.ag-next{margin-top:10px}.ag-h{font-size:10.5px}
+.ag-steps{gap:6px;margin-top:6px}
+.ag-step{padding:7px 10px}.ag-step b{font-size:12.5px}.ag-step span{font-size:11.5px;line-height:1.4}
+@media (max-width:960px){.brain-grid{grid-template-columns:1fr}.agent::before,.agent::after{display:none}}
+
+.brain-grid{align-items:stretch}
+.brain-grid .stagebox{height:auto;min-height:470px}
+.ag-step span{display:block;line-height:1.35 !important;margin-top:2px}
+.ag-step{padding:8px 10px}
+.ag-next .ag-h{margin-top:4px}
+
+/* cleaner rail top: no overflowing bar or floating dots; numbered cells in one tidy card */
+.slide .s-vis .fcols::before,.slide .s-vis .fcols>div::before,.slide .s-vis .fcols>div+div::after{display:none !important}
+.slide:not(#impact) .s-vis .fcols{counter-reset:fc;border:1px solid var(--line);border-top:2px solid var(--accent);border-radius:12px;overflow:hidden}
+.slide:not(#impact) .s-vis .fcols>div{counter-increment:fc;padding:16px 20px}
+.slide:not(#impact) .s-vis .fcols>div b::before{content:"0" counter(fc);display:inline-block;margin-right:8px;font-size:11px;font-weight:600;color:var(--accent);vertical-align:1px}
+
+/* brain: wider section, roomier right column, taller graph */
+#brain .s-vis{max-width:1200px}
+#brain .brain-grid{grid-template-columns:1.2fr 1fr}
+#brain .brain-grid .stagebox{min-height:600px}
+#brain .agent{padding:18px 20px}
+#brain .ag-iss .diag{grid-template-columns:1fr 1fr;gap:6px}
+#brain .ag-iss .dg{flex-direction:column;align-items:flex-start;gap:2px;display:flex !important}
+#brain .ag-steps{grid-template-columns:1fr}
+@media (max-width:960px){#brain .brain-grid{grid-template-columns:1fr}#brain .ag-iss .diag{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -1782,7 +1821,7 @@ const LAB={
     for(let i=0;i<N.length;i++){const a=N[i];if(!vis(a))continue;
       for(let j=i+1;j<N.length;j++){const b=N[j];if(!vis(b))continue;let dx=b.x-a.x,dy=b.y-a.y,d2=dx*dx+dy*dy+.01,d=Math.sqrt(d2),F=5200/d2*k;dx/=d;dy/=d;a.vx-=dx*F;a.vy-=dy*F;b.vx+=dx*F;b.vy+=dy*F}}
     E.forEach(([a,b])=>{if(!vis(a)||!vis(b))return;let dx=b.x-a.x,dy=b.y-a.y,d=Math.hypot(dx,dy)||1,L=a.t==='cell'&&a.id==='iA'||b.id==='iA'?120:70,F=(d-L)*.02*k;dx/=d;dy/=d;a.vx+=dx*F;a.vy+=dy*F;b.vx-=dx*F;b.vy-=dy*F});
-    N.forEach(n=>{if(!vis(n))return;n.vx+=(W/2-n.x)*.0002*k;n.vy+=(H/2-n.y)*.006*k;if(n===drag){n.vx=n.vy=0;return}n.vx*=.82;n.vy*=.82;n.x+=n.vx;n.y+=n.vy;n.x=Math.max(90,Math.min(W-90,n.x));n.y=Math.max(30,Math.min(H-30,n.y))});
+    N.forEach(n=>{if(!vis(n))return;n.vx+=(W/2-n.x)*.0002*k;n.vy+=(H/2-n.y)*.006*k;if(n===drag){n.vx=n.vy=0;return}n.vx*=.82;n.vy*=.82;n.x+=n.vx;n.y+=n.vy;n.x=Math.max(120,Math.min(W-120,n.x));n.y=Math.max(30,Math.min(H-30,n.y))});
     alpha=Math.max(alpha*.985,0);
   }
   function draw(){
@@ -1794,7 +1833,7 @@ const LAB={
       x.beginPath();x.arc(n.x,n.y,n.r,0,6.28);x.fillStyle=col;x.fill();
       if(n===sel){x.beginPath();x.arc(n.x,n.y,n.r+6,0,6.28);x.strokeStyle=col;x.lineWidth=1.5;x.stroke();x.lineWidth=1}
       const showL=hl?(n.t===hl&&!focus)||n===focus||(focus&&focus.nb.has(n)):(n.t==='run'||n.t==='issue'||n===focus||(focus&&focus.nb.has(n)));
-      if(showL){x.font=`${n.t==='run'?'600 11px':'500 11px'} "Inter",sans-serif`;const tw=x.measureText(n.label).width;let lx=n.x+n.r+7,ly=n.y-9;const self=placed.findIndex(r=>r[0]===n.x-n.r-2&&r[1]===n.y-n.r-2);const sv=self>=0?placed.splice(self,1)[0]:null;const must=n===focus||(focus&&focus.nb.has(n));if(!free(lx-5,ly,lx+tw+5,ly+19)){lx=n.x-n.r-7-tw;if(!free(lx-5,ly,lx+tw+5,ly+19)&&!must){if(sv)placed.push(sv);x.globalAlpha=1;return}}placed.push([lx-5,ly,lx+tw+5,ly+19]);if(sv)placed.push(sv);
+      if(showL){x.font=`${n.t==='run'?'600 11px':'500 11px'} "Inter",sans-serif`;const tw=x.measureText(n.label).width;let lx=n.x+n.r+7,ly=n.y-9;if(lx+tw+6>W)lx=n.x-n.r-7-tw;if(lx<6)lx=n.x+n.r+7;const self=placed.findIndex(r=>r[0]===n.x-n.r-2&&r[1]===n.y-n.r-2);const sv=self>=0?placed.splice(self,1)[0]:null;const must=n===focus||(focus&&focus.nb.has(n));if(!free(lx-5,ly,lx+tw+5,ly+19)){lx=n.x-n.r-7-tw;if(!free(lx-5,ly,lx+tw+5,ly+19)&&!must){if(sv)placed.push(sv);x.globalAlpha=1;return}}placed.push([lx-5,ly,lx+tw+5,ly+19]);if(sv)placed.push(sv);
         x.fillStyle='rgba(255,255,255,.92)';x.beginPath();x.roundRect?x.roundRect(lx-5,ly,tw+10,19,6):x.rect(lx-5,ly,tw+10,19);x.fill();
         x.fillStyle=n.t==='issue'?'#0E1116':n.t==='run'?'#0f1a2b':'#4a576c';x.fillText(n.label,lx,n.y+4.5)}
       x.globalAlpha=1});
