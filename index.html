@@ -959,6 +959,27 @@ h2,.typed-h,.s-h{font-weight:600}
 .ag-step .ph{color:var(--accent);margin-top:3px}
 .ag-step b{display:block;font-size:14px;font-weight:600}.ag-step span{font-size:13px}
 @media (max-width:960px){.ag-iss .diag,.ag-steps{grid-template-columns:1fr}.panel{position:static;width:auto;max-height:none}.stagebox{height:380px}}
+
+/* tighter pipeline: slides sit close so they read as one flow */
+.slide{margin-bottom:64px;padding-top:24px}
+.branch{margin-bottom:64px}
+.s-line{margin-top:10px}.s-vis{margin-top:24px}
+.chap-intro{padding-bottom:24px}
+/* feature cards joined into one connected rail */
+.s-vis .fcols{position:relative;gap:0;border:1px solid var(--line);border-radius:12px;background:#fff;overflow:visible}
+.s-vis .fcols>div{border:0;border-radius:0;background:none;position:relative;padding:16px 20px 16px 22px}
+.s-vis .fcols>div+div{border-left:1px solid var(--line)}
+.s-vis .fcols::before{content:"";position:absolute;left:22px;right:22px;top:-1px;height:3px;border-radius:3px;background:var(--accent);transform-origin:left;transform:scaleX(0);transition:transform 1.4s var(--ease) .6s}
+.slide.in .s-vis .fcols::before{transform:scaleX(1)}
+.s-vis .fcols>div::before{content:"";position:absolute;left:22px;top:-6px;width:9px;height:9px;border-radius:50%;background:#fff;border:2.5px solid var(--accent);z-index:1}
+.s-vis .fcols>div+div::after{content:"";position:absolute;left:-7px;top:50%;width:12px;height:12px;margin-top:-6px;border-radius:50%;background:#fff;border:1px solid var(--line);box-shadow:inset 0 0 0 3px #fff,inset 0 0 0 6px var(--accent)}
+@media (max-width:960px){.s-vis .fcols>div+div{border-left:0;border-top:1px solid var(--line)}.s-vis .fcols>div+div::after{left:50%;top:-7px;margin:0 0 0 -6px}}
+
+/* graph -> agent strip joined by a short animated link */
+.agent{position:relative;margin-top:30px}
+.agent::before{content:"";position:absolute;left:50%;top:-31px;width:3px;height:30px;margin-left:-1.5px;background:repeating-linear-gradient(var(--accent) 0 6px,transparent 6px 10px);background-size:3px 10px;animation:dashdown .6s linear infinite}
+.agent::after{content:"";position:absolute;left:50%;top:-6px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 5px rgb(31 63 216 / .15)}
+@keyframes dashdown{to{background-position:0 10px}}
 </style>
 </head>
 <body>
@@ -1503,8 +1524,10 @@ document.querySelectorAll('.spot').forEach(el=>el.addEventListener('pointermove'
     const cta=slides[2].querySelector('.s-cta'),a=bot(cta);out.push([a,[a[0],R(document.getElementById('ask')).top+30]]);return out}
   (function f(now){requestAnimationFrame(f);if(!on)return;x.clearRect(0,0,innerWidth,innerHeight);x.fillStyle=x.strokeStyle='#1F3FD8';x.lineWidth=1.5;
     segs().forEach(([a,b])=>{if(b[1]<-60||a[1]>innerHeight+60)return;const k=clamp((innerHeight*.72-a[1])/Math.max(1,b[1]-a[1]));if(k<=0)return;
-      x.beginPath();for(let j=0;j<=60*k;j++){const[px,py]=pt(a,b,j/60);j?x.lineTo(px,py):x.moveTo(px,py)}x.stroke();
-      if(!reduceM){const[px,py]=pt(a,b,((now/1800)%1)*k);x.beginPath();x.arc(px,py,3,0,6.28);x.fill()}})})();
+      x.lineWidth=3;x.lineCap='round';x.globalAlpha=.25;x.beginPath();for(let j=0;j<=60;j++){const[px,py]=pt(a,b,j/60);j?x.lineTo(px,py):x.moveTo(px,py)}x.stroke();
+      x.globalAlpha=1;x.beginPath();for(let j=0;j<=60*k;j++){const[px,py]=pt(a,b,j/60);j?x.lineTo(px,py):x.moveTo(px,py)}x.stroke();
+      const[hx,hy]=pt(a,b,k);x.beginPath();x.arc(hx,hy,6,0,6.28);x.fill();x.globalAlpha=.18;x.beginPath();x.arc(hx,hy,12,0,6.28);x.fill();x.globalAlpha=1;
+      if(!reduceM)for(let q=0;q<3;q++){const t=(((now/1400)+q/3)%1)*k;for(let z=0;z<8;z++){const tt=t-z*.012;if(tt<0)break;const[px,py]=pt(a,b,tt);x.globalAlpha=(1-z/8)*.9;x.beginPath();x.arc(px,py,4.5-z*.4,0,6.28);x.fillStyle='#fff';x.fill();x.fillStyle='#1F3FD8';x.beginPath();x.arc(px,py,3.2-z*.3,0,6.28);x.fill()}}x.globalAlpha=1})})();
 
   // 01 Ingest: real-looking materials get fingerprinted and linked into the hub
   (()=>{const s1=slides[0],mats=[...s1.querySelectorAll('.mat')],svg=document.getElementById('matLinks'),hub=document.getElementById('hub'),cnt=document.getElementById('hubCount');if(!mats.length)return;
