@@ -345,7 +345,8 @@ h2{font-size:clamp(32px,3.8vw,50px);line-height:1.06;letter-spacing:-.026em;font
 .filters{display:flex;flex-wrap:wrap;gap:8px;padding:4px 4px 14px}
 .filters button{font:inherit;font-size:13px;color:var(--ink-2);background:rgb(15 26 43 / .03);border:1px solid var(--line);border-radius:999px;padding:6px 12px;display:flex;align-items:center;gap:8px;cursor:pointer;transition:opacity .2s,border-color .2s}
 .filters button i{width:9px;height:9px;border-radius:50%;display:inline-block}
-.filters button.off{opacity:.35}
+.filters button.active{background:color-mix(in srgb,var(--c) 14%,#fff);border-color:var(--c);color:var(--ink);font-weight:600}
+.filters button.active i{box-shadow:0 0 0 4px color-mix(in srgb,var(--c) 25%,transparent)}
 .filters button:hover{border-color:rgb(15 26 43 / .2)}
 .brain-grid{display:grid;grid-template-columns:1fr 300px;gap:14px}
 .stagebox{position:relative;height:540px;border-radius:14px;border:1px solid var(--line);background:radial-gradient(60% 60% at 50% 50%,rgb(63 127 230 / .07),transparent 70%),rgb(255 255 255 / .55);overflow:hidden}
@@ -579,6 +580,28 @@ section{padding:112px 0}
 .prog span.done{background:rgb(63 127 230 / .1);color:var(--accent)}
 .prog span.on{background:var(--grad);color:#fff;font-weight:600}
 @media (max-width:960px){.imp.big .n{font-size:64px}.prog span{font-size:10.5px}section{padding:80px 0}}
+
+/* ===== Slides: centered header -> wide visual -> feature cards (Linear-style) ===== */
+.chapters-x{padding-left:0}
+.spine,.slide::before{display:none}
+.slide{display:flex;flex-direction:column;align-items:center;text-align:center;min-height:0;padding:40px 0 0;margin-bottom:150px;gap:0}
+.slide:last-child{margin-bottom:60px}
+.s-text{display:contents}
+.s-num{order:1;display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;background:#fff;border:1px solid rgb(63 127 230 / .3);box-shadow:0 4px 14px -8px rgb(63 127 230 / .5)}
+.slide[data-n="01"] .s-num{color:var(--pink);border-color:rgb(209 77 138 / .3)}
+.slide[data-n="03"] .s-num{color:var(--warn);border-color:rgb(201 128 28 / .35)}
+.s-h{order:2;margin-top:18px;max-width:22ch}
+.s-line{order:3;margin:14px auto 0;max-width:52ch}
+.s-vis{order:4;width:100%;max-width:1000px;margin-top:40px;text-align:left}
+.s-vis::before,.s-vis::after{display:none}
+.feats{order:5;width:100%;max-width:1000px;margin-top:16px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;text-align:left}
+.feats li{display:flex;flex-direction:column;gap:10px;padding:22px;border-radius:18px;background:rgb(255 255 255 / .75);border:1px solid rgb(255 255 255 / .9);box-shadow:inset 0 1px 0 #fff,0 10px 30px -20px rgb(40 70 130 / .25);transition:transform .35s var(--ease),box-shadow .35s}
+.feats li:hover{transform:translateY(-3px);box-shadow:inset 0 1px 0 #fff,0 18px 40px -22px rgb(40 70 130 / .35)}
+.feats li>div{display:flex;flex-direction:column;gap:6px;flex:1}
+.ftag{margin-top:auto;padding-top:12px;font-style:normal;font-size:12px;font-weight:500;color:var(--ink-3);border-top:1px dashed var(--line)}
+.s-cta{order:6;margin-top:32px}
+.brain3d{min-height:520px}
+@media (max-width:960px){.feats{grid-template-columns:1fr}.slide{margin-bottom:100px}.brain3d{min-height:400px}}
 </style>
 </head>
 <body>
@@ -683,9 +706,9 @@ section{padding:112px 0}
         <h3 class="s-h">Your lab's files, exactly as they are</h3>
         <p class="s-line">Obtimize starts from what your team already saves. No migration, no re-typing.</p>
         <ul class="feats">
-          <li><i class="ph ph-files"></i><div><b>Reads biology files natively</b><span>FCS gating, microscope TIFFs, plate maps, run sheets and protocol PDFs, including non-English ones.</span></div></li>
-          <li><i class="ph ph-lock-key"></i><div><b>Read-only, originals kept</b><span>Every file is fingerprinted, so any number can be traced back to its source.</span></div></li>
-          <li><i class="ph ph-plugs-connected"></i><div><b>Connects where data lives</b><span>Shared drives and instrument export folders first; notebooks and Slack next.</span></div></li>
+          <li><i class="ph ph-files"></i><div><b>Reads biology files natively</b><span>FCS gating, microscope TIFFs, plate maps, run sheets and protocol PDFs, including non-English ones.</span><em class="ftag">FCS · TIFF · CSV · DOCX · PDF</em></div></li>
+          <li><i class="ph ph-lock-key"></i><div><b>Read-only, originals kept</b><span>Every file is fingerprinted, so any number can be traced back to its source.</span><em class="ftag">Fingerprint per file</em></div></li>
+          <li><i class="ph ph-plugs-connected"></i><div><b>Connects where data lives</b><span>Shared drives and instrument export folders first; notebooks and Slack next.</span><em class="ftag">Shared drives today · ELNs and Slack next</em></div></li>
         </ul>
       </div>
       <div class="s-vis glass">
@@ -709,9 +732,9 @@ section{padding:112px 0}
         <h3 class="s-h">One brain that understands every experiment</h3>
         <p class="s-line">Each run is rebuilt as linked facts, so the lab's history becomes something you can ask.</p>
         <ul class="feats">
-          <li><i class="ph ph-graph"></i><div><b>Connected scientific memory</b><span>Every run linked to its doses, cell line, passage, lot, protocol version, images and result.</span></div></li>
-          <li><i class="ph ph-notebook"></i><div><b>Keeps the context</b><span>Failed runs, hypotheses and the decisions behind them, not just final numbers.</span></div></li>
-          <li><i class="ph ph-seal-check"></i><div><b>Draft until signed</b><span>Anything the software extracts stays a draft until a scientist verifies it.</span></div></li>
+          <li><i class="ph ph-graph"></i><div><b>Connected scientific memory</b><span>Every run linked to its doses, cell line, passage, lot, protocol version, images and result.</span><em class="ftag">Run → doses → cells → protocol → result</em></div></li>
+          <li><i class="ph ph-notebook"></i><div><b>Keeps the context</b><span>Failed runs, hypotheses and the decisions behind them, not just final numbers.</span><em class="ftag">Failed runs kept, never dropped</em></div></li>
+          <li><i class="ph ph-seal-check"></i><div><b>Draft until signed</b><span>Anything the software extracts stays a draft until a scientist verifies it.</span><em class="ftag">Draft → signed by a named scientist</em></div></li>
         </ul>
       </div>
       <div class="s-vis glass brain3d">
@@ -726,9 +749,9 @@ section{padding:112px 0}
         <h3 class="s-h">Finds problems before they cost you a run</h3>
         <p class="s-line">An optimizer fed bad data gives confident wrong answers. So Obtimize checks first.</p>
         <ul class="feats">
-          <li><i class="ph ph-warning"></i><div><b>Gaps and errors</b><span>Missing outcomes, unlabeled photos, and doses that don't match their dilution sheets.</span></div></li>
-          <li><i class="ph ph-stack"></i><div><b>What can be compared</b><span>Flags assay version changes and batch effects instead of silently pooling them.</span></div></li>
-          <li><i class="ph ph-copy"></i><div><b>Repeated runs</b><span>Catches planned experiments that repeat ones you already ran.</span></div></li>
+          <li><i class="ph ph-warning"></i><div><b>Gaps and errors</b><span>Missing outcomes, unlabeled photos, and doses that don't match their dilution sheets.</span><em class="ftag">Missing outcome · unlabeled image · dose mismatch</em></div></li>
+          <li><i class="ph ph-stack"></i><div><b>What can be compared</b><span>Flags assay version changes and batch effects instead of silently pooling them.</span><em class="ftag">Assay version · lot · plate</em></div></li>
+          <li><i class="ph ph-copy"></i><div><b>Repeated runs</b><span>Catches planned experiments that repeat ones you already ran.</span><em class="ftag">Checked against every past run</em></div></li>
         </ul>
       </div>
       <div class="s-vis glass">
@@ -751,9 +774,9 @@ section{padding:112px 0}
         <h3 class="s-h">Tells you what to run next</h3>
         <p class="s-line">Verified records become a plan that fits your well budget, or an honest "not yet".</p>
         <ul class="feats">
-          <li><i class="ph ph-flask"></i><div><b>Next experiments</b><span>The wells that teach you the most per round, not repeats of the best run.</span></div></li>
-          <li><i class="ph ph-crosshair"></i><div><b>A robust range</b><span>Conditions that hold across run-to-run noise, which matters at scale-up.</span></div></li>
-          <li><i class="ph ph-hand-palm"></i><div><b>Says when it can't</b><span>If the data can't support a decision, it asks for replicates first.</span></div></li>
+          <li><i class="ph ph-flask"></i><div><b>Next experiments</b><span>The wells that teach you the most per round, not repeats of the best run.</span><em class="ftag">Fits a fixed well budget</em></div></li>
+          <li><i class="ph ph-crosshair"></i><div><b>A robust range</b><span>Conditions that hold across run-to-run noise, which matters at scale-up.</span><em class="ftag">A range, not one fragile point</em></div></li>
+          <li><i class="ph ph-hand-palm"></i><div><b>Says when it can't</b><span>If the data can't support a decision, it asks for replicates first.</span><em class="ftag">"Run 2 replicates first"</em></div></li>
         </ul>
         <a class="btn btn-primary s-cta" href="#ask">Ask your lab's history <i class="ph ph-arrow-down"></i></a>
       </div>
@@ -769,7 +792,7 @@ section{padding:112px 0}
   <section id="brain" class="brain-sec">
     <div class="rv">
       <h2>Explore the brain yourself</h2>
-      <p class="sub">An illustrative lab, as Obtimize sees it. Drag any dot, filter by type, or click one to see where it came from.</p>
+      <p class="sub">An illustrative lab, as Obtimize sees it. Click a type to highlight it, drag any dot, or click one to see where it came from.</p>
     </div>
     <div class="glass brainbox rv">
       <div class="filters" id="filters"></div>
@@ -1155,12 +1178,11 @@ document.querySelectorAll('.spot').forEach(el=>el.addEventListener('pointermove'
   const pt=(a,b,t)=>{const my=(a[1]+b[1])/2,u=1-t;return[u*u*u*a[0]+3*u*u*t*a[0]+3*u*t*t*b[0]+t*t*t*b[0],u*u*u*a[1]+3*u*u*t*my+3*u*t*t*my+t*t*t*b[1]]};
   const COLS=[[209,77,138],[63,127,230],[63,127,230],[63,127,230]];
   (function f(now){requestAnimationFrame(f);if(!on)return;x.clearRect(0,0,innerWidth,innerHeight);
-    const segs=[];for(let i=0;i<visEls.length-1;i++){const A=visEls[i].getBoundingClientRect(),B=visEls[i+1].getBoundingClientRect();segs.push([[A.left+A.width/2,A.bottom],[B.left+B.width/2,B.top],COLS[i]])}
-    const L=visEls[3].getBoundingClientRect(),C=cta.getBoundingClientRect();segs.push([[L.left+L.width/2,L.bottom],[C.left+C.width/2,C.bottom+30],COLS[3]]);
+    const fe=slides.map(s=>s.querySelector('.feats')),pi=slides.map(s=>s.querySelector('.s-num'));const segs=[];for(let i=0;i<slides.length-1;i++){const A=fe[i].getBoundingClientRect(),B=pi[i+1].getBoundingClientRect();segs.push([[A.left+A.width/2,A.bottom+6],[B.left+B.width/2,B.top-4],COLS[i]])}
+    const C=cta.getBoundingClientRect(),Q=document.getElementById('ask').getBoundingClientRect();segs.push([[C.left+C.width/2,C.bottom+6],[C.left+C.width/2,Q.top+40],COLS[3]]);
     segs.forEach(([a,b,c],i)=>{if(b[1]<-50||a[1]>innerHeight+50)return;
       const k=clamp((innerHeight*.7-a[1])/Math.max(1,b[1]-a[1]));if(k<=0)return;
-      x.lineWidth=2;x.strokeStyle=`rgba(${c},.18)`;x.setLineDash([]);x.beginPath();for(let j=0;j<=60;j++){const[px,py]=pt(a,b,j/60);j?x.lineTo(px,py):x.moveTo(px,py)}x.stroke();
-      x.lineWidth=2.5;x.strokeStyle=`rgba(${c},.85)`;x.beginPath();for(let j=0;j<=60*k;j++){const[px,py]=pt(a,b,j/60);j?x.lineTo(px,py):x.moveTo(px,py)}x.stroke();
+            x.lineWidth=2.5;x.strokeStyle=`rgba(${c},.85)`;x.beginPath();for(let j=0;j<=60*k;j++){const[px,py]=pt(a,b,j/60);j?x.lineTo(px,py):x.moveTo(px,py)}x.stroke();
       const [hx,hy]=pt(a,b,k);x.beginPath();x.arc(hx,hy,5,0,6.28);x.fillStyle=`rgb(${c})`;x.fill();
       if(!reduceM)for(let j=0;j<5;j++){const t=((now/2600)+j/5)%1;if(t>k)continue;const[px,py]=pt(a,b,t);x.beginPath();x.arc(px,py,3.2,0,6.28);x.fillStyle=`rgb(${c})`;x.globalAlpha=.9;x.fill();x.globalAlpha=1}
     })})();
@@ -1247,14 +1269,14 @@ const LAB={
   const byId=Object.fromEntries(N.map(n=>[n.id,n]));
   const E=LAB.edges.map(([a,b])=>[byId[a],byId[b]]);
   N.forEach(n=>n.nb=new Set());E.forEach(([a,b])=>{a.nb.add(b);b.nb.add(a)});
-  const on=Object.fromEntries(Object.keys(LAB.types).map(k=>[k,true]));
+  let hl=null;
   let W,H,hover=null,sel=null,drag=null,moved=false,alpha=1;
-  const vis=n=>on[n.t];
+  const vis=n=>true;
   function size(){const d=devicePixelRatio||1;W=c.clientWidth;H=c.clientHeight;c.width=W*d;c.height=H*d;x.setTransform(d,0,0,d,0,0)}
   size();N.forEach((n,i)=>{const a=i/N.length*6.28;n.x=W/2+Math.cos(a)*W*.3;n.y=H/2+Math.sin(a)*H*.3});
   // filters
   const f=document.getElementById('filters');
-  Object.entries(LAB.types).forEach(([k,[name,col]])=>{const b=document.createElement('button');b.innerHTML=`<i style="background:${col}"></i>${name}`;b.onclick=()=>{on[k]=!on[k];b.classList.toggle('off',!on[k]);alpha=1};f.appendChild(b)});
+  Object.entries(LAB.types).forEach(([k,[name,col]])=>{const b=document.createElement('button');b.innerHTML=`<i style="background:${col}"></i>${name}`;b.style.setProperty('--c',col);b.onclick=()=>{hl=hl===k?null:k;[...f.children].forEach(x=>x.classList.toggle('active',x===b&&hl===k));sel=null;show(null);alpha=Math.max(alpha,.3)};f.appendChild(b)});
   const WHAT={run:'One experiment: wells run together under one plan.',cond:'A dose or reagent a run used, like CHIR or VEGF.',cell:'The stem cell line and passage a run started from.',proto:'The protocol version the team followed.',image:'Microscope photos taken during a run.',result:'A measured outcome, such as CD31+ purity from flow cytometry.',issue:'A problem Obtimize found on its own, before anyone asked.'};
   document.getElementById('pKey').innerHTML=Object.entries(LAB.types).map(([k,[nm,col]])=>`<div><i style="background:${col}"></i><span><b>${nm}.</b> ${WHAT[k]}</span></div>`).join('');
   const $=id=>document.getElementById(id);
@@ -1280,13 +1302,13 @@ const LAB={
     alpha=Math.max(alpha*.995,reduce?0:.06);
   }
   function draw(){
-    x.clearRect(0,0,W,H);const focus=hover||sel;
-    E.forEach(([a,b])=>{if(!vis(a)||!vis(b))return;const hot=focus&&(a===focus||b===focus);x.strokeStyle=hot?'rgba(63,127,230,.75)':focus?'rgba(15,26,43,.06)':(a.t==='issue'||b.t==='issue')?'rgba(201,128,28,.3)':'rgba(15,26,43,.16)';x.lineWidth=hot?1.6:1;x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke()});
-    N.forEach(n=>{if(!vis(n))return;const dim=focus&&n!==focus&&!focus.nb.has(n);x.globalAlpha=dim?.25:1;const col=LAB.types[n.t][1];
+    x.clearRect(0,0,W,H);const focus=hover||sel;const dimT=n=>hl&&n.t!==hl;
+    E.forEach(([a,b])=>{if(!vis(a)||!vis(b))return;const hot=(focus&&(a===focus||b===focus))||(hl&&!focus&&(a.t===hl||b.t===hl));x.strokeStyle=hot?'rgba(63,127,230,.75)':focus?'rgba(15,26,43,.06)':(a.t==='issue'||b.t==='issue')?'rgba(201,128,28,.3)':'rgba(15,26,43,.16)';x.lineWidth=hot?1.6:1;x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke()});
+    N.forEach(n=>{if(!vis(n))return;const dim=(focus&&n!==focus&&!focus.nb.has(n))||(!focus&&dimT(n));x.globalAlpha=dim?.25:1;const col=LAB.types[n.t][1];
       if(n.t==='issue'){x.beginPath();x.arc(n.x,n.y,n.r+5+Math.sin(performance.now()/300)*2,0,6.28);x.strokeStyle='rgba(201,128,28,.35)';x.stroke()}
       x.beginPath();x.arc(n.x,n.y,n.r,0,6.28);x.fillStyle=col;x.fill();
       if(n===sel){x.beginPath();x.arc(n.x,n.y,n.r+6,0,6.28);x.strokeStyle=col;x.lineWidth=1.5;x.stroke();x.lineWidth=1}
-      const showL=n.t==='run'||n.t==='issue'||n===focus||(focus&&focus.nb.has(n));
+      const showL=hl?(n.t===hl&&!focus)||n===focus||(focus&&focus.nb.has(n)):(n.t==='run'||n.t==='issue'||n===focus||(focus&&focus.nb.has(n)));
       if(showL){x.font=`${n.t==='run'?'600 12.5px':'500 12px'} "Inter",sans-serif`;const tw=x.measureText(n.label).width,lx=n.x+n.r+7,ly=n.y-9;
         x.fillStyle='rgba(255,255,255,.92)';x.beginPath();x.roundRect?x.roundRect(lx-5,ly,tw+10,19,6):x.rect(lx-5,ly,tw+10,19);x.fill();
         x.fillStyle=n.t==='issue'?'#c9801c':n.t==='run'?'#0f1a2b':'#4a576c';x.fillText(n.label,lx,n.y+4.5)}
