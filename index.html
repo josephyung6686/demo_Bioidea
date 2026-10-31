@@ -143,8 +143,9 @@ h2{font-size:clamp(32px,3.8vw,50px);line-height:1.06;letter-spacing:-.026em;font
 .ch h3{font-size:19px;font-weight:500;letter-spacing:-.02em;margin-top:6px}
 .ch p{color:var(--ink-2);margin-top:4px;max-width:50ch;font-size:15px;line-height:1.5}
 .f-h{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);padding-bottom:6px}
-.fbar{display:block;height:3px;border-radius:3px;margin-top:10px;width:0;background:var(--grad);transition:width 1.4s var(--ease) .3s}
+.fbar{display:block;height:3px;border-radius:3px;margin-top:10px;width:0;transition-duration:2.4s !important;background:var(--grad);transition:width 1.4s var(--ease) .3s}
 .funnel.in .fbar{width:var(--w)}
+.funnel .fn:nth-child(3) .fbar{transition-delay:.5s}.funnel .fn:nth-child(4) .fbar{transition-delay:1s}.funnel .fn:nth-child(5) .fbar{transition-delay:1.5s}
 .bstory .pull{margin:56px 0 0;max-width:40ch;font-size:26px}
 /* Story */
 .story{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}
@@ -632,6 +633,8 @@ h1 em,.mission em{background:none;-webkit-background-clip:initial;background-cli
 .s-num{box-shadow:none}
 .panel{background:#fbfcfe}
 .p-name,.p-body,.key div,.p-sec .row span{font-family:var(--sans)}
+
+.mission{text-align:center;margin-left:auto;margin-right:auto;max-width:30ch}
 </style>
 </head>
 <body>
@@ -711,9 +714,9 @@ h1 em,.mission em{background:none;-webkit-background-clip:initial;background-cli
       </div>
       <div class="glass spot funnel rv">
         <div class="f-h mono">What we saw this summer</div>
-        <div class="fn"><div class="n" data-count="300">0</div><div class="l"><b>Instrument files</b>Flow exports, photos, plate reads, protocols<i class="fbar" style="--w:100%"></i></div></div>
-        <div class="fn"><div class="n" data-count="3">0</div><div class="l"><b>Experiments, mixed together</b>No record of which file belonged where<i class="fbar" style="--w:62%"></i></div></div>
-        <div class="fn"><div class="n" data-count="31">0</div><div class="l"><b>Data points found</b>Conditions and outcomes scattered across files<i class="fbar" style="--w:30%"></i></div></div>
+        <div class="fn"><div class="n" data-count="300" data-dur="2600" data-delay="0">0</div><div class="l"><b>Instrument files</b>Flow exports, photos, plate reads, protocols<i class="fbar" style="--w:100%"></i></div></div>
+        <div class="fn"><div class="n" data-count="3" data-dur="2600" data-delay="500">0</div><div class="l"><b>Experiments, mixed together</b>No record of which file belonged where<i class="fbar" style="--w:62%"></i></div></div>
+        <div class="fn"><div class="n" data-count="31" data-dur="2600" data-delay="1000">0</div><div class="l"><b>Data points found</b>Conditions and outcomes scattered across files<i class="fbar" style="--w:30%"></i></div></div>
         <div class="fn zero"><div class="n">0</div><div class="l"><b>Ready for AI</b>So we started building Obtimize<i class="fbar" style="--w:3%"></i></div></div>
       </div>
     </div>
@@ -999,7 +1002,7 @@ document.querySelectorAll('[data-count]').forEach(el=>{
   const to=+el.dataset.count;
   new IntersectionObserver((es,o)=>es.forEach(e=>{if(!e.isIntersecting)return;o.disconnect();
     if(reduceM){el.textContent=to;return}
-    const t0=performance.now(),d=1400;(function f(t){const k=Math.min(1,(t-t0)/d),v=1-Math.pow(1-k,3);el.textContent=Math.round(to*v);if(k<1)requestAnimationFrame(f)})(t0)}),{threshold:.5}).observe(el);
+    const delay=+(el.dataset.delay||0),d=+(el.dataset.dur||1400);const t0=performance.now()+delay;(function f(t){const k=Math.max(0,Math.min(1,(t-t0)/d)),v=1-Math.pow(1-k,3);el.textContent=Math.round(to*v);if(k<1)requestAnimationFrame(f)})(t0)}),{threshold:.5}).observe(el);
 });
 // Expandable trust cards
 document.querySelectorAll('.trust-cards .tr').forEach(b=>b.addEventListener('click',()=>b.setAttribute('aria-expanded',b.getAttribute('aria-expanded')!=='true')));
