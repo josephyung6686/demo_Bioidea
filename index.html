@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Obtimize | Experiment memory for cell therapy labs</title>
-<meta name="description" content="Obtimize turns a lab's scattered experimental data into one connected record, then uses it to recommend what to run next.">
+<title>Obtimize | The AI second brain for cell therapy R&amp;D</title>
+<meta name="description" content="Obtimize brings together everything a cell therapy lab knows, understands how its experiments connect, and helps scientists decide what to run next.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
 <style>
 :root{
-  --bg:#07090c; --bg-2:#0b0f14;
+  --bg:#07090c;
   --ink:#eef2f5; --ink-2:#a9b4bf; --ink-3:#77838f;
-  --accent:#5fd4c4; --accent-ink:#04201c;
+  --accent:#5fd4c4; --accent-ink:#04201c; --blue:#7fa8d6; --warn:#f3c98b;
   --line:rgb(255 255 255 / .08);
   --glass:linear-gradient(135deg,rgb(255 255 255 / .09),rgb(255 255 255 / .02));
   --r:18px;
@@ -21,32 +21,34 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font-family:"Schibsted Grotesk",system-ui,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{background:var(--bg);color:var(--ink);font-family:"Inter Tight",system-ui,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
 .mono{font-family:"JetBrains Mono",ui-monospace,monospace}
 .wrap{max-width:1240px;margin:0 auto;padding:0 24px}
 
-/* Ambient light: the glass needs something to refract */
+/* Ambient light so the glass has something to refract */
 .aurora{position:fixed;inset:0;z-index:-2;pointer-events:none;
   background:
    radial-gradient(60vw 50vh at 85% -10%,rgb(95 212 196 / .20),transparent 60%),
-   radial-gradient(50vw 50vh at -10% 30%,rgb(56 120 190 / .16),transparent 60%),
+   radial-gradient(60vw 60vh at -10% 25%,rgb(41 80 113 / .55),transparent 65%),
    radial-gradient(40vw 40vh at 60% 110%,rgb(95 212 196 / .10),transparent 60%),
    var(--bg)}
 .grain{position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.05;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 
-/* Glass + gloss (web approximation of frosted glass) */
+/* Frosted glass + gloss sweep (web approximation) */
 .glass{position:relative;isolation:isolate;border-radius:var(--r);
   background:var(--glass);border:1px solid rgb(255 255 255 / .10);
   backdrop-filter:blur(22px) saturate(160%);-webkit-backdrop-filter:blur(22px) saturate(160%);
-  box-shadow:inset 0 1px 0 rgb(255 255 255 / .14),inset 0 -1px 0 rgb(255 255 255 / .03),0 30px 80px -30px rgb(0 10 20 / .7);overflow:hidden}
+  box-shadow:inset 0 1px 0 rgb(255 255 255 / .14),inset 0 -1px 0 rgb(255 255 255 / .03),0 20px 50px -30px rgb(0 10 20 / .5);overflow:hidden}
 .glass::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;border-radius:inherit;
   background:linear-gradient(115deg,rgb(255 255 255 / .10) 0%,transparent 28%,transparent 70%,rgb(255 255 255 / .04) 100%)}
 .gloss::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;
   background:linear-gradient(105deg,transparent 35%,rgb(255 255 255 / .10) 50%,transparent 65%);
   transform:translateX(-120%);transition:transform 1.1s var(--ease)}
-.gloss:hover::after{transform:translateX(120%)}
+.gloss:hover::after{transform:none}
+.spot{--mx:50%;--my:50%}
+.spot::before{background:radial-gradient(420px circle at var(--mx) var(--my),rgb(95 212 196 / .10),transparent 45%),linear-gradient(115deg,rgb(255 255 255 / .10) 0%,transparent 28%,transparent 70%,rgb(255 255 255 / .04) 100%)}
 @media (prefers-reduced-transparency:reduce){.glass{background:#121820;backdrop-filter:none;-webkit-backdrop-filter:none}}
 
 /* Nav */
@@ -56,7 +58,7 @@ nav{position:sticky;top:14px;z-index:50;margin-top:14px}
 .mark{width:26px;height:26px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#bff5ec,var(--accent) 45%,#1f6f66);box-shadow:inset 0 1px 1px rgb(255 255 255 / .6),0 0 0 3px rgb(95 212 196 / .12)}
 .links{display:flex;gap:28px;font-size:14px;color:var(--ink-2)}
 .links a:hover{color:var(--ink)}
-.btn{display:inline-flex;align-items:center;gap:8px;white-space:nowrap;height:44px;padding:0 20px;border-radius:999px;font-weight:500;font-size:15px;transition:transform .2s var(--ease),background .2s,box-shadow .3s}
+.btn{display:inline-flex;align-items:center;gap:8px;white-space:nowrap;height:44px;padding:0 20px;border-radius:999px;font-weight:500;font-size:15px;transition:transform .2s var(--ease),background .2s}
 .btn:active{transform:scale(.98)}
 .btn-primary{background:linear-gradient(180deg,#8be6da,var(--accent));color:var(--accent-ink);box-shadow:inset 0 1px 0 rgb(255 255 255 / .55),0 10px 30px -10px rgb(95 212 196 / .6)}
 .btn-primary:hover{transform:translateY(-1px)}
@@ -64,78 +66,133 @@ nav{position:sticky;top:14px;z-index:50;margin-top:14px}
 .btn-ghost:hover{background:rgb(255 255 255 / .07)}
 
 /* Hero */
-.hero{display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center;min-height:calc(100dvh - 90px);padding:56px 0 72px}
+.hero{display:grid;grid-template-columns:1fr 1.05fr;gap:48px;align-items:center;min-height:calc(100dvh - 90px);padding:48px 0 64px}
 .eyebrow{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
-h1{font-size:clamp(40px,5.2vw,68px);line-height:1.02;letter-spacing:-.035em;font-weight:600;margin:18px 0 22px}
-h1 em{font-style:italic;font-weight:500;color:var(--accent)}
-.lead{font-size:19px;color:var(--ink-2);max-width:34ch;line-height:1.5}
+h1{font-size:clamp(40px,5vw,66px);line-height:1.04;letter-spacing:-.045em;font-weight:500;margin:18px 0 22px}
+h1 em{font-style:italic;font-weight:400;color:var(--accent)}
+.lead{font-size:19px;color:var(--ink-2);max-width:36ch;line-height:1.5}
 .ctas{display:flex;gap:12px;margin-top:34px;flex-wrap:wrap}
-.graph-card{aspect-ratio:1/1.02;padding:0}
-.graph-card canvas{position:absolute;inset:0;width:100%;height:100%}
-.graph-q{position:absolute;left:18px;right:18px;bottom:18px;padding:14px 16px;border-radius:14px;font-size:14px}
-.graph-q .q{color:var(--ink)}
-.graph-q .a{color:var(--ink-2);margin-top:6px;font-size:13px}
-.graph-q .a b{color:var(--accent);font-weight:500}
-.graph-legend{position:absolute;top:18px;left:18px;display:flex;gap:14px;font-size:12px;color:var(--ink-3)}
-.graph-legend span{display:flex;align-items:center;gap:6px}
-.graph-legend i{width:8px;height:8px;border-radius:50%;display:inline-block}
 
-/* Founders strip */
-.strip{display:flex;align-items:center;justify-content:center;gap:40px;padding:26px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--ink-2);font-size:15px;flex-wrap:wrap}
+/* Design-space map */
+.map-card{padding:20px 20px 18px}
+.map-top{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--ink-3);gap:12px;flex-wrap:wrap}
+.legend{display:flex;gap:14px}
+.legend span{display:flex;align-items:center;gap:6px}
+.legend i{width:9px;height:9px;border-radius:50%;display:inline-block}
+.plot{position:relative;margin:14px 0 0 26px;aspect-ratio:1.25/1}
+.plot canvas{position:absolute;inset:0;width:100%;height:100%;border-radius:10px}
+.ax-x,.ax-y{position:absolute;font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--ink-3)}
+.ax-x{bottom:-22px;left:0;right:0;text-align:center}
+.ax-y{left:-26px;top:50%;transform:rotate(-90deg) translateX(50%);transform-origin:left top;white-space:nowrap}
+.map-out{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:34px}
+.map-out div{padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:rgb(0 0 0 / .22);font-size:12px;color:var(--ink-3)}
+.map-out b{display:block;color:var(--ink);font-weight:500;font-size:14px}
+.map-out .warn b{color:var(--warn)}
+
+/* Credibility strip */
+.strip{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:26px 8px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--ink-2);font-size:15px;flex-wrap:wrap}
 .strip b{color:var(--ink);font-weight:500}
 .strip .ph{color:var(--accent);font-size:20px;vertical-align:-4px;margin-right:8px}
 
-section{padding:128px 0}
-h2{font-size:clamp(32px,3.8vw,50px);line-height:1.06;letter-spacing:-.03em;font-weight:600;max-width:20ch}
-.sub{color:var(--ink-2);font-size:18px;max-width:58ch;margin-top:18px}
+section{padding:120px 0}
+h2{font-size:clamp(32px,3.8vw,50px);line-height:1.06;letter-spacing:-.04em;font-weight:500;max-width:22ch}
+.sub{color:var(--ink-2);font-size:18px;max-width:60ch;margin-top:18px}
 
-/* Problem: manifesto + numbered evidence */
-.problem{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
-.big{font-size:clamp(64px,9vw,128px);font-weight:600;letter-spacing:-.05em;line-height:.9;color:var(--ink)}
-.big span{color:var(--accent)}
-.big-cap{color:var(--ink-2);margin-top:20px;max-width:40ch}
-.pain{display:grid;gap:14px}
-.pain .glass{padding:24px 26px;display:grid;grid-template-columns:40px 1fr;gap:16px}
-.pain .ph{font-size:26px;color:var(--accent)}
-.pain h3{font-size:18px;font-weight:600;letter-spacing:-.01em}
-.pain p{color:var(--ink-2);font-size:15px;margin-top:4px}
+/* Story */
+.story{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}
+.story-text p{color:var(--ink-2);font-size:18px;margin-top:20px;max-width:52ch}
+.story-text p b{color:var(--ink);font-weight:500}
+.pull{margin-top:36px;padding-left:22px;border-left:2px solid var(--accent);font-size:22px;line-height:1.4;letter-spacing:-.01em;max-width:30ch}
+.funnel{padding:28px 36px}
+.fn{display:grid;grid-template-columns:120px 1fr;align-items:center;gap:20px;padding:18px 0;border-bottom:1px solid var(--line)}
+.fn:last-child{border-bottom:0}
+.fn .n{font-size:56px;font-weight:600;letter-spacing:-.04em;line-height:1}
+.fn .l{color:var(--ink-2);font-size:15px}
+.fn .l b{display:block;color:var(--ink);font-weight:500;font-size:16px}
+.fn.zero .n{color:var(--accent)}
 
-/* Platform bento */
-.bento{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:minmax(240px,auto);gap:16px;margin-top:56px}
-.cell{padding:32px;display:flex;flex-direction:column;justify-content:space-between}
-.cell .ph{font-size:30px;color:var(--accent)}
-.cell h3{font-size:24px;font-weight:600;letter-spacing:-.02em;margin-top:18px}
-.cell p{color:var(--ink-2);margin-top:10px;max-width:46ch}
-.cell ul{list-style:none;margin-top:22px;display:flex;flex-wrap:wrap;gap:8px}
-.cell li{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--ink-2);border:1px solid var(--line);padding:6px 10px;border-radius:999px;background:rgb(255 255 255 / .02)}
-.c-storage{grid-column:span 2}
-.c-memory{grid-column:span 4;background:linear-gradient(135deg,rgb(95 212 196 / .16),rgb(56 120 190 / .06) 60%,rgb(255 255 255 / .02))}
-.c-opt{grid-column:span 6;display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center;background:linear-gradient(100deg,rgb(255 255 255 / .05),rgb(95 212 196 / .10))}
-.layer{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--ink-3)}
-.range{position:relative;height:150px;border-radius:14px;border:1px solid var(--line);background:rgb(0 0 0 / .25);overflow:hidden}
-.range svg{position:absolute;inset:0;width:100%;height:100%}
-
-/* Timeline */
-.tl{margin-top:56px;max-width:760px;display:grid;gap:0;position:relative}
-.tl::before{content:"";position:absolute;left:23px;top:24px;bottom:24px;width:1px;background:linear-gradient(var(--accent),rgb(95 212 196 / .08))}
-.ev{display:grid;grid-template-columns:46px 1fr;gap:24px;padding:18px 0}
-.ev h3{font-size:19px;font-weight:600;margin-top:9px}
-.ev p{color:var(--ink-2);margin-top:4px;max-width:56ch}
-.flag{display:inline-flex;gap:8px;align-items:center;margin-top:12px;font-size:12px;color:#f3c98b;border:1px solid rgb(243 201 139 / .3);background:rgb(243 201 139 / .06);padding:6px 12px;border-radius:999px}
-/* Who */
-.who{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:16px;margin-top:48px}
-.who .glass{padding:30px}
-.who .glass:first-child{background:linear-gradient(160deg,rgb(95 212 196 / .14),rgb(255 255 255 / .02))}
-.who .ph{font-size:28px;color:var(--accent)}
-.who h3{font-size:20px;font-weight:600;margin-top:16px}
-.who p{color:var(--ink-2);margin-top:8px;font-size:15px}
+/* Team */
 .team{padding-top:40px}
+.people{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:48px}
+.person{padding:32px;display:grid;grid-template-columns:64px 1fr;gap:22px;align-items:start}
+.avatar{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;font-weight:500;font-size:20px;letter-spacing:-.02em;color:var(--accent-ink);background:radial-gradient(circle at 35% 30%,#c9f7ef,var(--accent) 55%,#2b8c80);box-shadow:inset 0 1px 1px rgb(255 255 255 / .6),0 0 0 4px rgb(95 212 196 / .10)}
+.person h3{font-size:22px;font-weight:500;letter-spacing:-.02em}
+.role{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--accent);margin-top:4px}
+.person p{color:var(--ink-2);font-size:15px;margin-top:12px}
 
-/* Principles: 2x2 editorial */
-.principles{display:grid;grid-template-columns:1fr 1fr;gap:56px 72px;margin-top:64px}
-.pr{border-top:1px solid rgb(95 212 196 / .35);padding-top:24px}
-.pr h3{font-size:22px;font-weight:600;letter-spacing:-.02em}
-.pr p{color:var(--ink-2);margin-top:10px;max-width:48ch}
+/* Product bento */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;margin-top:56px}
+.cell{padding:30px;min-height:230px;display:flex;flex-direction:column}
+.cell .ph{font-size:28px;color:var(--accent)}
+.cell h3{font-size:21px;font-weight:600;letter-spacing:-.02em;margin-top:16px}
+.cell p{color:var(--ink-2);margin-top:8px;font-size:15px;max-width:48ch}
+.chips{list-style:none;margin-top:auto;padding-top:20px;display:flex;flex-wrap:wrap;gap:8px}
+.chips li{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--ink-2);border:1px solid var(--line);padding:6px 10px;border-radius:999px;background:rgb(255 255 255 / .02)}
+.s2{grid-column:span 2}.s4{grid-column:span 4}
+.tint-a{background:linear-gradient(135deg,rgb(95 212 196 / .16),rgb(56 120 190 / .05) 60%,rgb(255 255 255 / .02))}
+.tint-b{background:linear-gradient(200deg,rgb(127 168 214 / .14),rgb(255 255 255 / .02) 70%)}
+
+/* Pipeline */
+.pipeline{margin-top:56px;padding:28px;display:grid;grid-template-columns:.8fr 44px 1.5fr 44px 1fr;align-items:center}
+.stage-h{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.stage-h b{color:var(--accent);font-weight:500}
+.src{display:grid;gap:8px}
+.src div{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:12px;font-size:14px;border:1px solid var(--line);background:rgb(255 255 255 / .03)}
+.src .ph{font-size:18px;color:var(--accent)}
+.link{height:2px;border-radius:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent) 0 0/60% 100% no-repeat,rgb(95 212 196 / .15);animation:flow 2.2s linear infinite}
+@keyframes flow{from{background-position:-100% 0}to{background-position:250% 0}}
+.brain{border-radius:14px;border:1px solid var(--line);background:radial-gradient(70% 70% at 50% 45%,rgb(95 212 196 / .10),transparent 70%),rgb(0 0 0 / .25)}
+.brain svg{display:block;width:100%;height:auto}
+.brain text{font-family:"JetBrains Mono",monospace;font-size:11px;fill:#a9b4bf}
+.brain .run text{fill:#eef2f5;font-size:12px}
+.edge{stroke:rgb(255 255 255 / .16);stroke-width:1}
+.edge.hot{stroke:#5fd4c4;stroke-opacity:.6;stroke-dasharray:4 6;animation:dash 1.6s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-20}}
+.recipe{display:grid;gap:8px}
+.rx{padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:rgb(255 255 255 / .03);font-size:13px;color:var(--ink-2)}
+.rx b{display:block;color:var(--ink);font-weight:500;font-size:14px;margin-bottom:2px}
+.rx.ok{border-color:rgb(95 212 196 / .35);background:rgb(95 212 196 / .08)}
+.rx.warn{border-color:rgb(243 201 139 / .3);background:rgb(243 201 139 / .05)}
+.rx.warn b{color:var(--warn)}
+.wells{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-top:8px}
+.wells span{font-family:"JetBrains Mono",monospace;font-size:10.5px;padding:4px 6px;border-radius:6px;background:rgb(0 0 0 / .3);color:var(--ink-2);text-align:center}
+.pipe-note{font-size:12px;color:var(--ink-3);margin-top:14px}
+
+/* Impact */
+.impact{display:grid;grid-template-columns:1.2fr 1fr 1fr;grid-template-rows:auto auto;gap:16px;margin-top:56px}
+.imp{padding:30px}
+.imp .n{font-size:clamp(44px,5vw,64px);font-weight:600;letter-spacing:-.045em;line-height:1}
+.imp .n span{color:var(--accent)}
+.imp h3{font-size:19px;font-weight:600;margin-top:14px}
+.imp p{color:var(--ink-2);font-size:15px;margin-top:6px}
+.imp.big{grid-row:span 2;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(160deg,rgb(95 212 196 / .18),rgb(56 120 190 / .06) 55%,rgb(255 255 255 / .02))}
+.imp.big .n{font-size:clamp(64px,8vw,104px)}
+.bars{display:grid;gap:10px;margin-top:28px}
+.bar{display:grid;grid-template-columns:92px 1fr;align-items:center;gap:12px;font-size:13px;color:var(--ink-2)}
+.bar i{display:block;height:10px;border-radius:999px}
+.imp .ic{font-size:30px;color:var(--accent)}
+.foot-note{font-size:13px;color:var(--ink-3);margin-top:18px}
+
+/* Ask demo */
+.ask{display:grid;grid-template-columns:1fr 1.1fr;gap:56px;align-items:center}
+.chat{padding:24px;display:grid;gap:14px}
+.msg{padding:14px 16px;border-radius:14px;font-size:15px;max-width:90%}
+.msg.q{justify-self:end;background:rgb(95 212 196 / .14);border:1px solid rgb(95 212 196 / .25)}
+.msg.a{background:rgb(255 255 255 / .04);border:1px solid var(--line);color:var(--ink-2)}
+.msg.a b{color:var(--ink);font-weight:500}
+.cite{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.cite span{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--accent);border:1px solid rgb(95 212 196 / .3);border-radius:6px;padding:3px 7px}
+.flag{display:flex;gap:10px;align-items:flex-start;font-size:14px;padding:12px 14px;border-radius:12px;border:1px solid rgb(243 201 139 / .25);background:rgb(243 201 139 / .05);color:var(--ink-2)}
+.flag .ph{color:var(--warn);font-size:18px;margin-top:1px}
+.ask ul{list-style:none;margin-top:28px;display:grid;gap:14px}
+.ask li{display:flex;gap:12px;color:var(--ink-2)}
+.ask li .ph{color:var(--accent);font-size:20px;margin-top:2px}
+
+/* Trust */
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:40px 48px;margin-top:56px}
+.tr .ph{font-size:26px;color:var(--accent)}
+.tr h3{font-size:18px;font-weight:500;margin-top:12px;letter-spacing:-.01em}
+.tr p{color:var(--ink-2);font-size:15px;margin-top:6px;max-width:34ch}
 
 /* Research */
 .research{padding:56px;display:grid;grid-template-columns:1.2fr 1fr;gap:56px;align-items:center}
@@ -145,11 +202,12 @@ h2{font-size:clamp(32px,3.8vw,50px);line-height:1.06;letter-spacing:-.03em;font-
 .fact b{display:block;font-weight:500}
 .fact span{color:var(--ink-2);font-size:14px}
 
-/* Partner CTA */
-.partner{text-align:center;padding:96px 32px;background:radial-gradient(60% 80% at 50% 0%,rgb(95 212 196 / .22),transparent 70%),var(--glass)}
-.partner h2{margin:0 auto}
-.partner .sub{margin:18px auto 0}
-.partner .ctas{justify-content:center}
+/* Vision */
+.vision{text-align:center;padding:96px 32px;background:radial-gradient(60% 80% at 50% 0%,rgb(95 212 196 / .22),transparent 70%),var(--glass)}
+.vision .q{font-size:clamp(28px,3.4vw,44px);line-height:1.15;letter-spacing:-.03em;font-weight:600;max-width:26ch;margin:0 auto}
+.vision .q em{font-style:italic;font-weight:500;color:var(--accent)}
+.vision .sub{margin:20px auto 0}
+.vision .ctas{justify-content:center}
 
 footer{padding:56px 0 48px;color:var(--ink-3);font-size:14px}
 .foot{display:flex;justify-content:space-between;align-items:center;gap:24px;border-top:1px solid var(--line);padding-top:32px;flex-wrap:wrap}
@@ -157,23 +215,28 @@ footer{padding:56px 0 48px;color:var(--ink-3);font-size:14px}
 /* Reveal */
 .rv{opacity:0;transform:translateY(22px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
 .rv.in{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.gloss::after{display:none}html{scroll-behavior:auto}}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.gloss::after{display:none}.link,.edge.hot{animation:none}html{scroll-behavior:auto}}
 
 /* Mobile */
-@media (max-width:900px){
-  .links{display:none}
-  .hero,.problem,.research,.c-opt{grid-template-columns:1fr}
+@media (max-width:960px){
+  .links,.nav .btn{display:none}
+  .hero,.story,.ask,.research{grid-template-columns:1fr}
+  .hero>*,.story>*,.ask>*,.research>*{min-width:0}
   .hero{min-height:auto;padding:40px 0 56px;gap:36px}
-  .bento{grid-template-columns:1fr}
-  .c-storage,.c-memory,.c-opt{grid-column:auto}
-  .principles{grid-template-columns:1fr;gap:36px}
-  .who{grid-template-columns:1fr}
+  h1{font-size:40px}
+  .bento,.impact,.people,.trust{grid-template-columns:1fr}
+  .person{grid-template-columns:1fr}
+  .s2,.s4{grid-column:auto}
+  .imp.big{grid-row:auto}
+  .pipeline{grid-template-columns:1fr;padding:18px}
+  .link{width:2px;height:32px;justify-self:center;background:rgb(95 212 196 / .4);animation:none}
   .research{padding:28px}
+  .funnel{padding:20px 24px}
+  .fn{grid-template-columns:90px 1fr}.fn .n{font-size:42px}
+  .map-out{grid-template-columns:1fr}
   section{padding:80px 0}
   .wrap{padding:0 16px}
-  .nav .btn{display:none}
-  .hero>*,.problem>*,.research>*{min-width:0}
-  h1{font-size:38px}
+  .strip{justify-content:flex-start}
 }
 </style>
 </head>
@@ -186,9 +249,10 @@ footer{padding:56px 0 48px;color:var(--ink-3);font-size:14px}
     <div class="nav glass">
       <a href="#" class="brand"><span class="mark"></span>Obtimize</a>
       <div class="links">
-        <a href="#problem">Problem</a>
-        <a href="#platform">Platform</a>
-        <a href="#workflow">How it works</a>
+        <a href="#story">Our story</a>
+        <a href="#product">Product</a>
+        <a href="#how">How it works</a>
+        <a href="#impact">Impact</a>
         <a href="#research">Research</a>
         <a href="#team">Team</a>
       </div>
@@ -198,190 +262,347 @@ footer{padding:56px 0 48px;color:var(--ink-3);font-size:14px}
 
   <header class="hero">
     <div class="rv">
-      <div class="eyebrow">Experiment memory for cell therapy</div>
-      <h1>Stop repeating runs your lab <em>already</em> tried.</h1>
-      <p class="lead">Obtimize turns scattered experiment files into one trusted record, then recommends what to run next.</p>
+      <div class="eyebrow">For cell therapy R&amp;D</div>
+      <h1>The AI <em>second brain</em> for your lab.</h1>
+      <p class="lead">Obtimize remembers every experiment your team has run, connects them, and finds the conditions worth running next.</p>
       <div class="ctas">
         <a href="#partner" class="btn btn-primary">Become a design partner <i class="ph ph-arrow-right"></i></a>
-        <a href="#platform" class="btn btn-ghost">See the platform</a>
+        <a href="#how" class="btn btn-ghost">See how it works</a>
       </div>
     </div>
-    <div class="glass graph-card rv" aria-label="Interactive view of an experiment memory graph">
-      <canvas id="graph"></canvas>
-      <div class="graph-legend mono">
-        <span><i style="background:#5fd4c4"></i>Experiment</span>
-        <span><i style="background:#7fa8d6"></i>Condition</span>
-        <span><i style="background:#e9eef2"></i>Result</span>
+
+    <div class="glass spot map-card rv" role="img" aria-label="Illustrative differentiation design space with past runs, a robust operating region, and recommended next experiments">
+      <div class="map-top mono">
+        <span>iPSC to endothelial design space (illustrative)</span>
+        <div class="legend">
+          <span><i style="background:#7fa8d6"></i>Past runs</span>
+          <span><i style="border:2px solid #5fd4c4;background:transparent"></i>Next</span>
+        </div>
       </div>
-      <div class="graph-q glass">
-        <div class="q"><i class="ph ph-magnifying-glass" style="color:var(--accent)"></i> Have we tried VEGF above 50 ng/mL?</div>
-        <div class="a">Yes, in <b>3 runs</b>. Each answer links to its source files.</div>
+      <div class="plot">
+        <canvas id="map"></canvas>
+        <div class="ax-x">CHIR99021 dose</div>
+        <div class="ax-y">VEGF dose</div>
+      </div>
+      <div class="map-out">
+        <div><b>Robust region</b>Holds across noise</div>
+        <div><b>6 wells</b>Recommended next</div>
+        <div class="warn"><b>2 replicates</b>Needed before deciding</div>
       </div>
     </div>
   </header>
-</div>
 
-<div class="wrap">
   <div class="strip rv">
     <div><i class="ph ph-graduation-cap"></i>Founded at <b>Columbia University</b></div>
-    <div><i class="ph ph-flask"></i>Built on lab data from a real cell therapy team</div>
-    <div><i class="ph ph-dna"></i>From the team behind <b>NutriGene AI</b></div>
+    <div><i class="ph ph-dna"></i>Research built at <b>NutriGene AI</b>, Hong Kong</div>
+    <div><i class="ph ph-flask"></i>Born from real <b>iPSC differentiation</b> data</div>
   </div>
 </div>
 
 <main class="wrap">
 
-  <section id="problem" class="problem">
-    <div class="rv">
-      <div class="big">300 files.<br><span>0 rows.</span></div>
-      <p class="big-cap">We tried to optimize a real iPSC to endothelial differentiation. Three mixed experiments gave us about 300 files, and none of it was ready for an optimizer without weeks of manual work.</p>
+  <!-- Founder story -->
+  <section id="story" class="story">
+    <div class="story-text rv">
+      <h2>Why we started Obtimize</h2>
+      <p>This summer we were building an optimization system for <b>iPSC to endothelial cell differentiation</b> at <b>NutriGene AI</b>, a biotech company in Hong Kong.</p>
+      <p>The lab sent us around 300 instrument files covering three different experiments, all mixed together. We pulled out 31 data points. <b>Not one was ready for optimization.</b></p>
+      <div class="pull">Before AI can help scientists design better experiments, it has to understand what the lab has already done.</div>
     </div>
-    <div class="pain">
-      <div class="glass gloss rv"><i class="ph ph-files"></i><div><h3>Data lives everywhere</h3><p>Flow exports, microscope images, plate reader files, protocols, spreadsheets, Slack threads and people's heads.</p></div></div>
-      <div class="glass gloss rv"><i class="ph ph-arrow-counter-clockwise"></i><div><h3>Failed runs disappear</h3><p>They rarely get written up, so labs repeat conditions they have already tried.</p></div></div>
-      <div class="glass gloss rv"><i class="ph ph-robot"></i><div><h3>AI can't use what's there</h3><p>Optimization needs clean rows of conditions and outcomes. Most labs don't have them.</p></div></div>
+    <div class="glass spot funnel rv">
+      <div class="fn"><div class="n">300</div><div class="l"><b>Instrument files</b>Flow exports, images, plate reads, protocols</div></div>
+      <div class="fn"><div class="n">3</div><div class="l"><b>Experiments, mixed together</b>No record of which file belonged where</div></div>
+      <div class="fn"><div class="n">31</div><div class="l"><b>Data points identified</b>Conditions and outcomes scattered across files</div></div>
+      <div class="fn zero"><div class="n">0</div><div class="l"><b>Ready for optimization</b>So we started building Obtimize</div></div>
     </div>
   </section>
 
-  <section id="platform">
+  <!-- Team -->
+  <section id="team" class="team">
+    <h2 class="rv">Founders</h2>
+    <div class="people">
+      <div class="glass spot person rv">
+        <div class="avatar">JY</div>
+        <div>
+          <h3>Joseph Yung</h3>
+          <div class="role">Co-founder, Columbia Engineering</div>
+          <p>Co-developed the optimization system for stem cell manufacturing at NutriGene AI in Hong Kong. Previously built a GPU computer vision pipeline at Columbia's Morphogenesis and Developmental Biomechanics Lab, shipped enterprise AI search at AIkonic, and worked in Strategy and Transactions at EY.</p>
+        </div>
+      </div>
+      <div class="glass spot person rv">
+        <div class="avatar">AK</div>
+        <div>
+          <h3>Alana Kwan</h3>
+          <div class="role">Co-founder, Columbia Chemical Engineering</div>
+          <p>Studies Chemical Engineering with a concentration in Data and Computational Science and a minor in AI. Leads product, turning what scientists actually need into what we build, with hands-on experience building AI products and prototypes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product -->
+  <section id="product">
     <div class="rv">
-      <h2>An AI brain for your lab, in three layers.</h2>
-      <p class="sub">Memory and optimization are one system. The memory produces the clean data the optimizer needs. The optimizer gives your team a reason to keep the memory complete.</p>
+      <h2>What Obtimize does</h2>
+      <p class="sub">A lab-wide second brain that understands experiments, not just documents. It keeps everything your lab knows in one connected memory and puts it to work.</p>
     </div>
     <div class="bento">
-      <div class="cell glass gloss c-storage rv">
-        <div><i class="ph ph-database"></i><h3>Storage</h3><p>Connects read-only to the drives and instrument folders you already use. Originals stay untouched, so every number traces back to its source.</p></div>
-        <ul><li>FCS</li><li>Microscopy</li><li>Plate reader</li><li>Protocols</li></ul>
+      <div class="cell glass spot gloss s4 tint-a rv">
+        <i class="ph ph-plugs-connected"></i>
+        <h3>Connects to the tools you already use</h3>
+        <p>No migration and no re-entry. Obtimize reads from where your data already lives and keeps every original file untouched.</p>
+        <ul class="chips"><li>Lab notebooks</li><li>Spreadsheets</li><li>Flow cytometry</li><li>Microscopy</li><li>Protocols</li></ul>
       </div>
-      <div class="cell glass gloss c-memory rv">
-        <div><i class="ph ph-brain"></i><h3>Memory</h3><p>Each experiment is rebuilt as one connected record: conditions, cell line, passage, protocol version, operator, outcome and source files. Software estimates stay marked as drafts until a scientist signs them.</p></div>
-        <ul><li>CHIR</li><li>BMP4</li><li>VEGF</li><li>Coating dose</li><li>Passage</li><li>Draft vs. signed</li></ul>
+      <div class="cell glass spot gloss s2 rv">
+        <i class="ph ph-graph"></i>
+        <h3>Connected scientific memory</h3>
+        <p>Every experiment linked to its conditions, samples, results, protocol changes and original evidence.</p>
       </div>
-      <div class="cell glass gloss c-opt rv">
-        <div>
-          <i class="ph ph-target"></i>
-          <h3>Optimization</h3>
-          <p>Recommends the next batch of experiments within a fixed well budget. It returns a reliable operating range instead of one fragile recipe, and it tells you when the data can't support a decision yet.</p>
+      <div class="cell glass spot gloss s2 rv">
+        <i class="ph ph-notebook"></i>
+        <h3>Keeps the context</h3>
+        <p>Failed experiments, hypotheses and the decisions behind them, not just the final numbers.</p>
+      </div>
+      <div class="cell glass spot gloss s2 tint-b rv">
+        <i class="ph ph-chat-circle-text"></i>
+        <h3>A research partner</h3>
+        <p>Ask what your team has tried, compare results or dig into why a run failed. Every answer cites its evidence.</p>
+      </div>
+      <div class="cell glass spot gloss s2 rv">
+        <i class="ph ph-target"></i>
+        <h3>Decides what's next</h3>
+        <p>Recommends informative experiments and robust operating conditions within a limited research budget.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pipeline -->
+  <section id="how">
+    <div class="rv">
+      <h2>How it works</h2>
+      <p class="sub">Lab files go in. Obtimize links them into one record of every experiment, then plans the next round within your well budget.</p>
+    </div>
+
+    <div class="glass spot pipeline rv">
+      <div>
+        <div class="stage-h"><b>1</b> Your lab's data</div>
+        <div class="src">
+          <div><i class="ph ph-book-open-text"></i>Lab notebooks</div>
+          <div><i class="ph ph-table"></i>Spreadsheets</div>
+          <div><i class="ph ph-chart-scatter"></i>Flow cytometry</div>
+          <div><i class="ph ph-microscope"></i>Microscope images</div>
+          <div><i class="ph ph-file-text"></i>Protocols</div>
         </div>
-        <div class="range" aria-label="Illustration of a recommended operating range">
-          <svg viewBox="0 0 400 150" preserveAspectRatio="none">
-            <defs><linearGradient id="rg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#5fd4c4" stop-opacity=".35"/><stop offset="1" stop-color="#5fd4c4" stop-opacity="0"/></linearGradient></defs>
-            <rect x="150" y="0" width="120" height="150" fill="url(#rg)"/>
-            <line x1="150" y1="0" x2="150" y2="150" stroke="#5fd4c4" stroke-dasharray="3 4" stroke-opacity=".7"/>
-            <line x1="270" y1="0" x2="270" y2="150" stroke="#5fd4c4" stroke-dasharray="3 4" stroke-opacity=".7"/>
-            <path d="M0 128 C 60 120, 110 80, 170 52 S 250 34, 280 50 S 360 110, 400 122" fill="none" stroke="#e9eef2" stroke-width="2"/>
-            <g fill="#7fa8d6"><circle cx="40" cy="122" r="4"/><circle cx="95" cy="98" r="4"/><circle cx="182" cy="50" r="4"/><circle cx="228" cy="38" r="4"/><circle cx="300" cy="66" r="4"/><circle cx="352" cy="104" r="4"/></g>
-            <text x="210" y="140" text-anchor="middle" fill="#5fd4c4" font-family="JetBrains Mono" font-size="11">operating range</text>
+      </div>
+
+      <div class="link"></div>
+
+      <div>
+        <div class="stage-h"><b>2</b> Second brain</div>
+        <div class="brain">
+          <svg viewBox="0 0 520 380" role="img" aria-label="Knowledge graph linking runs to conditions, protocol versions and results">
+            <g>
+              <line class="edge hot" x1="140" y1="150" x2="70" y2="60"/>
+              <line class="edge hot" x1="140" y1="150" x2="260" y2="50"/>
+              <line class="edge" x1="140" y1="150" x2="70" y2="260"/>
+              <line class="edge hot" x1="140" y1="150" x2="260" y2="190"/>
+              <line class="edge" x1="140" y1="150" x2="90" y2="345"/>
+              <line class="edge" x1="350" y1="140" x2="260" y2="50"/>
+              <line class="edge" x1="350" y1="140" x2="450" y2="60"/>
+              <line class="edge hot" x1="350" y1="140" x2="260" y2="190"/>
+              <line class="edge" x1="350" y1="140" x2="460" y2="200"/>
+              <line class="edge" x1="240" y1="290" x2="70" y2="260"/>
+              <line class="edge" x1="240" y1="290" x2="260" y2="190"/>
+              <line class="edge" x1="240" y1="290" x2="270" y2="355" style="stroke:#f3c98b;stroke-dasharray:3 4;stroke-opacity:.7"/>
+              <line class="edge" x1="430" y1="290" x2="450" y2="60"/>
+              <line class="edge" x1="430" y1="290" x2="260" y2="190"/>
+              <line class="edge" x1="430" y1="290" x2="460" y2="355"/>
+            </g>
+            <g fill="#7fa8d6">
+              <circle cx="70" cy="60" r="5"/><circle cx="260" cy="50" r="5"/><circle cx="450" cy="60" r="5"/><circle cx="70" cy="260" r="5"/><circle cx="260" cy="190" r="6"/><circle cx="460" cy="200" r="5"/>
+            </g>
+            <g fill="#e9eef2"><circle cx="90" cy="345" r="4"/><circle cx="460" cy="355" r="4"/></g>
+            <circle cx="270" cy="355" r="4" fill="#f3c98b"/>
+            <text x="82" y="64">CHIR 4 µM</text>
+            <text x="272" y="54">VEGF 50 ng/mL</text>
+            <text x="392" y="40">Coating lot B</text>
+            <text x="82" y="264">Passage 12</text>
+            <text x="274" y="194">Protocol v3</text>
+            <text x="404" y="222">Passage 18</text>
+            <text x="102" y="349">CD31+ high</text>
+            <text x="282" y="359" style="fill:#f3c98b">No outcome yet</text>
+            <text x="390" y="375">Low yield</text>
+            <g class="run" fill="#5fd4c4">
+              <circle cx="140" cy="150" r="9"/><circle cx="350" cy="140" r="9"/><circle cx="240" cy="290" r="9"/><circle cx="430" cy="290" r="9"/>
+              <circle cx="140" cy="150" r="16" fill="none" stroke="#5fd4c4" stroke-opacity=".4"/>
+              <text x="156" y="146">Run 07</text><text x="366" y="136">Run 09</text><text x="182" y="294">Run 14</text><text x="372" y="294">Run 05</text>
+            </g>
           </svg>
         </div>
       </div>
-    </div>
-  </section>
 
-  <section id="workflow">
-    <h2 class="rv">One folder, from upload to next round.</h2>
-    <p class="sub rv">An illustrative iPSC to endothelial project. Product illustration, not a customer record.</p>
-    <div class="tl">
-      <div class="ev rv"><div class="dot glass"><i class="ph ph-plugs-connected"></i></div><div><h3>Connect</h3><p>The team points Obtimize at a shared drive holding 14 differentiation runs. Access is read-only.</p></div></div>
-      <div class="ev rv"><div class="dot glass"><i class="ph ph-table"></i></div><div><h3>Parse</h3><p>FCS exports, images and protocol calendars become a draft experiment table, one row per run.</p><div class="flag mono"><i class="ph ph-warning"></i>Run 14 has no outcome recorded</div></div></div>
-      <div class="ev rv"><div class="dot glass"><i class="ph ph-check-circle"></i></div><div><h3>Confirm</h3><p>A scientist adds the missing Run 14 result in two clicks and signs the record. Draft becomes verified.</p></div></div>
-      <div class="ev rv"><div class="dot glass"><i class="ph ph-chat-circle-text"></i></div><div><h3>Ask</h3><p>"What did VEGF above 50 ng/mL do?" The answer cites the runs and files behind it.</p></div></div>
-      <div class="ev rv"><div class="dot glass"><i class="ph ph-arrow-bend-down-right"></i></div><div><h3>Run next</h3><p>Obtimize proposes the next batch within the team's well budget. They approve it, run it, and the results flow back in.</p></div></div>
-    </div>
-  </section>
+      <div class="link"></div>
 
-  <section id="who">
-    <h2 class="rv">Who it's for.</h2>
-    <div class="who">
-      <div class="glass gloss rv"><i class="ph ph-flask"></i><h3>Bench scientists</h3><p>Spend minutes a week confirming records instead of digging through folders to find what was tried.</p></div>
-      <div class="glass gloss rv"><i class="ph ph-chart-line-up"></i><h3>Process development</h3><p>Reach target yield in fewer rounds, with an operating range you can defend at scale-up.</p></div>
-      <div class="glass gloss rv"><i class="ph ph-briefcase"></i><h3>CSOs and CEOs</h3><p>Every run your team pays for keeps informing the next one, even after people move on.</p></div>
-    </div>
-  </section>
-
-  <section>
-    <h2 class="rv">Built for how cell therapy labs actually work.</h2>
-    <div class="principles">
-      <div class="pr rv"><h3>No migration</h3><p>Benchling-style platforms need data entered into them first. Obtimize rebuilds experiments from the files you already have.</p></div>
-      <div class="pr rv"><h3>Speaks cell therapy</h3><p>Flow gating, passages, coatings and differentiation protocols, including protocols written in other languages.</p></div>
-      <div class="pr rv"><h3>Failures count</h3><p>Failed runs are data. Obtimize asks scientists to fill in missing outcomes, so the next round learns from them.</p></div>
-      <div class="pr rv"><h3>Honest by design</h3><p>Drafts stay separate from verified data, every claim is cited, and it holds back an answer rather than fake precision.</p></div>
-    </div>
-  </section>
-
-  <section id="research">
-    <div class="glass research rv">
       <div>
-        <h2>Grounded in research, not demos.</h2>
-        <p class="sub">Our optimization methods come from research we built and benchmarked this summer. The same work produced a lab-data pipeline tested on real files from a cell therapy lab.</p>
+        <div class="stage-h"><b>3</b> Next round</div>
+        <div class="recipe">
+          <div class="rx ok"><b>Robust region found</b>CHIR mid range, VEGF high range</div>
+          <div class="rx"><b>6 wells recommended</b>Chosen to learn the most per well
+            <div class="wells"><span>A1</span><span>A2</span><span>A3</span><span>B1</span><span>B2</span><span>B3</span></div>
+          </div>
+          <div class="rx warn"><b>Diagnostic</b>Run 14 has no outcome. Replicate the edge region before scaling.</div>
+        </div>
+      </div>
+    </div>
+    <p class="pipe-note rv">Illustrative example. Values are not from a customer lab.</p>
+  </section>
+
+  <!-- Impact -->
+  <section id="impact">
+    <div class="rv">
+      <h2>Faster, cheaper process development</h2>
+      <p class="sub">Every differentiation run costs weeks and thousands of dollars in media, cells and scientist time. Obtimize gets labs to a reliable answer with fewer of them.</p>
+    </div>
+    <div class="impact">
+      <div class="glass spot imp big rv">
+        <div>
+          <div class="n">2<span>×</span></div>
+          <h3>Fewer experimental rounds</h3>
+          <p>In benchmarks, our framework matched a standard optimizer's result in 5 rounds instead of 10. For a real differentiation program, that projects to roughly 4 months saved.</p>
+        </div>
+        <div class="bars mono">
+          <div class="bar">Standard<i style="width:100%;background:rgb(127 168 214 / .55)"></i></div>
+          <div class="bar">Obtimize<i style="width:50%;background:var(--accent)"></i></div>
+        </div>
+      </div>
+      <div class="glass spot imp rv">
+        <div class="n">66<span>/66</span></div>
+        <h3>Reliable operating regions</h3>
+        <p>Every operating region it reported in benchmarks contained the true answer. When the data wasn't enough, it said so.</p>
+      </div>
+      <div class="glass spot imp rv">
+        <i class="ph ph-copy ic"></i>
+        <h3>No repeated runs</h3>
+        <p>Flags planned experiments that repeat ones you already ran, before you spend the wells.</p>
+      </div>
+      <div class="glass spot imp rv" style="grid-column:span 2">
+        <i class="ph ph-timer ic"></i>
+        <h3>Data cleanup in minutes, not weeks</h3>
+        <p>The manual work that stalled our own project becomes a draft table that scientists confirm. Our target is under 10 minutes a week.</p>
+      </div>
+    </div>
+    <p class="foot-note rv">Benchmark results are from synthetic test problems in our manuscript. Wet-lab validation is in progress.</p>
+  </section>
+
+  <!-- Ask demo -->
+  <section class="ask">
+    <div class="rv">
+      <h2>Ask your lab's history</h2>
+      <ul>
+        <li><i class="ph ph-link"></i>Every answer links back to the run and file it came from.</li>
+        <li><i class="ph ph-bell-ringing"></i>It speaks up first when a result is missing or a planned experiment repeats an old one.</li>
+        <li><i class="ph ph-robot"></i>The same context can feed the AI assistants your lab already uses.</li>
+      </ul>
+    </div>
+    <div class="glass spot chat rv" role="img" aria-label="Example conversation with Obtimize, illustrative data">
+      <div class="msg q">Why did run 09 underperform compared with run 07?</div>
+      <div class="msg a">Run 09 used <b>coating lot B</b> and was seeded at <b>passage 18</b>. Every other condition matched run 07.
+        <div class="cite"><span>run_07.fcs</span><span>run_09.fcs</span><span>protocol_v3.docx</span></div>
+      </div>
+      <div class="flag"><i class="ph ph-warning"></i>Run 14 has no outcome recorded.</div>
+      <div class="flag"><i class="ph ph-copy"></i>Planned run 16 repeats the conditions of run 05.</div>
+    </div>
+  </section>
+
+  <!-- Trust -->
+  <section id="trust">
+    <h2 class="rv">How we handle your data</h2>
+        <div class="trust">
+      <div class="tr rv"><i class="ph ph-lock-key"></i><h3>Read-only connections</h3><p>Obtimize never writes to your drives or instruments.</p></div>
+      <div class="tr rv"><i class="ph ph-fingerprint"></i><h3>Originals preserved</h3><p>Every source file is kept unchanged and checksummed, so every number traces back.</p></div>
+      <div class="tr rv"><i class="ph ph-seal-check"></i><h3>Draft vs. signed</h3><p>Software estimates stay drafts until a scientist verifies them.</p></div>
+      <div class="tr rv"><i class="ph ph-quotes"></i><h3>Every claim cited</h3><p>Answers link to the runs and files they came from. No invented data.</p></div>
+      <div class="tr rv"><i class="ph ph-hand-palm"></i><h3>Abstains when unsure</h3><p>If the data can't support a decision, it says so and asks for replicates.</p></div>
+      <div class="tr rv"><i class="ph ph-stack"></i><h3>Knows what can be compared</h3><p>Flags mismatched assay versions, batch effects and wells sharing one plate, instead of silently pooling them.</p></div>
+    </div>
+  </section>
+
+  <!-- Research -->
+  <section id="research">
+    <div class="glass spot research rv">
+      <div>
+        <h2>Research</h2>
+        <p class="sub">The recommendation engine comes from an optimization framework we developed and benchmarked this summer, built for limited budgets and noisy biology.</p>
       </div>
       <div class="facts">
-        <div class="fact"><i class="ph ph-article"></i><div><b>Optimization framework</b><span>Benchmarked, with a manuscript prepared for PLOS ONE.</span></div></div>
-        <div class="fact"><i class="ph ph-microscope"></i><div><b>Lab-data pipeline</b><span>Parses flow cytometry, microscopy, protocol calendars and plate reader files.</span></div></div>
-        <div class="fact"><i class="ph ph-dna"></i><div><b>NutriGene AI</b><span>Our earlier work applying AI to biological data.</span></div></div>
+        <div class="fact"><i class="ph ph-article"></i><div><b>Optimization framework</b><span>Developed, benchmarked and written up for PLOS ONE.</span></div></div>
+        <div class="fact"><i class="ph ph-flask"></i><div><b>Real lab data pipeline</b><span>Tested on files from a working cell therapy lab.</span></div></div>
+        <div class="fact"><i class="ph ph-dna"></i><div><b>Built with a working lab</b><span>Developed at NutriGene AI Biotech in Hong Kong on real stem cell manufacturing data.</span></div></div>
       </div>
     </div>
   </section>
 
-  <section id="team" class="team">
-    <div class="rv">
-      <h2>Founded at Columbia.</h2>
-      <p class="sub">We are Columbia University researchers who built AI for biology at NutriGene AI. This summer we ran into the data problem ourselves while optimizing a real stem cell differentiation, so we started building the fix.</p>
-    </div>
-  </section>
-
+  <!-- Vision + CTA -->
   <section id="partner">
-    <div class="glass partner rv">
-      <h2>Make your next differentiation round count.</h2>
-      <p class="sub">We are working with one iPSC differentiation team over the next 90 days. Bring a folder of runs, and we will turn it into a connected record and a next-round plan.</p>
+    <div class="glass spot vision rv">
+      <p class="q">An AI brain that <em>learns alongside</em> your team and turns what it knows into better science.</p>
+      <p class="sub">We're starting with cell therapy. We're looking for design partners running iPSC differentiation who want their next round to count.</p>
       <div class="ctas"><a href="mailto:kwungfund@gmail.com?subject=Obtimize%20design%20partner" class="btn btn-primary">Become a design partner <i class="ph ph-arrow-right"></i></a></div>
-          </div>
+    </div>
   </section>
 </main>
 
 <footer class="wrap">
   <div class="foot">
     <a href="#" class="brand"><span class="mark"></span>Obtimize</a>
-    <span>The experiment memory and optimization layer for cell therapy labs.</span>
+    <span>From experimental data to better biological decisions.</span>
     <span>&copy; 2026 Obtimize</span>
   </div>
 </footer>
 
 <script>
-// Scroll reveal: sequence content as it enters view
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
-document.querySelectorAll('.rv').forEach((el,i)=>{el.style.transitionDelay=(i%5)*60+'ms';io.observe(el)});
+// Reveal content in sequence as it enters view
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.rv').forEach((el,i)=>{el.style.transitionDelay=(i%4)*70+'ms';io.observe(el)});
 
-// Hero graph: experiments link conditions to results, like the lab's memory
+// Glass spotlight follows the pointer
+document.querySelectorAll('.spot').forEach(el=>el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect();el.style.setProperty('--mx',e.clientX-r.left+'px');el.style.setProperty('--my',e.clientY-r.top+'px')}));
+
+// Hero: illustrative design space. Heatmap = predicted outcome, dashed contour = robust region,
+// dots = past runs, pulsing rings = recommended next experiments.
 (()=>{
-  const c=document.getElementById('graph'),x=c.getContext('2d');
+  const c=document.getElementById('map'),x=c.getContext('2d');
   const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const cols={e:'#5fd4c4',c:'#7fa8d6',r:'#e9eef2'};
-  let W,H,nodes=[],edges=[];
+  const f=(u,v)=>Math.exp(-(((u-.56)/.2)**2+((v-.62)/.24)**2)+ .6*((u-.56)/.2)*((v-.62)/.24)*.5)*.9+.25*Math.exp(-(((u-.2)/.12)**2+((v-.25)/.14)**2));
+  const past=[[.12,.2],[.22,.35],[.3,.78],[.42,.18],[.5,.5],[.62,.7],[.7,.3],[.82,.82],[.88,.15],[.35,.55],[.58,.88],[.15,.62]];
+  const next=[[.47,.66],[.66,.58],[.55,.78],[.4,.48],[.72,.74],[.52,.55]];
+  let W,H,img;
   function build(){
     const d=devicePixelRatio||1;W=c.clientWidth;H=c.clientHeight;c.width=W*d;c.height=H*d;x.setTransform(d,0,0,d,0,0);
-    nodes=[];edges=[];
-    const rnd=(a,b)=>a+Math.random()*(b-a);
-    const exps=[...Array(7)].map(()=>({t:'e',x:rnd(.18,.82)*W,y:rnd(.18,.66)*H,r:6}));
-    nodes.push(...exps);
-    exps.forEach(e=>{
-      for(let k=0;k<3;k++){const n={t:k<2?'c':'r',x:e.x+rnd(-70,70),y:e.y+rnd(-60,60),r:k<2?3.5:3};nodes.push(n);edges.push([e,n])}
-    });
-    for(let i=0;i<exps.length-1;i++)edges.push([exps[i],exps[i+1]]);
-    nodes.forEach(n=>{n.ox=n.x;n.oy=n.y;n.p=Math.random()*6.28});
+    const g=document.createElement('canvas'),N=90;g.width=N;g.height=N;const gx=g.getContext('2d'),id=gx.createImageData(N,N);
+    for(let j=0;j<N;j++)for(let i=0;i<N;i++){const z=Math.min(1,f(i/N,1-j/N)),k=(j*N+i)*4;
+      id.data[k]=12+z*83;id.data[k+1]=18+z*194;id.data[k+2]=26+z*170;id.data[k+3]=40+z*150}
+    gx.putImageData(id,0,0);img=g;
   }
   function draw(t){
     x.clearRect(0,0,W,H);
-    nodes.forEach(n=>{if(!reduce){n.x=n.ox+Math.sin(t/1800+n.p)*6;n.y=n.oy+Math.cos(t/2100+n.p)*6}});
-    edges.forEach(([a,b])=>{x.strokeStyle=a.t==='e'&&b.t==='e'?'rgba(95,212,196,.35)':'rgba(255,255,255,.12)';x.lineWidth=1;x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke()});
-    const hi=Math.floor(t/2400)%7;
-    nodes.forEach((n,i)=>{
-      x.beginPath();x.arc(n.x,n.y,n.r,0,6.28);x.fillStyle=cols[n.t];x.fill();
-      if(n.t==='e'&&nodes.filter(m=>m.t==='e').indexOf(n)===hi){x.beginPath();x.arc(n.x,n.y,n.r+7,0,6.28);x.strokeStyle='rgba(95,212,196,.5)';x.stroke()}
-    });
+    x.imageSmoothingEnabled=true;x.drawImage(img,0,0,W,H);
+    // grid
+    x.strokeStyle='rgba(255,255,255,.05)';for(let i=1;i<5;i++){x.beginPath();x.moveTo(W*i/5,0);x.lineTo(W*i/5,H);x.moveTo(0,H*i/5);x.lineTo(W,H*i/5);x.stroke()}
+    // robust region contour (marching on a coarse grid)
+    x.fillStyle='rgba(238,242,245,.85)';
+    const N=120,th=.62;
+    for(let j=0;j<N;j++)for(let i=0;i<N;i++){const a=f(i/N,1-j/N)>th,b=f((i+1)/N,1-j/N)>th,cc=f(i/N,1-(j+1)/N)>th;
+      if(a!==b||a!==cc){if((i+j)%3===0)x.fillRect(i/N*W,j/N*H,1.4,1.4)}}
+    // past runs
+    past.forEach(([u,v])=>{x.beginPath();x.arc(u*W,(1-v)*H,4,0,6.28);x.fillStyle='#7fa8d6';x.fill();x.strokeStyle='rgba(7,9,12,.8)';x.stroke()});
+    // next experiments
+    const p=reduce?0:(Math.sin(t/500)+1)/2;
+    next.forEach(([u,v],i)=>{x.beginPath();x.arc(u*W,(1-v)*H,6+p*2,0,6.28);x.strokeStyle='#5fd4c4';x.lineWidth=2;x.stroke();x.lineWidth=1;
+      x.beginPath();x.arc(u*W,(1-v)*H,12+p*6,0,6.28);x.strokeStyle=`rgba(95,212,196,${.35*(1-p)})`;x.stroke()});
     if(!reduce)requestAnimationFrame(draw);
   }
-  build();addEventListener('resize',build);requestAnimationFrame(draw);
+  build();addEventListener('resize',()=>{build()});requestAnimationFrame(draw);
 })();
 </script>
 </body>
