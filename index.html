@@ -1374,6 +1374,13 @@ body,body *:not(.ph):not(i),button,input,textarea,select,svg text{font-family:"I
 @media (max-width:960px){.br-cols::after,.br-col::after{display:none}}
 .funnel{align-self:center !important;height:auto !important}
 .bstory .story{align-items:center !important}
+
+.branch{display:flex;flex-direction:column;align-items:center;text-align:center}
+.branch .br-root{display:inline-flex;padding:7px 14px;border-radius:999px;border:1px solid var(--line);background:#fff;font-size:12.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);gap:0}
+.branch .br-h{margin-top:18px;max-width:22ch}
+.branch .br-line{margin:12px auto 0;max-width:52ch}
+.branch .br-cols{width:100%}
+.branch>*{order:0 !important}
 </style>
 </head>
 <body>
@@ -1557,7 +1564,9 @@ body,body *:not(.ph):not(i),button,input,textarea,select,svg text{font-family:"I
     </section>
 
     <section class="branch" id="branch">
-      <div class="br-root"><span class="hub-dot"><i class="ph ph-brain"></i></span><b>What you can do with it</b></div>
+      <div class="s-num br-root">What you get</div>
+      <h3 class="s-h br-h">Four ways your team uses the brain</h3>
+      <p class="s-line br-line">Each one draws on the same verified memory, so answers, flags, plans and exports never disagree with each other.</p>
       <svg class="br-lines" id="brLines" aria-hidden="true" preserveAspectRatio="none"></svg>
       <div class="br-toggle" role="tablist"><button class="on" data-m="with">With Obtimize</button><button data-m="without">Today, without it</button></div>
       <div class="br-cols">
