@@ -123,7 +123,9 @@ h2{font-size:clamp(32px,3.8vw,50px);line-height:1.06;letter-spacing:-.026em;font
 /* Brand story */
 .mission{font-size:clamp(26px,3vw,40px);line-height:1.18;letter-spacing:-.025em;font-weight:400;max-width:24ch;color:var(--ink)}
 .mission{position:relative}
-.m-ghost{visibility:hidden}
+.m-ghost,.th-ghost{visibility:hidden}
+.typed-h{position:relative;max-width:26ch;margin-top:12px}
+.th-live{position:absolute;inset:0}
 .m-live{position:absolute;inset:0}
 .m-live .tcaret{height:.9em}
 .mission strong.blue{font-weight:inherit;color:var(--accent)}
@@ -611,7 +613,8 @@ footer{padding:64px 0 40px;color:var(--ink-3);font-size:14px;border-top:1px soli
   <!-- Pipeline scene (scroll-driven) -->
   <section id="how" class="scene-sec">
     <div class="rv">
-      <h2>How it works</h2>
+      <div class="eyebrow">How it works</div>
+      <h2 class="typed-h" data-type="Before AI can help scientists design better experiments, it has to understand what the lab has already done." aria-label="Before AI can help scientists design better experiments, it has to understand what the lab has already done."><span class="th-ghost" aria-hidden="true">Before AI can help scientists design better experiments, it has to understand what the lab has already done.</span><span class="th-live" aria-hidden="true"></span></h2>
       <p class="sub">Scroll down to follow your lab's files into the brain, and out the other side as a plan.</p>
     </div>
     <div class="scene" id="scene">
@@ -835,7 +838,7 @@ document.querySelectorAll('.rv').forEach((el,i)=>{el.style.transitionDelay=(i%4)
 
 // Headlines reveal word by word
 const reduceM=matchMedia('(prefers-reduced-motion: reduce)').matches;
-document.querySelectorAll('h2').forEach(h=>{
+document.querySelectorAll('h2:not(.typed-h)').forEach(h=>{
   h.innerHTML=h.textContent.trim().split(/\s+/).map((w,i)=>`<span class="w" style="transition-delay:${i*60}ms">${w}</span>`).join(' ');
   new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){h.classList.add('show');o.disconnect()}}),{threshold:.4}).observe(h);
 });
@@ -861,6 +864,11 @@ document.querySelectorAll('.trust-cards .tr').forEach(b=>b.addEventListener('cli
     const total=segs.reduce((a,s)=>a+s[1].length,0);let n=0;
     (function step(){n++;let left=n,html='';for(const[wrap,txt]of segs){if(left<=0)break;const part=txt.slice(0,left);left-=txt.length;html+=wrap?wrap.replace('></','>'+part+'</'):part}
       live.innerHTML=html+'<span class="tcaret"></span>';if(n<total)setTimeout(step,28);else setTimeout(()=>{live.innerHTML=html},1800)})()}),{threshold:.6}).observe(el)})();
+
+// "How it works" headline types out too
+document.querySelectorAll('.typed-h').forEach(h=>{const t=h.dataset.type,live=h.querySelector('.th-live');
+  if(reduceM){live.textContent=t;return}
+  new IntersectionObserver((es,o)=>es.forEach(e=>{if(!e.isIntersecting)return;o.disconnect();let i=0;(function step(){live.innerHTML=t.slice(0,++i)+'<span class="tcaret"></span>';if(i<t.length)setTimeout(step,t[i-1]===','?240:30);else setTimeout(()=>live.textContent=t,1800)})()}),{threshold:.6}).observe(h)});
 
 // Closing tagline types itself out when it scrolls into view
 (()=>{const el=document.getElementById('typed');if(!el)return;const t=el.dataset.text,out=document.getElementById('typedT');
