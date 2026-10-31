@@ -181,7 +181,7 @@ h2{font-size:clamp(32px,3.8vw,50px);line-height:1.06;letter-spacing:-.026em;font
 /* Campaign steps */
 .camp{margin-top:56px;padding:32px 28px 28px}
 .orb-wrap{display:flex;flex-direction:column;align-items:center}
-.orb{position:relative;width:72px;height:72px;border-radius:50%;display:grid;place-items:center;font-size:32px;color:#061a33;background:radial-gradient(circle at 35% 30%,#ffffff,#8db8f7 50%,#3f7fe6);box-shadow:0 0 0 8px rgb(63 127 230 / .08),0 0 60px rgb(63 127 230 / .35);animation:breathe 3.2s ease-in-out infinite}
+.orb{position:relative;width:72px;height:72px;border-radius:50%;display:grid;place-items:center;font-size:32px;color:#ffffff;background:radial-gradient(circle at 35% 30%,#ffffff,#8db8f7 50%,#3f7fe6);box-shadow:0 0 0 8px rgb(63 127 230 / .08),0 0 60px rgb(63 127 230 / .35);animation:breathe 3.2s ease-in-out infinite}
 @keyframes breathe{50%{box-shadow:0 0 0 14px rgb(63 127 230 / .04),0 0 80px rgb(63 127 230 / .4)}}
 .cross{position:absolute;right:-6px;bottom:-4px;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:16px;background:#ffffff;color:#d14d8a;border:1px solid rgb(209 77 138 / .4)}
 .orb-l{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-top:12px}
@@ -206,24 +206,33 @@ h2{font-size:clamp(32px,3.8vw,50px);line-height:1.06;letter-spacing:-.026em;font
 .cd-out{margin-top:14px;display:flex;flex-wrap:wrap;gap:6px}
 .cd-out span{font-size:11px;border:1px solid rgb(209 77 138 / .3);color:#d14d8a;border-radius:6px;padding:4px 8px;animation:pop .45s var(--ease) both}
 
-/* Scroll-driven pipeline scene */
-.scene{height:340vh;position:relative;margin-top:24px}
-.pin{position:sticky;top:0;height:100dvh;display:grid;grid-template-columns:.8fr 1.2fr;gap:40px;align-items:center}
-.steps-col{display:grid;gap:10px}
-.sstep{display:grid;grid-template-columns:44px 1fr;gap:16px;padding:18px;border-radius:16px;border:1px solid transparent;opacity:.35;transition:opacity .5s var(--ease),border-color .5s,background .5s}
-.sstep.on{opacity:1;border-color:rgb(63 127 230 / .3);background:linear-gradient(160deg,rgb(63 127 230 / .10),rgb(209 77 138 / .03))}
-.sstep.done{opacity:.6}
-.si{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-size:22px;color:#3f7fe6;background:rgb(63 127 230 / .08);border:1px solid rgb(63 127 230 / .2)}
-.sstep.on .si{color:#fff;background:var(--grad);border-color:transparent}
-.sstep h3{font-size:20px;font-weight:500;letter-spacing:-.02em}
-.sstep p{color:var(--ink-2);font-size:14.5px;margin-top:4px}
-.vis{position:relative;height:min(78dvh,640px)}
-.vis canvas{position:absolute;inset:0;width:100%;height:100%}
-.core{position:absolute;left:52%;top:50%;width:76px;height:76px;margin:-38px 0 0 -38px;border-radius:50%;display:grid;place-items:center;font-size:34px;color:#061a33;background:radial-gradient(circle at 35% 30%,#fff,#8db8f7 50%,#3f7fe6);box-shadow:0 0 0 10px rgb(63 127 230 / .07),0 0 70px rgb(63 127 230 / .45);transform:scale(var(--cs,.6));transition:transform .2s linear}
-.srcs-v,.outs-v{position:absolute;top:0;bottom:0;display:flex;flex-direction:column;justify-content:space-evenly}
-.srcs-v{left:0}.outs-v{right:0;top:22%;bottom:22%;width:230px}
-.srcs-v span,.outs-v span{display:inline-flex;align-items:center;gap:8px;font-size:13px;padding:7px 12px;border-radius:999px;border:1px solid rgb(15 26 43 / .12);background:rgb(255 255 255 / .85);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:var(--ink);white-space:nowrap;transition:opacity .5s var(--ease),transform .5s var(--ease)}
-.srcs-v span .ph{color:#d14d8a;font-size:16px}.outs-v span .ph{color:#3f7fe6;font-size:16px}
+/* Vertical scroll-driven pipeline */
+.scene{height:360vh;position:relative;margin-top:24px}
+.pin{position:sticky;top:0;height:100dvh;display:flex;align-items:center}
+.vstage{position:relative;width:100%;height:min(94dvh,860px);display:grid;grid-template-rows:auto auto 1fr 250px 1fr auto 56px;justify-items:center}
+.vstage canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.vhead{grid-row:1;text-align:center;z-index:1}
+.vsteps{display:inline-flex;gap:6px;padding:5px;border-radius:999px;background:rgb(255 255 255 / .7);border:1px solid var(--line)}
+.vsteps span{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;padding:7px 14px;border-radius:999px;color:var(--ink-3);transition:all .4s var(--ease)}
+.vsteps span.done{color:var(--accent)}
+.vsteps span.on{color:#fff;background:var(--grad);box-shadow:0 6px 18px -8px rgb(63 127 230 / .7)}
+.vcap{margin-top:12px;font-size:15px;color:var(--ink-2);min-height:22px}
+.vfiles{grid-row:2;display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:22px;z-index:1;max-width:980px}
+.vfiles span{display:inline-flex;align-items:center;gap:7px;font-size:13px;padding:7px 12px;border-radius:999px;border:1px solid rgb(209 77 138 / .25);background:rgb(255 255 255 / .9);color:var(--ink);transition:transform .4s var(--ease),opacity .4s}
+.vfiles span .ph{color:var(--pink);font-size:15px}
+.vbrain{grid-row:4;position:relative;width:250px;height:250px;display:grid;place-items:center;z-index:1}
+.vbrain .core{position:relative;left:auto;top:auto;margin:0}
+.vbrain .synth{position:absolute;left:calc(100% + 48px);top:50%;bottom:auto;transform:translateY(-50%);width:300px}
+.core-tip{position:absolute;top:calc(100% + 4px);font-size:12.5px;font-weight:500;color:var(--accent);opacity:0;transition:opacity .4s;white-space:nowrap}
+.core-tip.on{opacity:1}
+.vouts{grid-row:6;display:grid;grid-template-columns:repeat(3,250px);gap:20px;z-index:1}
+.plan small{display:block;font-size:12px;color:var(--ink-2);margin-top:2px}
+.vchat{grid-row:7;align-self:end;z-index:1;display:inline-flex;align-items:center;gap:10px;font-size:14px;font-weight:600;padding:11px 18px;border-radius:999px;color:#fff;background:var(--grad);box-shadow:0 10px 26px -12px rgb(63 127 230 / .8);opacity:0;transform:translateY(10px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.vchat.on{opacity:1;transform:none}
+.vchat:hover{transform:translateY(-2px)}
+
+.core{position:absolute;left:52%;top:50%;width:76px;height:76px;margin:-38px 0 0 -38px;border-radius:50%;display:grid;place-items:center;font-size:34px;color:#ffffff;background:radial-gradient(circle at 35% 30%,#fff,#8db8f7 50%,#3f7fe6);box-shadow:0 0 0 10px rgb(63 127 230 / .07),0 0 70px rgb(63 127 230 / .45);transform:scale(var(--cs,.6));transition:transform .2s linear}
+.vouts .plan{width:250px}
 .plan{display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start;padding:12px 14px;border-radius:14px;border:1px solid rgb(63 127 230 / .3);background:rgb(255 255 255 / .9);box-shadow:0 12px 30px -18px rgb(40 70 130 / .4);opacity:0;transform:translateX(16px) scale(.97);transition:opacity .6s var(--ease),transform .6s var(--ease)}
 .plan.on{opacity:1;transform:none}
 .plan .ph{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;color:#fff;background:var(--grad);font-size:16px}
@@ -232,8 +241,6 @@ h2{font-size:clamp(32px,3.8vw,50px);line-height:1.06;letter-spacing:-.026em;font
 .plan span{font-size:12px;color:var(--ink-2)}
 .core{border:0;cursor:pointer}
 .core:hover{transform:scale(calc(var(--cs,.6) * 1.08))}
-.core-tip{position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%);font-size:12px;font-weight:500;color:var(--accent);white-space:nowrap;opacity:0;transition:opacity .3s}
-.core.ready .core-tip{opacity:1}
 .synth{position:absolute;left:52%;bottom:2%;transform:translateX(-50%);width:min(340px,70%);padding:10px 14px;border-radius:12px;background:rgb(255 255 255 / .9);border:1px solid var(--line);box-shadow:0 12px 30px -18px rgb(40 70 130 / .35);font-size:12px;opacity:0;transition:opacity .4s}
 .synth.on{opacity:1}
 .synth-h{font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:6px}
@@ -241,7 +248,6 @@ h2{font-size:clamp(32px,3.8vw,50px);line-height:1.06;letter-spacing:-.026em;font
 .synth-l{margin-top:6px;display:grid;gap:3px;color:var(--ink-2);min-height:54px}
 .synth-l div{animation:pop .35s var(--ease)}
 .synth-l b{color:var(--ink);font-weight:600}
-.brain-sec{padding-top:40px}
 
 /* Interactive brain */
 .brainbox{margin-top:48px;padding:18px}
@@ -298,7 +304,7 @@ h2{font-size:clamp(32px,3.8vw,50px);line-height:1.06;letter-spacing:-.026em;font
 /* Impact charts */
 .imp .n b{font-weight:inherit}
 .conv{width:100%;height:auto;margin-top:24px}
-.conv text{font-family:"Inter",sans-serif;font-feature-settings:"tnum";font-size:10px;fill:#77838f}
+.conv text{font-family:"Inter",sans-serif;font-feature-settings:"tnum";font-size:10px;fill:#4a576c}
 .conv .gridl line{stroke:rgb(15 26 43 / .05)}
 .conv .ln{fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:420;stroke-dashoffset:420;transition:stroke-dashoffset 2.2s var(--ease)}
 .conv .std{stroke:#d14d8a;transition-delay:.2s}
@@ -422,16 +428,16 @@ footer{padding:64px 0 40px;color:var(--ink-3);font-size:14px;border-top:1px soli
   .person{grid-template-columns:1fr}
   .s2,.s4{grid-column:auto}
   .imp.big{grid-row:auto}
-  .scene{height:260vh}
-  .pin{grid-template-columns:1fr;gap:12px;align-content:center}
-  .sstep{display:none;padding:12px}
-  .sstep.on{display:grid}
-  .vis{height:56dvh}
-  .srcs-v span{font-size:0;padding:7px;gap:0}
-  .srcs-v span .ph{font-size:15px}
-  .outs-v{width:150px}
-  .plan span{display:none}
+  .scene{height:300vh}
+  .vfiles span{font-size:0;padding:7px;gap:0}
+  .vfiles span .ph{font-size:15px}
   .synth{display:none}
+  .vouts{grid-template-columns:1fr;gap:8px;width:100%}
+  .plan small{display:none}
+  .vstage{grid-template-rows:auto auto 1fr 200px 1fr auto 50px}
+  .vbrain{width:200px;height:200px}
+  .vsteps span{font-size:0;padding:8px;gap:0}
+  .vsteps span .ph{font-size:15px}
   .csteps{grid-template-columns:repeat(2,1fr)}
   .wires{display:none}
   .cdetail{grid-template-columns:1fr}
@@ -606,29 +612,31 @@ footer{padding:64px 0 40px;color:var(--ink-3);font-size:14px;border-top:1px soli
   <section id="how" class="scene-sec">
     <div class="rv">
       <h2>How it works</h2>
-      <p class="sub">Scroll to watch a lab's scattered files become one brain, then become a plan.</p>
+      <p class="sub">Scroll down to follow your lab's files into the brain, and out the other side as a plan.</p>
     </div>
     <div class="scene" id="scene">
       <div class="pin">
-        <div class="steps-col">
-          <div class="sstep" data-s="0"><div class="si"><i class="ph ph-tray-arrow-down"></i></div><div><h3>Ingest</h3><p>Reads what the lab already saves: run sheets, flow cytometry, microscope photos, plate reads, protocol changes and calculation sheets. Read-only, originals kept.</p></div></div>
-          <div class="sstep" data-s="1"><div class="si"><i class="ph ph-graph"></i></div><div><h3>Understand</h3><p>Pulls out every condition, cell line, passage, lot, protocol version and result, and links them into one graph per experiment.</p></div></div>
-          <div class="sstep" data-s="2"><div class="si"><i class="ph ph-stethoscope"></i></div><div><h3>Diagnose</h3><p>Checks the graph for missing outcomes, unlabeled images, assay mismatches, calculation errors and repeated runs, before anyone relies on it.</p></div></div>
-          <div class="sstep" data-s="3"><div class="si"><i class="ph ph-target"></i></div><div><h3>Recommend</h3><p>Turns verified records into the next wells to run, a robust operating range, and cited answers. Or says what to fix first.</p></div></div>
-        </div>
-        <div class="vis" id="vis">
+        <div class="vstage" id="vis">
           <canvas id="sceneCv" aria-hidden="true"></canvas>
-          <button class="core" id="core" aria-label="Open the second brain"><i class="ph ph-brain"></i><span class="core-tip">Open the brain</span></button>
-          <div class="synth" id="synth"><div class="synth-h">Synthesizing</div><div class="synth-l" id="synthL"></div></div>
-          <div class="srcs-v">
+          <div class="vhead">
+            <div class="vsteps"><span><i class="ph ph-tray-arrow-down"></i>Ingest</span><span><i class="ph ph-graph"></i>Understand</span><span><i class="ph ph-stethoscope"></i>Diagnose</span><span><i class="ph ph-target"></i>Recommend</span></div>
+            <p class="vcap" id="vcap">Your lab's files, exactly as they are saved today.</p>
+          </div>
+          <div class="vfiles">
             <span><i class="ph ph-file-xls"></i>Run sheets</span><span><i class="ph ph-chart-scatter"></i>FCS files</span><span><i class="ph ph-image"></i>Microscope photos</span><span><i class="ph ph-grid-nine"></i>Plate reads</span>
             <span><i class="ph ph-file-text"></i>Protocols</span><span><i class="ph ph-calculator"></i>Calc sheets</span><span><i class="ph ph-notebook"></i>Notebooks</span><span><i class="ph ph-chat-circle-dots"></i>Slack threads</span>
           </div>
-          <div class="outs-v">
-            <div class="plan"><i class="ph ph-flask"></i><div><b>Next round: 6 wells</b><span>CHIR 3 to 4 µM, VEGF 100 ng/mL, lot A</span></div></div>
-            <div class="plan"><i class="ph ph-crosshair"></i><div><b>Robust range</b><span>Holds across passages 10 to 14</span></div></div>
-            <div class="plan warn"><i class="ph ph-wrench"></i><div><b>Fix first</b><span>Record Run 14, label 12 photos</span></div></div>
+          <div class="vbrain">
+            <button class="core" id="core" aria-label="Open the second brain"><i class="ph ph-brain"></i></button>
+            <div class="synth" id="synth"><div class="synth-h">Synthesizing</div><div class="synth-l" id="synthL"></div></div>
+            <div class="core-tip" id="coreTip">Click the brain to explore it</div>
           </div>
+          <div class="vouts">
+            <div class="plan"><i class="ph ph-flask"></i><div><b>Next round: 6 wells</b><small>CHIR 3 to 4 µM, VEGF 100 ng/mL, lot A</small></div></div>
+            <div class="plan"><i class="ph ph-crosshair"></i><div><b>Robust range</b><small>Holds across passages 10 to 14</small></div></div>
+            <div class="plan warn"><i class="ph ph-wrench"></i><div><b>Fix first</b><small>Record Run 14, label 12 photos</small></div></div>
+          </div>
+          <a class="vchat" href="#ask" id="vchat"><i class="ph ph-chat-circle-text"></i>Ask your lab's history<i class="ph ph-arrow-down"></i></a>
         </div>
       </div>
     </div>
@@ -947,65 +955,65 @@ document.querySelectorAll('.spot').forEach(el=>el.addEventListener('pointermove'
   build();addEventListener('resize',build);requestAnimationFrame(draw);
 })();
 
-// Scroll-driven pipeline: files -> brain graph -> diagnosis -> recommendations.
-// Progress comes from the pinned section's position, read in a rAF loop that only runs while it's on screen.
+// Vertical scroll pipeline: files -> brain (graph forms, synthesis feed) -> issues -> three outputs -> chat.
 (()=>{
   const scene=document.getElementById('scene');if(!scene)return;
   const cv=document.getElementById('sceneCv'),x=cv.getContext('2d'),vis=document.getElementById('vis');
-  const steps=[...document.querySelectorAll('.sstep')],srcs=[...document.querySelectorAll('.srcs-v span')],outs=[...document.querySelectorAll('.outs-v .plan')],core=document.getElementById('core'),synth=document.getElementById('synth'),synthL=document.getElementById('synthL');
-  core.addEventListener('click',()=>document.getElementById('brain').scrollIntoView({behavior:reduce?'auto':'smooth'}));
-  const FACTS=['<b>Run 07</b>: CHIR 4 µM, VEGF 100, P12 → CD31+ high','<b>Run 09</b>: lot B, passage 18 → CD31+ low','<b>Run 12</b>: dilution sheet says 80, not 100','<b>Run 05</b>: purity assay v1, not v2','<b>Run 14</b>: no outcome recorded','<b>Protocol v3</b>: day 4 feeding changed','<b>12 photos</b>: no run label'];let shown=-1;
+  const pills=[...document.querySelectorAll('.vsteps span')],files=[...document.querySelectorAll('.vfiles span')],outs=[...document.querySelectorAll('.vouts .plan')];
+  const core=document.getElementById('core'),tip=document.getElementById('coreTip'),synth=document.getElementById('synth'),synthL=document.getElementById('synthL'),cap=document.getElementById('vcap'),chat=document.getElementById('vchat');
   const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let W,H,C,R,nodes=[],edges=[],active=false;
-  const cols=['#3f7fe6','#d14d8a','#8a95a8','#a7b0bf','#5fb58a','#9ec3f5'];
-  const issues=[['Missing outcome',0],['Assay mismatch',0],['Calc error',0],['Repeated run',0]];
-  let seed=7;const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
+  core.addEventListener('click',()=>document.getElementById('brain').scrollIntoView({behavior:reduce?'auto':'smooth'}));
+  const CAPS=["Your lab's files stream in, read-only, exactly as they are saved today.","Every condition, cell line, passage and result is linked into one graph.","Problems light up before anyone relies on the data.","The brain opens out into a plan, a range, and what to fix first."];
+  const FACTS=['<b>Run 07</b>: CHIR 4 µM, VEGF 100, P12 → CD31+ high','<b>Run 09</b>: lot B, passage 18 → CD31+ low','<b>Run 12</b>: dilution sheet says 80, not 100','<b>Run 05</b>: purity assay v1, not v2','<b>Run 14</b>: no outcome recorded','<b>Protocol v3</b>: day 4 feeding changed','<b>12 photos</b>: no run label'];
+  const ISS=['Missing outcome','Assay mismatch','Calc error','Repeated run'];
+  const cols=['#3f7fe6','#d14d8a','#7c879a','#5fb58a','#8db8f7'];
+  let W,H,C,R,nodes=[],edges=[],active=false,shown=-1,lastS=-1;
+  let seed=5;const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
+  const rel=el=>{const r=el.getBoundingClientRect(),v=vis.getBoundingClientRect();return{x:r.left-v.left,y:r.top-v.top,w:r.width,h:r.height}};
   function size(){const d=devicePixelRatio||1;W=vis.clientWidth;H=vis.clientHeight;cv.width=W*d;cv.height=H*d;x.setTransform(d,0,0,d,0,0);
-    C=[W*.52,H*.5];R=Math.min(W*.24,H*.36);
-    seed=7;nodes=[];for(let i=0;i<34;i++){const a=rnd()*6.283,r=R*(.32+rnd()*.6);nodes.push({x:C[0]+Math.cos(a)*r,y:C[1]+Math.sin(a)*r,c:cols[i%cols.length],r:i%6===0?5:3.2})}
-    edges=[];nodes.forEach((n,i)=>{const near=nodes.map((m,j)=>[j,Math.hypot(m.x-n.x,m.y-n.y)]).filter(([j])=>j!==i).sort((a,b)=>a[1]-b[1]).slice(0,2);near.forEach(([j])=>{if(i<j)edges.push([i,j])})});
-    [3,11,19,27].forEach((k,i)=>issues[i][1]=k);
-  }
+    const b=rel(core);C=[b.x+b.w/2,b.y+b.h/2];R=110;
+    seed=5;nodes=[];for(let i=0;i<30;i++){const a=rnd()*6.283,r=R*(.5+rnd()*.48);nodes.push({x:C[0]+Math.cos(a)*r,y:C[1]+Math.sin(a)*r,c:cols[i%cols.length],r:i%5===0?4.6:3.2,a})}
+    edges=[];nodes.forEach((n,i)=>{nodes.map((m,j)=>[j,Math.hypot(m.x-n.x,m.y-n.y)]).filter(([j])=>j!==i).sort((p,q)=>p[1]-q[1]).slice(0,2).forEach(([j])=>{if(i<j)edges.push([i,j])})})}
   const clamp=v=>Math.max(0,Math.min(1,v)),ease=v=>1-Math.pow(1-clamp(v),3);
-  const anchor=el=>{const r=el.getBoundingClientRect(),v=vis.getBoundingClientRect();return[r.left-v.left,r.top-v.top,r.width,r.height]};
-  function bez(p0,p1,p2,p3,t){const u=1-t;return[u*u*u*p0[0]+3*u*u*t*p1[0]+3*u*t*t*p2[0]+t*t*t*p3[0],u*u*u*p0[1]+3*u*u*t*p1[1]+3*u*t*t*p2[1]+t*t*t*p3[1]]}
-  function curve(a,b,k,col,width){x.strokeStyle=col;x.lineWidth=width;x.beginPath();const N=40;for(let i=0;i<=N*k;i++){const t=i/N,[px,py]=bez(a,[a[0]+(b[0]-a[0])*.5,a[1]],[a[0]+(b[0]-a[0])*.5,b[1]],b,t);i?x.lineTo(px,py):x.moveTo(px,py)}x.stroke()}
+  const vb=(a,b,t)=>{const my=(a[1]+b[1])/2,u=1-t;return[u*u*u*a[0]+3*u*u*t*a[0]+3*u*t*t*b[0]+t*t*t*b[0],u*u*u*a[1]+3*u*u*t*my+3*u*t*t*my+t*t*t*b[1]]};
+  function line(a,b,k,col,w){x.strokeStyle=col;x.lineWidth=w;x.beginPath();for(let i=0;i<=40*k;i++){const[px,py]=vb(a,b,i/40);i?x.lineTo(px,py):x.moveTo(px,py)}x.stroke()}
+  function dot(a,b,t,col,r){const[px,py]=vb(a,b,t);x.beginPath();x.arc(px,py,r,0,6.28);x.fillStyle=col;x.fill()}
   function frame(now){
     if(!active)return;
     const r=scene.getBoundingClientRect(),p=clamp(-r.top/(r.height-innerHeight));
-    const A=ease(p/.22),B=ease((p-.2)/.3),Cd=ease((p-.5)/.22),D=ease((p-.74)/.2);
-    const s=Math.min(3,Math.floor(p*4.0001));steps.forEach((el,i)=>{el.classList.toggle('on',i===s);el.classList.toggle('done',i<s)});
-    outs.forEach((o,i)=>o.classList.toggle('on',D>.2+i*.25));
-    core.style.setProperty('--cs',(.6+.4*B).toFixed(3));core.classList.toggle('ready',B>=1);
-    const sp=p>.18&&p<.78;synth.classList.toggle('on',sp);const fi=Math.min(FACTS.length-1,Math.floor(clamp((p-.2)/.5)*FACTS.length));
+    const A=ease(p/.22),B=ease((p-.2)/.3),Cd=ease((p-.5)/.22),D=ease((p-.72)/.18),E=ease((p-.9)/.08);
+    const s=Math.min(3,Math.floor(p*4.0001));
+    if(s!==lastS){lastS=s;pills.forEach((el,i)=>{el.classList.toggle('on',i===s);el.classList.toggle('done',i<s)});cap.textContent=CAPS[s]}
+    outs.forEach((o,i)=>o.classList.toggle('on',D>.25+i*.25));chat.classList.toggle('on',E>.3);
+    core.style.setProperty('--cs',(.7+.3*B).toFixed(3));tip.classList.toggle('on',B>=1);
+    const sp=p>.18&&p<.74;synth.classList.toggle('on',sp);const fi=Math.min(FACTS.length-1,Math.floor(clamp((p-.2)/.5)*FACTS.length));
     if(sp&&fi!==shown){shown=fi;synthL.innerHTML=FACTS.slice(Math.max(0,fi-2),fi+1).map(f=>`<div>${f}</div>`).join('')}
     x.clearRect(0,0,W,H);
-    // ring with four step arcs filling clockwise
-    const labels=['Ingest','Understand','Diagnose','Recommend'];
-    for(let i=0;i<4;i++){const a0=-Math.PI/2+i*Math.PI/2+.06,a1=a0+Math.PI/2-.12,f=clamp(p*4-i);
-      x.lineWidth=3;x.strokeStyle='rgba(15,26,43,.08)';x.beginPath();x.arc(C[0],C[1],R+18,a0,a1);x.stroke();
-      if(f>0){const g=x.createLinearGradient(C[0]-R,C[1]-R,C[0]+R,C[1]+R);g.addColorStop(0,'#3f7fe6');g.addColorStop(.5,'#3f7fe6');g.addColorStop(1,'#1f4eaa');x.strokeStyle=g;x.beginPath();x.arc(C[0],C[1],R+18,a0,a0+(a1-a0)*f);x.stroke()}
-      const am=(a0+a1)/2,lx=C[0]+Math.cos(am)*(R+40),ly=C[1]+Math.sin(am)*(R+40);
-      x.font='500 12px "Inter",sans-serif';x.textAlign='center';x.fillStyle=f>0?'rgba(15,26,43,.85)':'rgba(74,87,108,.45)';x.fillText(labels[i],lx,ly+4)}
-    x.textAlign='left';
-    // inflow: source chips -> circle
-    srcs.forEach((el,i)=>{const[ax,ay,aw,ah]=anchor(el),a=[ax+aw+4,ay+ah/2],ang=Math.PI+(i-3.5)*.16,b=[C[0]+Math.cos(ang)*(R+18),C[1]+Math.sin(ang)*(R+18)];
-      const k=clamp(A*1.3-i*.04);if(k<=0)return;curve(a,b,k,'rgba(209,77,138,.22)',1.2);
-      if(k>=1&&!reduce){for(let j=0;j<2;j++){const t=((now/2200)+i*.11+j*.5)%1,[px,py]=bez(a,[a[0]+(b[0]-a[0])*.5,a[1]],[a[0]+(b[0]-a[0])*.5,b[1]],b,t);x.beginPath();x.arc(px,py,2.4,0,6.28);x.fillStyle='#d14d8a';x.fill()}}});
-    // graph forms inside the circle
-    edges.forEach(([i,j])=>{const k=clamp(B*nodes.length-Math.max(i,j));if(k<=0)return;const a=nodes[i],b=nodes[j];x.strokeStyle='rgba(63,127,230,.25)';x.lineWidth=1;x.beginPath();x.moveTo(a.x,a.y);x.lineTo(a.x+(b.x-a.x)*k,a.y+(b.y-a.y)*k);x.stroke()});
-    nodes.forEach((n,i)=>{const k=clamp(B*nodes.length-i);if(k<=0)return;const isIss=issues.findIndex(q=>q[1]===i);const hot=isIss>=0&&Cd>.15+isIss*.2;
+    // ring around the brain fills with overall progress
+    x.lineWidth=3;x.strokeStyle='rgba(15,26,43,.07)';x.beginPath();x.arc(C[0],C[1],R+16,0,6.283);x.stroke();
+    x.strokeStyle='#3f7fe6';x.lineCap='round';x.beginPath();x.arc(C[0],C[1],R+16,-Math.PI/2,-Math.PI/2+6.283*p);x.stroke();x.lineCap='butt';
+    // files stream down into the brain
+    files.forEach((el,i)=>{const f=rel(el),a=[f.x+f.w/2,f.y+f.h+2],ang=-Math.PI/2+(i-3.5)*.17,b=[C[0]+Math.cos(ang)*(R+16),C[1]+Math.sin(ang)*(R+16)],k=clamp(A*1.25-i*.03);
+      if(k<=0)return;line(a,b,k,'rgba(209,77,138,.28)',1.3);
+      if(k>=1&&!reduce&&p<.8)for(let j=0;j<2;j++)dot(a,b,((now/2000)+i*.12+j*.5)%1,'#d14d8a',2.4)});
+    // graph forms inside the brain ring
+    edges.forEach(([i,j])=>{const k=clamp(B*nodes.length-Math.max(i,j));if(k<=0)return;const a=nodes[i],b=nodes[j];x.strokeStyle='rgba(63,127,230,.28)';x.lineWidth=1;x.beginPath();x.moveTo(a.x,a.y);x.lineTo(a.x+(b.x-a.x)*k,a.y+(b.y-a.y)*k);x.stroke()});
+    const issIdx=[2,9,17,24];
+    nodes.forEach((n,i)=>{const k=clamp(B*nodes.length-i);if(k<=0)return;const q=issIdx.indexOf(i),hot=q>=0&&Cd>.15+q*.2;
       x.beginPath();x.arc(n.x,n.y,(hot?6:n.r)*k,0,6.28);x.fillStyle=hot?'#c9801c':n.c;x.fill();
-      if(hot){const pl=reduce?0:(Math.sin(now/300)+1)/2;x.beginPath();x.arc(n.x,n.y,10+pl*5,0,6.28);x.strokeStyle=`rgba(201,128,28,${.5-.3*pl})`;x.stroke();
-        const lab=issues[isIss][0];x.font='500 12px "Inter",sans-serif';const tw=x.measureText(lab).width,lx=n.x+12,ly=n.y-10;x.fillStyle='rgba(255,255,255,.95)';x.beginPath();x.roundRect?x.roundRect(lx-5,ly,tw+10,20,6):x.rect(lx-5,ly,tw+10,20);x.fill();x.fillStyle='#c9801c';x.fillText(lab,lx,n.y+4.5)}});
-    // outflow: circle -> outputs
-    outs.forEach((el,i)=>{const k=clamp(D*1.4-i*.2);if(k<=0)return;const[ax,ay,aw,ah]=anchor(el),ang=(i-1)*.35,a=[C[0]+Math.cos(ang)*(R+18),C[1]+Math.sin(ang)*(R+18)],b=[ax-4,ay+ah/2];
-      curve(a,b,k,'rgba(63,127,230,.4)',1.6);
-      if(k>=1&&!reduce){const t=((now/1800)+i*.3)%1,[px,py]=bez(a,[a[0]+(b[0]-a[0])*.5,a[1]],[a[0]+(b[0]-a[0])*.5,b[1]],b,t);x.beginPath();x.arc(px,py,2.8,0,6.28);x.fillStyle='#3f7fe6';x.fill()}});
+      if(hot){const pl=reduce?0:(Math.sin(now/300)+1)/2;x.beginPath();x.arc(n.x,n.y,10+pl*4,0,6.28);x.strokeStyle=`rgba(201,128,28,${.5-.3*pl})`;x.stroke();
+        const lab=ISS[q];x.font='600 11.5px "Inter",sans-serif';const tw=x.measureText(lab).width,left=n.x<C[0],lx=left?C[0]-R-30-tw:C[0]+R+30,ly=n.y;
+        x.strokeStyle='rgba(201,128,28,.45)';x.beginPath();x.moveTo(n.x,n.y);x.lineTo(left?lx+tw+6:lx-6,ly);x.stroke();
+        x.fillStyle='rgba(255,255,255,.95)';x.beginPath();x.roundRect?x.roundRect(lx-6,ly-11,tw+12,22,7):x.rect(lx-6,ly-11,tw+12,22);x.fill();x.fillStyle='#b06d10';x.fillText(lab,lx,ly+4)}});
+    // brain opens out into three outputs
+    outs.forEach((el,i)=>{const k=clamp(D*1.4-i*.2);if(k<=0)return;const o=rel(el),a=[C[0]+(i-1)*40,C[1]+R+16],b=[o.x+o.w/2,o.y-2];
+      line(a,b,k,'rgba(63,127,230,.45)',1.6);if(k>=1&&!reduce)dot(a,b,((now/1700)+i*.3)%1,'#3f7fe6',2.8)});
+    // and into the chat
+    if(E>0){const c=rel(chat),mid=rel(outs[1]),a=[mid.x+mid.w/2,mid.y+mid.h+2],b=[c.x+c.w/2,c.y-2];line(a,b,E,'rgba(63,127,230,.45)',1.6)}
     requestAnimationFrame(frame);
   }
   size();addEventListener('resize',size);
-  new IntersectionObserver(es=>es.forEach(e=>{active=e.isIntersecting;if(active)requestAnimationFrame(frame)})).observe(scene);
+  new IntersectionObserver(es=>es.forEach(e=>{active=e.isIntersecting;if(active){size();requestAnimationFrame(frame)}})).observe(scene);
 })();
 
 // ---------- Shared illustrative lab ----------
