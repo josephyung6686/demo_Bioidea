@@ -1093,6 +1093,22 @@ h2,.typed-h,.s-h{font-weight:600}
 body,body *:not(.ph):not(i),button,input,textarea,select,svg text{font-family:"Inter",system-ui,sans-serif !important}
 .eyebrow,.s-num,.ov-h,.map-out-h,.p-type,.rec-h,.rail-h,.ag-h,.ch-k,.f-h,.foot-grid h4,.filters button{letter-spacing:.06em}
 .mat-meta b,.frow span,.cite span,.src-c b,.p-sec .file{font-feature-settings:"tnum"}
+
+/* horizontal brain: wide short graph on top, agent as a 3-column row below */
+.brain-grid{grid-template-columns:1fr}
+.brain-grid .stagebox{min-height:430px;height:430px}
+.agent{margin-top:30px;display:grid;grid-template-columns:1fr 1.1fr 1.1fr;grid-template-rows:auto 1fr;column-gap:28px}
+.agent .ag-head{grid-column:1/-1;margin-bottom:6px}
+.agent .ag-log{grid-column:1;margin-top:8px;align-content:start}
+.agent .ag-iss{grid-column:2}
+.agent .ag-iss .diag{margin-top:8px}
+.agent .ag-next{grid-column:3;margin-top:0}
+.agent .ag-iss,.agent .ag-next{border-left:1px solid var(--line);padding-left:24px}
+.agent::before{left:50%;top:-31px;width:2px;height:30px;margin-left:-1px;background:repeating-linear-gradient(var(--accent) 0 6px,transparent 6px 10px);background-size:2px 10px;animation:dashdown .6s linear infinite}
+.agent::after{left:50%;top:-6px;margin:0 0 0 -5px}
+.ag-next:not(:has(.ag-step)){opacity:1}
+.ag-next:not(:has(.ag-step)) .ag-h{opacity:0}
+@media (max-width:960px){.agent{grid-template-columns:1fr}.agent .ag-log,.agent .ag-iss,.agent .ag-next{grid-column:1;border-left:0;padding-left:0}.brain-grid .stagebox{height:380px}}
 </style>
 </head>
 <body>
@@ -1766,7 +1782,7 @@ const LAB={
     for(let i=0;i<N.length;i++){const a=N[i];if(!vis(a))continue;
       for(let j=i+1;j<N.length;j++){const b=N[j];if(!vis(b))continue;let dx=b.x-a.x,dy=b.y-a.y,d2=dx*dx+dy*dy+.01,d=Math.sqrt(d2),F=5200/d2*k;dx/=d;dy/=d;a.vx-=dx*F;a.vy-=dy*F;b.vx+=dx*F;b.vy+=dy*F}}
     E.forEach(([a,b])=>{if(!vis(a)||!vis(b))return;let dx=b.x-a.x,dy=b.y-a.y,d=Math.hypot(dx,dy)||1,L=a.t==='cell'&&a.id==='iA'||b.id==='iA'?120:70,F=(d-L)*.02*k;dx/=d;dy/=d;a.vx+=dx*F;a.vy+=dy*F;b.vx-=dx*F;b.vy-=dy*F});
-    N.forEach(n=>{if(!vis(n))return;n.vx+=(W/2-n.x)*.002*k;n.vy+=(H/2-n.y)*.002*k;if(n===drag){n.vx=n.vy=0;return}n.vx*=.82;n.vy*=.82;n.x+=n.vx;n.y+=n.vy;n.x=Math.max(90,Math.min(W-90,n.x));n.y=Math.max(30,Math.min(H-30,n.y))});
+    N.forEach(n=>{if(!vis(n))return;n.vx+=(W/2-n.x)*.0002*k;n.vy+=(H/2-n.y)*.006*k;if(n===drag){n.vx=n.vy=0;return}n.vx*=.82;n.vy*=.82;n.x+=n.vx;n.y+=n.vy;n.x=Math.max(90,Math.min(W-90,n.x));n.y=Math.max(30,Math.min(H-30,n.y))});
     alpha=Math.max(alpha*.985,0);
   }
   function draw(){
