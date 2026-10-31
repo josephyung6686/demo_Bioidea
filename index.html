@@ -1581,7 +1581,7 @@ document.querySelectorAll('.spot').forEach(el=>el.addEventListener('pointermove'
   // contour of the robust region, ordered by angle so it can be drawn progressively
   const th=.62,cu=.56,cv=.62,cont=[];
   for(let a=0;a<6.283;a+=.06){cont.push([cu+Math.cos(a)*.15,cv+Math.sin(a)*.18])}
-  let W,H,img,hover=null;const CYC=13000;
+  let W,H,img,hover=null;const CYC=8000;
   function build(){const d=devicePixelRatio||1;W=c.clientWidth;H=c.clientHeight;c.width=W*d;c.height=H*d;x.setTransform(d,0,0,d,0,0);
     const g=document.createElement('canvas'),N=90;g.width=N;g.height=N;const gx=g.getContext('2d'),id=gx.createImageData(N,N);
     for(let j=0;j<N;j++)for(let i=0;i<N;i++){const z=f(i/N,1-j/N),k=(j*N+i)*4,S=[[255,255,255],[232,238,253],[176,198,248],[110,150,238]],q=Math.min(2.999,z*3),m=Math.floor(q),r=q-m,A=S[m],B=S[m+1];id.data[k]=A[0]+(B[0]-A[0])*r;id.data[k+1]=A[1]+(B[1]-A[1])*r;id.data[k+2]=A[2]+(B[2]-A[2])*r;id.data[k+3]=255}
@@ -1589,32 +1589,32 @@ document.querySelectorAll('.spot').forEach(el=>el.addEventListener('pointermove'
   const P=(u,v)=>[u*W,(1-v)*H];
   const ease=k=>1-Math.pow(1-Math.max(0,Math.min(1,k)),3);
   let lastPh=-1;
-  const phases=[[0,'Loading 12 past runs from run sheets and flow files'],[3200,'Fitting the response across CHIR and VEGF'],[5200,'Robust region found: holds across run-to-run noise'],[7600,'Placing 6 wells where they teach the most'],[10200,'Flag: 2 wells need replicates before deciding']];
+  const phases=[[0,'Loading 12 past runs from run sheets and flow files'],[1900,'Fitting the response across CHIR and VEGF'],[3100,'Robust region found: holds across run-to-run noise'],[4500,'Placing 6 wells where they teach the most'],[6100,'Flag: 2 wells need replicates before deciding']];
   function draw(now){
     const t=reduce?CYC-1:now%CYC;
     let ph=0;phases.forEach((p,i)=>{if(t>=p[0])ph=i});
-    const prog=Math.min(1,t/11200);pf.style.width=(prog*100)+'%';
+    const prog=Math.min(1,t/6800);pf.style.width=(prog*100)+'%';
     if(ph!==lastPh){lastPh=ph;stT.textContent=phases[ph][1];pspans.forEach((sp,j)=>{sp.classList.toggle('on',j===ph);sp.classList.toggle('done',j<ph)});cards.forEach(cd=>cd.classList.toggle('on',(+cd.dataset.ph===1&&ph===2)||(+cd.dataset.ph===2&&ph===3)||(+cd.dataset.ph===3&&ph===4)))}
     x.clearRect(0,0,W,H);
     // model confidence grows as runs load
-    x.imageSmoothingEnabled=true;x.drawImage(img,0,0,W,H);const veil=1-ease((t-400)/4800);if(veil>0){x.fillStyle=`rgba(250,251,254,${(veil*.92).toFixed(3)})`;x.fillRect(0,0,W,H)}
+    x.imageSmoothingEnabled=true;x.drawImage(img,0,0,W,H);const veil=1-ease((t-200)/2800);if(veil>0){x.fillStyle=`rgba(250,251,254,${(veil*.92).toFixed(3)})`;x.fillRect(0,0,W,H)}
     x.strokeStyle='rgba(15,26,43,.06)';x.lineWidth=1;for(let i=1;i<5;i++){x.beginPath();x.moveTo(W*i/5,0);x.lineTo(W*i/5,H);x.moveTo(0,H*i/5);x.lineTo(W,H*i/5);x.stroke()}
     // ticks
     x.font='10px "Inter",sans-serif';x.fillStyle='rgba(74,87,108,.85)';
     for(let i=0;i<=5;i++){x.fillText((1+i)+(i===5?' µM':''),Math.min(W-34,i/5*W+3),H-5)}
     for(let i=1;i<=3;i++){x.fillText(i*50+(i===3?' ng/mL':''),4,H-i/3*H+12)}
     // past runs pop in
-    past.forEach(([u,v],i)=>{const k=ease((t-200-i*220)/400);if(k<=0)return;const[px,py]=P(u,v);x.beginPath();x.arc(px,py,4*k+(hover&&hover.u===u&&hover.v===v?2:0),0,6.28);x.fillStyle='#0b1238';x.fill();x.strokeStyle='#ffffff';x.stroke()});
+    past.forEach(([u,v],i)=>{const k=ease((t-120-i*130)/260);if(k<=0)return;const[px,py]=P(u,v);x.beginPath();x.arc(px,py,4*k+(hover&&hover.u===u&&hover.v===v?2:0),0,6.28);x.fillStyle='#0b1238';x.fill();x.strokeStyle='#ffffff';x.stroke()});
     // contour draws itself
-    const ck=ease((t-5200)/1800);
-    if(ck>0){x.save();x.setLineDash([4,4]);x.strokeStyle='rgba(15,26,43,.75)';x.lineWidth=1.5;x.beginPath();const n=Math.floor(cont.length*ck);cont.slice(0,n+1).forEach(([u,v],i)=>{const[px,py]=P(u,v);i?x.lineTo(px,py):x.moveTo(px,py)});if(ck>=1)x.closePath();x.stroke();x.restore();
+    const ck=ease((t-3100)/1100);
+    if(ck>0){x.save();x.setLineDash([3,4]);x.strokeStyle='rgba(15,26,43,.55)';x.lineWidth=1;x.beginPath();const n=Math.floor(cont.length*ck);cont.slice(0,n+1).forEach(([u,v],i)=>{const[px,py]=P(u,v);i?x.lineTo(px,py):x.moveTo(px,py)});if(ck>=1)x.closePath();x.stroke();x.restore();
       if(ck>=1){const[lx,ly]=P(cu+.02,cv+.27);x.fillStyle='rgba(15,26,43,.85)';x.font='11px "Inter",sans-serif';x.fillText('robust region',lx-40,ly)}}
     // next wells drop in with labels
     const pulse=reduce?0:(Math.sin(now/450)+1)/2;
-    next.forEach(([u,v],i)=>{const k=ease((t-7600-i*320)/500);if(k<=0)return;const[px,py]=P(u,v);
-      const needRep=t>10200&&rep2.some(r=>r[0]===u&&r[1]===v);const col=needRep?'#0E1116':'#1F3FD8';
-      x.beginPath();x.arc(px,py-(1-k)*18,(6+pulse*1.5)*k,0,6.28);x.strokeStyle=col;x.lineWidth=2;x.stroke();x.lineWidth=1;
-      x.beginPath();x.arc(px,py,12+pulse*6,0,6.28);x.strokeStyle=needRep?`rgba(14,17,22,${.4*(1-pulse)})`:`rgba(31,63,216,${.35*(1-pulse)})`;x.stroke();
+    next.forEach(([u,v],i)=>{const k=ease((t-4500-i*180)/300);if(k<=0)return;const[px,py]=P(u,v);
+      const needRep=t>6100&&rep2.some(r=>r[0]===u&&r[1]===v);const col=needRep?'#0E1116':'#1F3FD8';
+      x.beginPath();x.arc(px,py-(1-k)*18,5*k,0,6.28);x.fillStyle=col;x.fill();x.lineWidth=1;
+      x.lineWidth=.8;x.beginPath();x.arc(px,py,9+pulse*4,0,6.28);x.strokeStyle=needRep?`rgba(14,17,22,${.4*(1-pulse)})`:`rgba(31,63,216,${.35*(1-pulse)})`;x.stroke();
       x.globalAlpha=k;x.fillStyle=col;x.font='500 10px "Inter",sans-serif';x.fillText(wells[i]+(needRep?' ×2':''),px+10,py-8);x.globalAlpha=1});
     if(!reduce)requestAnimationFrame(draw);
   }
