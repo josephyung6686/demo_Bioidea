@@ -908,6 +908,28 @@ h1,h2,.typed-h,.s-h,.mission,.vision .q,.hero .mission{font-family:var(--disp);f
 .map-body{grid-template-columns:1fr 220px}
 .map-side .map-out div{font-size:13.5px;line-height:1.45}
 .map-side .map-out b{font-size:15px}
+
+/* feature notes as cards inside the visual */
+.s-vis .fcols{margin-top:18px;max-width:none;gap:12px;grid-template-columns:repeat(3,1fr)}
+.s-vis .fcols>div{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 16px;opacity:0;transform:translateY(14px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.slide.in .s-vis .fcols>div{opacity:1;transform:none}
+.slide.in .s-vis .fcols>div:nth-child(1){transition-delay:.7s}.slide.in .s-vis .fcols>div:nth-child(2){transition-delay:.95s}.slide.in .s-vis .fcols>div:nth-child(3){transition-delay:1.2s}
+.s-vis .fcols b{font-size:14.5px}.s-vis .fcols p{font-size:13.5px}.s-vis .fcols small{margin-top:8px}
+.opt>.fcols{grid-column:1/-1;padding:0 26px 26px;margin-top:0;border:0}
+@media (max-width:960px){.s-vis .fcols{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.s-vis .fcols>div{opacity:1;transform:none}}
+
+/* one type system everywhere: Inter for headings and text, mono caps for labels */
+:root{--disp:"Inter",system-ui,sans-serif}
+h1,h2,h3,.typed-h,.s-h,.mission,.hero .mission,.vision .q,.p-name,.br-root b{font-family:var(--disp);letter-spacing:-.025em}
+h1,.hero .mission{font-weight:600}
+h2,.typed-h,.s-h{font-weight:600}
+.br-col b,.fcols b,.ov-row b,.person h3,.dg b,.rec b,.map-out b{font-family:var(--sans);font-weight:600}
+.legend,.cbar,.ax-x,.ax-y,.status,.ftag,.hub small,.mat-meta span,.opt-h span{font-family:var(--mono);font-size:11px;letter-spacing:.03em}
+/* legend: one compact line, clear of the axis label */
+.cbar{white-space:nowrap;padding:3px 8px;gap:6px;top:6px;right:6px}
+.cbar i{width:44px;height:5px}
+.cbar em{margin-left:2px}
 </style>
 </head>
 <body>
@@ -955,7 +977,7 @@ h1,h2,.typed-h,.s-h,.mission,.vision .q,.hero .mission{font-family:var(--disp);f
         <div class="plot">
         <canvas id="map"></canvas>
         <div class="tip mono" id="mapTip"></div>
-        <div class="cbar mono"><span>Low</span><i></i><span>High</span><em>Predicted CD31+ purity</em></div>
+        <div class="cbar mono"><span>Low</span><i></i><span>High</span><em>CD31+ purity</em></div>
         <div class="ax-x">CHIR99021 dose</div>
         <div class="ax-y">VEGF dose</div>
       </div>
@@ -1431,6 +1453,8 @@ document.querySelectorAll('.spot').forEach(el=>el.addEventListener('pointermove'
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');vis.add(e.target)}else vis.delete(e.target)}),{threshold:.15});
   slides.forEach(s=>io.observe(s));if(branch)io.observe(branch);
   const isOn=el=>vis.has(el)&&!reduceM;
+  // feature notes surface as cards inside each slide's visual
+  slides.forEach(sl=>{const f=sl.querySelector('.fcols'),v=sl.querySelector('.s-vis');if(f&&v)v.appendChild(f)});
 
   // one thin connector: slide 1 -> slide 2 -> branch -> slide 3 -> chat
   const cv=document.getElementById('flowCv'),x=cv.getContext('2d');let on=false;
