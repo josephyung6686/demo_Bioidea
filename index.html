@@ -846,6 +846,23 @@ body{background:var(--bg)}
 .trust-cards .tr .ph{font-size:20px;color:var(--accent)}
 .trust-cards .tr::after{content:"Details";display:inline-block;margin-top:10px;font-size:13px;font-weight:500;color:var(--accent);text-decoration:underline;text-underline-offset:4px}
 .trust-cards .tr[aria-expanded="true"]::after{content:"Hide details"}
+
+/* hero steps as a continuous progress bar */
+.prog{position:relative}
+.prog .pf{display:block;position:absolute;left:0;top:auto;bottom:-1px;height:2px;width:0;background:var(--accent);border-radius:2px;opacity:1;z-index:2;transition:width .25s linear}
+.prog span,.prog span.done,.prog span.on{border-bottom:0 !important}
+.prog span.done{color:var(--ink)}
+.prog span.on{color:var(--accent)}
+
+@media (max-width:960px){
+  .hero{grid-template-columns:1fr}
+  .hero .mission{font-size:34px}
+  .map-body{grid-template-columns:1fr}
+  .map-side .map-out{grid-template-columns:1fr 1fr 1fr;gap:10px}
+  .chap-intro{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr}.stats>div+div{border-left:0;padding-left:0;border-top:1px solid var(--line)}
+  .br-cols{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
