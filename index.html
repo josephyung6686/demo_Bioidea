@@ -1191,6 +1191,29 @@ body,body *:not(.ph):not(i),button,input,textarea,select,svg text{font-family:"I
 /* sticky nav: semi-transparent white glass, not cream */
 .nav{background:rgb(255 255 255 / .6) !important;backdrop-filter:blur(14px) saturate(160%);-webkit-backdrop-filter:blur(14px) saturate(160%);border:1px solid rgb(255 255 255 / .7) !important}
 .hero .mission em,.hero .mission strong.blue,.hero .mission .m-live em,.hero .mission .m-live strong{font-weight:inherit !important;font-style:normal !important;color:var(--accent)}
+
+/* funnel: three columns, then the 0 as a highlighted conclusion */
+.funnel{display:grid !important;grid-template-columns:repeat(3,1fr);grid-template-rows:auto 1fr auto;column-gap:20px;row-gap:18px;align-content:space-between}
+.funnel .f-h{grid-column:1/-1}
+.funnel .fn{display:flex !important;flex-direction:column;align-items:flex-start;gap:8px;padding:0 !important;border:0 !important;border-top:1px solid var(--line) !important;padding-top:14px !important}
+.funnel .fn .n{font-size:40px !important;line-height:1}
+.funnel .fn .l{font-size:13px}
+.funnel .fn .l b{font-size:14.5px !important;margin-bottom:2px}
+.funnel .fn.zero{grid-column:1/-1;flex-direction:row;align-items:center;gap:20px;border:0 !important;border-radius:12px;background:#eef1fd;padding:18px 22px !important}
+.funnel .fn.zero .n{font-size:56px !important;color:var(--accent)}
+.funnel .fn.zero .l b{font-size:17px !important}
+.funnel .fn.zero .fbar{display:none}
+@media (max-width:960px){.funnel{grid-template-columns:1fr}}
+
+.bstory .story{align-items:center}
+.funnel{grid-template-rows:auto auto auto !important;align-content:start;row-gap:22px;align-self:center}
+.funnel .fn{min-height:150px}
+.funnel .fn .fbar{margin-top:auto}
+
+.funnel .fn .l{display:flex;flex-direction:column;flex:1}
+.funnel .fn .fbar{margin-top:14px !important}
+.funnel .fn{min-height:0}
+.funnel .fn.zero{min-height:0;padding:14px 22px !important}
 </style>
 </head>
 <body>
