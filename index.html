@@ -13,7 +13,7 @@
 :root{
   --bg:#f6f7fa;
   --ink:#0f1a2b; --ink-2:#4a576c; --ink-3:#7c879a;
-  --accent:#2440e6; --accent-ink:#ffffff; --blue:#2440e6; --pink:#d14d8a; --warn:#c9801c;
+  --accent:#3f7fe6; --accent-ink:#ffffff; --blue:#3f7fe6; --pink:#d14d8a; --warn:#c9801c;
   --line:rgb(15 26 43 / .09);
   --glass:linear-gradient(135deg,rgb(255 255 255 / .78),rgb(255 255 255 / .48));
   --r:18px;
@@ -138,7 +138,7 @@ h2{font-size:clamp(32px,3.8vw,50px);line-height:1.06;letter-spacing:-.026em;font
 .ch.lit{opacity:1}
 .chapters::after{content:"";position:absolute;left:7px;top:8px;width:2px;margin-left:-.5px;height:var(--fill,0%);max-height:calc(100% - 8px - var(--end,8px));background:var(--grad);box-shadow:0 0 10px rgb(63 127 230 / .6)}
 .ch::before{content:"";position:absolute;left:-28px;top:1px;width:11px;height:11px;border-radius:50%;background:var(--bg);border:2px solid rgb(15 26 43 / .2);transition:all .4s var(--ease)}
-.ch.lit::before{border-color:#2440e6;background:#2440e6;box-shadow:0 0 0 5px rgb(63 127 230 / .15),0 0 16px rgb(63 127 230 / .7)}
+.ch.lit::before{border-color:#3f7fe6;background:#3f7fe6;box-shadow:0 0 0 5px rgb(63 127 230 / .15),0 0 16px rgb(63 127 230 / .7)}
 .ch-k{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
 .ch h3{font-size:19px;font-weight:500;letter-spacing:-.02em;margin-top:6px}
 .ch p{color:var(--ink-2);margin-top:4px;max-width:50ch;font-size:15px;line-height:1.5}
@@ -184,13 +184,13 @@ h2{font-size:clamp(32px,3.8vw,50px);line-height:1.06;letter-spacing:-.026em;font
 /* Campaign steps */
 .camp{margin-top:56px;padding:32px 28px 28px}
 .orb-wrap{display:flex;flex-direction:column;align-items:center}
-.orb{position:relative;width:72px;height:72px;border-radius:50%;display:grid;place-items:center;font-size:32px;color:#ffffff;background:radial-gradient(circle at 35% 30%,#ffffff,#8db8f7 50%,#2440e6);box-shadow:0 0 0 8px rgb(63 127 230 / .08),0 0 60px rgb(63 127 230 / .35);animation:breathe 3.2s ease-in-out infinite}
+.orb{position:relative;width:72px;height:72px;border-radius:50%;display:grid;place-items:center;font-size:32px;color:#ffffff;background:radial-gradient(circle at 35% 30%,#ffffff,#8db8f7 50%,#3f7fe6);box-shadow:0 0 0 8px rgb(63 127 230 / .08),0 0 60px rgb(63 127 230 / .35);animation:breathe 3.2s ease-in-out infinite}
 @keyframes breathe{50%{box-shadow:0 0 0 14px rgb(63 127 230 / .04),0 0 80px rgb(63 127 230 / .4)}}
 .cross{position:absolute;right:-6px;bottom:-4px;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:16px;background:#ffffff;color:#d14d8a;border:1px solid rgb(209 77 138 / .4)}
 .orb-l{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-top:12px}
 .wires{display:block;width:100%;height:110px;margin-top:-6px}
 .wires path{fill:none;stroke:rgb(63 127 230 / .18);stroke-width:1.5;vector-effect:non-scaling-stroke}
-.wires path.on{stroke:#2440e6;stroke-dasharray:6 8;animation:wire 1s linear infinite}
+.wires path.on{stroke:#3f7fe6;stroke-dasharray:6 8;animation:wire 1s linear infinite}
 @keyframes wire{to{stroke-dashoffset:-28}}
 .csteps{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
 .cs{font:inherit;color:var(--ink-2);background:rgb(15 26 43 / .03);border:1px solid var(--line);border-radius:14px;padding:14px 10px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;transition:all .35s var(--ease)}
@@ -199,12 +199,12 @@ h2{font-size:clamp(32px,3.8vw,50px);line-height:1.06;letter-spacing:-.026em;font
 .cs .day{font-size:10.5px;color:var(--ink-3)}
 .cs:hover{border-color:rgb(63 127 230 / .3)}
 .cs.on{border-color:rgb(63 127 230 / .6);background:linear-gradient(160deg,rgb(63 127 230 / .16),rgb(209 77 138 / .06));transform:translateY(-3px)}
-.cs.on .ph{color:#2440e6}
+.cs.on .ph{color:#3f7fe6}
 .cdetail{display:grid;grid-template-columns:1fr 1.3fr;gap:14px;margin-top:18px}
 .cd-col{border:1px solid var(--line);border-radius:14px;padding:20px;background:rgb(255 255 255 / .6);min-height:150px}
 .cd-col.ob{border-color:rgb(63 127 230 / .3);background:linear-gradient(160deg,rgb(63 127 230 / .08),rgb(255 255 255 / .6))}
 .cd-h{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);display:flex;align-items:center;gap:8px}
-.cd-col.ob .cd-h{color:#2440e6}
+.cd-col.ob .cd-h{color:#3f7fe6}
 .cd-col p{margin-top:10px;color:var(--ink);font-size:15px;animation:pop .45s var(--ease)}
 .cd-out{margin-top:14px;display:flex;flex-wrap:wrap;gap:6px}
 .cd-out span{font-size:11px;border:1px solid rgb(209 77 138 / .3);color:#d14d8a;border-radius:6px;padding:4px 8px;animation:pop .45s var(--ease) both}
@@ -234,7 +234,7 @@ h2{font-size:clamp(32px,3.8vw,50px);line-height:1.06;letter-spacing:-.026em;font
 .vchat.on{opacity:1;transform:none}
 .vchat:hover{transform:translateY(-2px)}
 
-.core{position:absolute;left:52%;top:50%;width:76px;height:76px;margin:-38px 0 0 -38px;border-radius:50%;display:grid;place-items:center;font-size:34px;color:#ffffff;background:radial-gradient(circle at 35% 30%,#fff,#8db8f7 50%,#2440e6);box-shadow:0 0 0 10px rgb(63 127 230 / .07),0 0 70px rgb(63 127 230 / .45);transform:scale(var(--cs,.6));transition:transform .2s linear}
+.core{position:absolute;left:52%;top:50%;width:76px;height:76px;margin:-38px 0 0 -38px;border-radius:50%;display:grid;place-items:center;font-size:34px;color:#ffffff;background:radial-gradient(circle at 35% 30%,#fff,#8db8f7 50%,#3f7fe6);box-shadow:0 0 0 10px rgb(63 127 230 / .07),0 0 70px rgb(63 127 230 / .45);transform:scale(var(--cs,.6));transition:transform .2s linear}
 .vouts .plan{width:250px}
 .plan{display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start;padding:12px 14px;border-radius:14px;border:1px solid rgb(63 127 230 / .3);background:rgb(255 255 255 / .9);box-shadow:0 12px 30px -18px rgb(40 70 130 / .4);opacity:0;transform:translateX(16px) scale(.97);transition:opacity .6s var(--ease),transform .6s var(--ease)}
 .plan.on{opacity:1;transform:none}
@@ -370,7 +370,7 @@ h2{font-size:clamp(32px,3.8vw,50px);line-height:1.06;letter-spacing:-.026em;font
 .p-sec .row{display:flex;flex-wrap:wrap;gap:6px}
 .p-sec .row span{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;border:1px solid var(--line);border-radius:8px;padding:4px 8px;color:var(--ink-2);background:rgb(15 26 43 / .02)}
 .p-sec .row span i{width:7px;height:7px;border-radius:50%}
-.p-sec .file{font-family:"JetBrains Mono",monospace;font-size:11.5px;color:#2440e6}
+.p-sec .file{font-family:"JetBrains Mono",monospace;font-size:11.5px;color:#3f7fe6}
 .p-sec .iss{color:#c9801c;border-color:rgb(201 128 28 / .3)}
 .p-back{margin-top:18px;font:inherit;font-size:13px;color:var(--ink-3);background:none;border:0;cursor:pointer;display:flex;align-items:center;gap:6px}
 .p-back:hover{color:var(--ink)}
@@ -402,7 +402,7 @@ h2{font-size:clamp(32px,3.8vw,50px);line-height:1.06;letter-spacing:-.026em;font
 .conv .gridl line{stroke:rgb(15 26 43 / .05)}
 .conv .ln{fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:420;stroke-dashoffset:420;transition:stroke-dashoffset 2.2s var(--ease)}
 .conv .std{stroke:#d14d8a;transition-delay:.2s}
-.conv .opt{stroke:#2440e6;transition-delay:.5s}
+.conv .opt{stroke:#3f7fe6;transition-delay:.5s}
 .conv .mark5{stroke:rgb(63 127 230 / .5);stroke-dasharray:3 4;opacity:0;transition:opacity .6s 2s}
 .imp.in .conv .ln{stroke-dashoffset:0}
 .imp.in .conv .mark5{opacity:1}
@@ -637,8 +637,8 @@ h1 em,.mission em{background:none;-webkit-background-clip:initial;background-cli
 .mission{text-align:center;margin-left:auto;margin-right:auto;max-width:30ch}
 
 /* ===== Re-theme: warm paper, deep navy ink, one electric blue (Benchling/Manas direction, own values) ===== */
-:root{--bg:#f6f5f1;--ink:#0b1238;--ink-2:#4a5068;--ink-3:#868b9e;--accent:#2440e6;--pink:#b8396f;--warn:#b5720f;--line:#e4e2dc;
-  --grad:linear-gradient(#2440e6,#2440e6);--r:14px}
+:root{--bg:#f6f5f1;--ink:#0b1238;--ink-2:#4a5068;--ink-3:#868b9e;--accent:#3f7fe6;--pink:#b8396f;--warn:#b5720f;--line:#e4e2dc;
+  --grad:linear-gradient(#3f7fe6,#3f7fe6);--r:14px}
 body{background:var(--bg);color:var(--ink)}
 .aurora{background:var(--bg)}.aurora::after,.grain{display:none}
 .btn{border-radius:10px;height:46px;font-weight:500}
@@ -708,6 +708,144 @@ footer{border-color:var(--line)}
 .hero .mission{text-align:left;margin:18px 0 0;max-width:none;font-size:clamp(30px,3.2vw,44px);line-height:1.14;font-weight:500;letter-spacing:-.022em}
 .hero .mission em{color:var(--pink)}
 .hero .mission strong.blue{color:var(--accent);font-weight:inherit}
+/* ===== Chapters v3 ===== */
+.fcols{order:5;width:100%;max-width:1000px;display:grid;grid-template-columns:repeat(3,1fr);gap:28px 40px;margin-top:40px;text-align:left}
+.fcols>div{border-top:1px solid #d9d7d0;padding-top:16px}
+.fcols b{display:block;font-size:15.5px;font-weight:600;color:var(--ink)}
+.fcols p{font-size:14.5px;line-height:1.55;color:var(--ink-2);margin-top:6px}
+.fcols small{display:block;margin-top:10px;font-size:12.5px;color:var(--accent);font-weight:500}
+.slide .feats{display:none}
+/* ingest materials */
+.ingest{position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:28px 28px 26px}
+.mats{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;position:relative;z-index:1}
+.mat{border:1px solid var(--line);border-radius:12px;background:#fff;overflow:hidden;transition:border-color .4s,box-shadow .4s}
+.mat.active{border-color:var(--accent);box-shadow:0 0 0 4px #e8ecff}
+.mat-pv{height:92px;border-bottom:1px solid var(--line);background:#fafaf8;position:relative;overflow:hidden}
+.mat-pv svg{width:100%;height:100%;display:block}
+.pv-tif{background:#cfd3cc}
+.pv-plate{display:grid;grid-template-columns:repeat(6,1fr);gap:5px;padding:12px 12px}
+.pv-plate i{aspect-ratio:1;border-radius:50%;border:1.5px solid #c9c7c0;background:#fff}
+.pv-plate i.f{background:#7d8fd9;border-color:#7d8fd9}
+.pv-sheet{padding:8px 10px;font-size:10.5px;display:grid;gap:3px}
+.pv-sheet div{display:grid;grid-template-columns:1fr 1.2fr 1fr;gap:4px;padding:2px 4px;border-bottom:1px solid #eeede8}
+.pv-sheet b{font-weight:600;color:var(--ink-3);font-size:9.5px;text-transform:uppercase}
+.pv-sheet span:last-child{font-variant-numeric:tabular-nums}
+.pv-doc{padding:10px 12px;display:grid;gap:6px;align-content:start}
+.pv-doc b{font-size:11px}
+.pv-doc i{display:block;height:5px;border-radius:3px;background:#e6e4de}
+.pv-doc i:nth-child(3){width:70%}
+.pv-doc i.chg{height:auto;font-style:normal;font-size:9.5px;font-weight:600;color:var(--warn);background:#fbf3e4;padding:2px 6px;border-radius:4px}
+.mat-meta{padding:10px 12px 4px}
+.mat-meta b{display:block;font-size:11.5px;font-weight:600;font-family:"JetBrains Mono",ui-monospace,monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mat-meta span{font-size:12px;color:var(--ink-3)}
+.mat-st{display:flex;align-items:center;gap:6px;padding:6px 12px 12px;font-size:11.5px;font-weight:500;color:var(--ink-3);opacity:.35;transition:opacity .4s,color .4s}
+.mat.linked .mat-st{opacity:1;color:var(--accent)}
+.mat-links{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.mat-links path{fill:none;stroke:#d9d7d0;stroke-width:1.5}
+.mat-links path.on{stroke:var(--accent);stroke-dasharray:var(--len);stroke-dashoffset:var(--len);animation:draw .7s var(--ease) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.hub{position:relative;z-index:1;margin:70px auto 0;width:max-content;display:flex;align-items:center;gap:12px;padding:10px 18px 10px 10px;border-radius:999px;border:1px solid var(--line);background:#fff}
+.hub-dot{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:#fff;font-size:20px;box-shadow:0 0 0 6px #e8ecff}
+.hub b{display:block;font-size:14px}.hub small{font-size:12.5px;color:var(--ink-2)}
+/* diagnostics panel */
+.diag{display:grid;gap:8px;margin-top:14px}
+.dg{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;text-align:left;font:inherit;background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px;cursor:pointer;transition:border-color .2s,background .2s}
+.dg:hover,.dg.on{border-color:var(--warn);background:#fdf8ef}
+.dg i{grid-row:span 2;width:8px;height:8px;border-radius:50%;margin-top:6px}
+.dg i.h{background:#c4361b}.dg i.m{background:var(--warn)}.dg i.l{background:#9aa3b5}
+.dg b{font-size:13.5px;font-weight:600}
+.dg span{font-size:12.5px;color:var(--ink-2)}
+.p-key-btn{margin-top:14px;font:inherit;font-size:13px;color:var(--accent);background:none;border:0;cursor:pointer;padding:0}
+.key{margin-top:10px}
+/* optimize */
+.opt{display:grid;grid-template-columns:1fr 1fr;gap:0;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:0}
+.opt>div{padding:26px}
+.opt-bench{border-left:1px solid var(--line)}
+.opt-h{display:flex;justify-content:space-between;align-items:baseline;font-size:15px;font-weight:600}
+.opt-h span{font-size:12.5px;font-weight:400;color:var(--ink-3)}
+.opt .plate{grid-template-columns:repeat(6,28px);gap:10px;justify-content:start;margin-top:16px;padding:14px;background:#fafaf8;border:1px solid var(--line);width:max-content}
+.opt .well{font-size:0;border-width:1.5px}
+.recs{display:grid;grid-template-columns:1fr 1fr;gap:6px 14px;margin-top:18px}
+.rec-h{grid-column:1/-1;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-top:4px}
+.rec-h.warn{color:var(--warn);margin-top:10px}
+.rec{display:flex;gap:10px;align-items:baseline;font-size:13px;padding:6px 0;border-bottom:1px solid #eeede8}
+.rec b{font-weight:600;min-width:22px;color:var(--accent)}
+.rec.warn b{color:var(--warn)}
+.rec span{color:var(--ink-2)}
+.slide.in .conv .ln{stroke-dashoffset:0}
+.slide.in .conv .mark5{opacity:1}
+.conv{margin-top:14px}
+.conv .std{stroke:#9aa3b5}.conv .opt{stroke:var(--accent)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);margin-top:14px;border-top:1px solid var(--line)}
+.stats>div{padding:14px 12px 0 0}
+.stats>div+div{padding-left:14px;border-left:1px solid var(--line)}
+.stats b{display:block;font-size:30px;font-weight:500;letter-spacing:-.02em}
+.stats small{font-size:12.5px;color:var(--ink-2)}
+.opt-note{font-size:12px;color:var(--ink-3);margin-top:16px}
+/* overview list: no card */
+.overview{background:none;border:0;padding:0}
+.ov-h{padding:0 0 10px;border-bottom:1px solid #d9d7d0}
+.ov-row{border-radius:0;border-bottom:1px solid var(--line);padding:16px 0;grid-template-columns:44px 1fr auto}
+.ov-row:hover{background:none}
+.ov-row:hover b{color:var(--accent)}
+.ov-row::after{display:none}
+.ov-n,.ov-row:first-of-type .ov-n{background:none;color:var(--accent);width:auto;height:auto;font-size:13px;font-weight:600;justify-content:start}
+@media (max-width:960px){.mats{grid-template-columns:repeat(2,1fr)}.opt{grid-template-columns:1fr}.opt-bench{border-left:0;border-top:1px solid var(--line)}.fcols{grid-template-columns:1fr}.recs{grid-template-columns:1fr}}
+
+/* brain branches into four abilities */
+.branch{position:relative;padding:10px 0 0;margin-bottom:150px;text-align:center}
+.br-root{display:inline-flex;align-items:center;gap:12px;padding:8px 20px 8px 8px;border:1px solid var(--line);border-radius:999px;background:#fff;position:relative;z-index:1}
+.br-root b{font-size:15px;font-weight:600}
+.br-lines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.br-lines path{fill:none;stroke:var(--accent);stroke-width:1.5;stroke-dasharray:var(--len,600);stroke-dashoffset:var(--len,600);transition:stroke-dashoffset 1.3s var(--ease)}
+.branch.in .br-lines path{stroke-dashoffset:0}
+.br-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;margin-top:96px;text-align:left;position:relative;z-index:1}
+.br-col{display:block;border-top:2px solid var(--accent);padding-top:18px;color:inherit}
+.br-col .ph{font-size:22px;color:var(--accent)}
+.br-col b{display:block;margin-top:10px;font-size:16px;font-weight:600}
+.br-col p{font-size:14.5px;line-height:1.55;color:var(--ink-2);margin-top:6px}
+.br-col span{display:inline-block;margin-top:12px;font-size:13px;font-weight:500;color:var(--accent)}
+.br-col:hover b{color:var(--accent)}
+@media (max-width:960px){.br-cols{grid-template-columns:1fr 1fr;gap:24px}}
+
+.hero .mission em,.hl-p{color:var(--accent)}
+
+/* ===== Palette: white marble + blue (no pink) ===== */
+:root{--bg:#f6f7fa;--ink:#0f1a2b;--ink-2:#4a576c;--ink-3:#7c879a;--accent:#3f7fe6;--pink:#3f7fe6;--line:rgb(15 26 43 / .09);--grad:linear-gradient(#3f7fe6,#3f7fe6)}
+body{background:var(--bg)}
+.aurora{background:radial-gradient(55vw 45vh at 88% -5%,rgb(63 127 230 / .14),transparent 62%),radial-gradient(45vw 45vh at -8% 35%,rgb(141 184 247 / .14),transparent 62%),radial-gradient(50vw 40vh at 55% 105%,rgb(141 184 247 / .16),transparent 62%),var(--bg)}
+.aurora::after{display:block}
+.btn-primary{background:var(--ink)}
+.btn-primary:hover{background:#26344d}
+.mark,.hub-dot,.ov-n{background:var(--accent)}
+.ov-n,.ov-row:first-of-type .ov-n{background:none;color:var(--accent)}
+.fcols>div{border-top-color:rgb(15 26 43 / .14)}
+.ingest,.opt,.mat,.br-root,.hub,.panel{border-color:rgb(15 26 43 / .09)}
+.hub-dot{box-shadow:0 0 0 6px rgb(63 127 230 / .14)}
+.mat.active{box-shadow:0 0 0 4px rgb(63 127 230 / .14)}
+.pv-plate i.f{background:#8db8f7;border-color:#8db8f7}
+/* hero map: label + right-side text results */
+.hero{grid-template-columns:.9fr 1.2fr}
+.map-title{font-size:15px;font-weight:600;color:var(--ink)}
+.map-cap{font-size:13px;color:var(--ink-2);margin-top:6px;line-height:1.5}
+.map-body{display:grid;grid-template-columns:1fr 168px;gap:20px;align-items:start}
+.map-body .plot{aspect-ratio:1.1/1}
+.map-side{padding-top:14px}
+.map-side .map-out-h{margin-top:0;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.map-side .map-out{display:grid;grid-template-columns:1fr;gap:14px;margin-top:12px}
+.map-side .map-out div,.map-side .map-out div.on,.map-side .map-out .warn.on{background:none;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:0 0 12px;transform:none;font-size:12.5px;line-height:1.45;color:var(--ink-2)}
+.map-side .map-out b,.map-side .map-out .warn b{display:block;color:var(--ink);font-size:14px;font-weight:600;margin-bottom:3px;text-decoration:underline 2px transparent;text-underline-offset:5px;transition:text-decoration-color .35s}
+.map-side .map-out div.on b{text-decoration-color:var(--accent)}
+.map-side .map-out .warn.on b{text-decoration-color:var(--warn)}
+@media (max-width:960px){.map-body{grid-template-columns:1fr}}
+
+/* security: plain text columns with underlined details link, no boxed cards */
+.trust-cards{gap:28px 40px}
+.trust-cards .tr,.trust-cards .tr:hover{background:none;border:0;border-top:1px solid rgb(15 26 43 / .14);border-radius:0;padding:18px 0 0;box-shadow:none;transform:none}
+.trust-cards .tr .plus{display:none}
+.trust-cards .tr .ph{font-size:20px;color:var(--accent)}
+.trust-cards .tr::after{content:"Details";display:inline-block;margin-top:10px;font-size:13px;font-weight:500;color:var(--accent);text-decoration:underline;text-underline-offset:4px}
+.trust-cards .tr[aria-expanded="true"]::after{content:"Hide details"}
 </style>
 </head>
 <body>
@@ -742,26 +880,31 @@ footer{border-color:var(--line)}
 
     <div class="glass spot map-card rv" role="img" aria-label="Illustrative differentiation design space with past runs, a robust operating region, and recommended next experiments">
       <div class="map-top mono">
-        <span>Stem cell differentiation · CHIR × VEGF (illustrative)</span>
+        <span class="map-title">How Obtimize picks your next experiments</span>
         <div class="legend">
           <span><i style="background:#0b1238"></i>Past runs</span>
-          <span><i style="border:2px solid #2440e6;background:transparent"></i>Next</span>
+          <span><i style="border:2px solid #3f7fe6;background:transparent"></i>Next</span>
         </div>
       </div>
+      <p class="map-cap">Stem cell differentiation, CHIR × VEGF (illustrative). Dots are past runs, shading is predicted CD31+ purity, rings are the wells it recommends.</p>
       <div class="status mono" id="mapStatus"><span class="sdot"></span><span id="mapStatusT">Loading past runs</span></div>
       <div class="prog" id="mapProg"><div class="pf" id="mapPF"></div><span>Load runs</span><span>Fit model</span><span>Find region</span><span>Place wells</span><span>Flag</span></div>
-      <div class="plot">
+      <div class="map-body">
+        <div class="plot">
         <canvas id="map"></canvas>
         <div class="tip mono" id="mapTip"></div>
         <div class="cbar mono"><span>Low</span><i></i><span>High</span><em>Predicted CD31+ purity</em></div>
         <div class="ax-x">CHIR99021 dose</div>
         <div class="ax-y">VEGF dose</div>
       </div>
-      <div class="map-out-h">What this round tells you</div>
-      <div class="map-out">
-        <div data-ph="1"><b>Where it works</b>CHIR 3 to 4 µM, VEGF 100 ng/mL</div>
-        <div data-ph="2"><b>Run next: 6 wells</b>The most informative experiments</div>
-        <div class="warn" data-ph="3"><b>Repeat first: 2 wells</b>Too noisy to trust yet</div>
+        <aside class="map-side">
+          <div class="map-out-h">This round</div>
+          <div class="map-out">
+            <div data-ph="1"><b>Where it works</b>CHIR 3 to 4 µM, VEGF 100 ng/mL</div>
+            <div data-ph="2"><b>Run next: 6 wells</b>The most informative experiments</div>
+            <div class="warn" data-ph="3"><b>Repeat first: 2 wells</b>Too noisy to trust yet</div>
+          </div>
+        </aside>
       </div>
     </div>
   </header>
@@ -800,177 +943,137 @@ footer{border-color:var(--line)}
     <h2 class="typed-h" data-type="Before AI can help scientists design better experiments, it has to understand what the lab has already done." aria-label="Before AI can help scientists design better experiments, it has to understand what the lab has already done."><span class="th-ghost" aria-hidden="true">Before AI can help scientists design better experiments, it has to understand what the lab has already done.</span><span class="th-live" aria-hidden="true"></span></h2>
     <p class="sub rv">Built for small cell therapy teams without a data team. General AI tools can't read a flow cytometry file or tell a passage 12 run from a passage 18 one. Obtimize can. Here is how, in four steps.</p>
   </div>
-    <aside class="overview rv" aria-label="Overview of the four steps">
+    <aside class="overview rv" aria-label="Overview of the pipeline">
       <div class="ov-h">The pipeline at a glance</div>
-      <a class="ov-row" href="#s1"><span class="ov-n">01</span><div><b>Ingest</b><small>Reads run sheets, flow files, photos and protocols, read-only</small></div><em>8 file types</em></a>
-      <a class="ov-row" href="#brain"><span class="ov-n">02</span><div><b>Understand</b><small>Links every run to its doses, cells, protocol and result</small></div><em>One graph</em></a>
-      <a class="ov-row" href="#s3"><span class="ov-n">03</span><div><b>Diagnose</b><small>Flags gaps, mismatches and repeats before anyone relies on them</small></div><em>5 checks</em></a>
-      <a class="ov-row" href="#s4"><span class="ov-n">04</span><div><b>Recommend</b><small>Next wells, a robust range, or an honest "not yet"</small></div><em>Next round</em></a>
+      <a class="ov-row" href="#s1"><span class="ov-n">01</span><div><b>Ingest</b><small>Reads your lab's files as they are, read-only</small></div><em>5 sources</em></a>
+      <a class="ov-row" href="#brain"><span class="ov-n">02</span><div><b>Understand &amp; diagnose</b><small>Links every run into one graph, then checks it</small></div><em>5 issues found</em></a>
+      <a class="ov-row" href="#impact"><span class="ov-n">03</span><div><b>Optimize</b><small>Plans the next round and a range that holds</small></div><em>6 wells</em></a>
+      <a class="ov-row" href="#ask"><span class="ov-n">04</span><div><b>Ask</b><small>Answers questions from your records, with citations</small></div><em>Try it</em></a>
     </aside>
   </section>
 
   <div class="chapters-x" id="chx">
-    <div class="spine" aria-hidden="true"><i id="spineFill"></i></div>
     <canvas id="flowCv" aria-hidden="true"></canvas>
 
     <section class="slide" data-n="01" id="s1">
       <div class="s-text">
         <div class="s-num">01 · Ingest</div>
-        <h3 class="s-h">Your lab's files, exactly as they are</h3>
-        <p class="s-line">Obtimize starts from what your team already saves. No migration, no re-typing.</p>
-        <ul class="feats">
-          <li><i class="ph ph-files"></i><div><b>Reads biology files natively</b><span>FCS gating, microscope TIFFs, plate maps, run sheets and protocol PDFs, including non-English ones.</span><em class="ftag">FCS · TIFF · CSV · DOCX · PDF</em></div></li>
-          <li><i class="ph ph-lock-key"></i><div><b>Read-only, originals kept</b><span>Every file is fingerprinted, so any number can be traced back to its source.</span><em class="ftag">Fingerprint per file</em></div></li>
-          <li><i class="ph ph-plugs-connected"></i><div><b>Connects where data lives</b><span>Shared drives and instrument export folders first; notebooks and Slack next.</span><em class="ftag">Shared drives today · ELNs and Slack next</em></div></li>
-        </ul>
-      </div>
-      <div class="s-vis glass">
-        <div class="drive-h"><i class="ph ph-folder-open"></i>Shared drive / Differentiation_2026<span class="mono" id="driveCount">0 of 8 linked</span></div>
-        <div class="drive" id="drive">
-          <div class="frow"><i class="ph ph-file-xls"></i><span>run_sheet_07.xlsx</span><em>Run sheet</em><b></b></div>
-          <div class="frow"><i class="ph ph-chart-scatter"></i><span>CD31_d10_R07.fcs</span><em>Flow cytometry</em><b></b></div>
-          <div class="frow"><i class="ph ph-image"></i><span>d6_R09_01.tif</span><em>Microscope photo</em><b></b></div>
-          <div class="frow"><i class="ph ph-grid-nine"></i><span>plate_map_oct.csv</span><em>Plate map</em><b></b></div>
-          <div class="frow"><i class="ph ph-file-text"></i><span>protocol_v3.docx</span><em>Protocol</em><b></b></div>
-          <div class="frow"><i class="ph ph-calculator"></i><span>dilution_R12.xlsx</span><em>Calculation</em><b></b></div>
-          <div class="frow"><i class="ph ph-notebook"></i><span>cell_log_oct.xlsx</span><em>Cell log</em><b></b></div>
-          <div class="frow"><i class="ph ph-chat-circle-dots"></i><span>#lab-diff thread</span><em>Slack</em><b></b></div>
+        <h3 class="s-h">Your lab's materials, exactly as they are</h3>
+        <p class="s-line">Obtimize reads what your team already saves. Each file is fingerprinted and linked, so every number traces back to its source.</p>
+        <div class="fcols">
+          <div><b>Reads biology natively</b><p>Flow cytometry gates, microscope images, plate maps, run sheets and protocols, in any language.</p><small>FCS · TIFF · CSV · XLSX · DOCX · PDF</small></div>
+          <div><b>Read-only, originals kept</b><p>Nothing in your drives changes. Each source gets a fingerprint the moment it is read.</p><small>One fingerprint per file</small></div>
+          <div><b>Connects where data lives</b><p>Shared drives and instrument export folders first. Notebooks and Slack next.</p><small>No migration, no re-typing</small></div>
         </div>
+      </div>
+      <div class="s-vis ingest">
+        <div class="mats" id="mats">
+          <div class="mat"><div class="mat-pv pv-fcs"><svg viewBox="0 0 120 72" id="pvFcs"></svg></div><div class="mat-meta"><b>CD31_d10_R07.fcs</b><span>Flow cytometry</span></div><div class="mat-st"><i class="ph ph-link-simple"></i><span>linked · 7f3a</span></div></div>
+          <div class="mat"><div class="mat-pv pv-tif"><svg viewBox="0 0 120 72" id="pvTif"></svg></div><div class="mat-meta"><b>d6_R09_01.tif</b><span>Microscope, day 6</span></div><div class="mat-st"><i class="ph ph-link-simple"></i><span>linked · 19c2</span></div></div>
+          <div class="mat"><div class="mat-pv pv-plate" id="pvPlate"></div><div class="mat-meta"><b>plate_map_oct.csv</b><span>24-well plate map</span></div><div class="mat-st"><i class="ph ph-link-simple"></i><span>linked · a04e</span></div></div>
+          <div class="mat"><div class="mat-pv pv-sheet"><div><b>Run</b><b>CHIR</b><b>VEGF</b></div><div><span>07</span><span>4 µM</span><span>100</span></div><div><span>09</span><span>4 µM</span><span>100</span></div><div><span>12</span><span>3 µM</span><span>80?</span></div></div><div class="mat-meta"><b>run_sheet_oct.xlsx</b><span>Run sheet</span></div><div class="mat-st"><i class="ph ph-link-simple"></i><span>linked · 5b81</span></div></div>
+          <div class="mat"><div class="mat-pv pv-doc"><b>Protocol v3</b><i></i><i></i><i class="chg">Day 4 feeding changed</i><i></i></div><div class="mat-meta"><b>protocol_v3.docx</b><span>Protocol</span></div><div class="mat-st"><i class="ph ph-link-simple"></i><span>linked · e6d0</span></div></div>
+        </div>
+        <svg class="mat-links" id="matLinks" aria-hidden="true"></svg>
+        <div class="hub" id="hub"><span class="hub-dot"><i class="ph ph-brain"></i></span><div><b>Obtimize</b><small id="hubCount">0 of 5 sources linked</small></div></div>
       </div>
     </section>
 
     <section class="slide" data-n="02" id="brain">
       <div class="s-text">
-        <div class="s-num">02 · Understand</div>
-        <h3 class="s-h">One brain that understands every experiment</h3>
-        <p class="s-line">Every run becomes linked facts. Highlight a type, drag a dot, or click one to see exactly where it came from.</p>
-        <ul class="feats">
-          <li><i class="ph ph-graph"></i><div><b>Connected scientific memory</b><span>Every run linked to its doses, cell line, passage, lot, protocol version, images and result.</span><em class="ftag">Run → doses → cells → protocol → result</em></div></li>
-          <li><i class="ph ph-notebook"></i><div><b>Keeps the context</b><span>Failed runs, hypotheses and the decisions behind them, not just final numbers.</span><em class="ftag">Failed runs kept, never dropped</em></div></li>
-          <li><i class="ph ph-seal-check"></i><div><b>Draft until signed</b><span>Anything the software extracts stays a draft until a scientist verifies it.</span><em class="ftag">Draft → signed by a named scientist</em></div></li>
-        </ul>
-      </div>
-      <div class="s-vis glass brainbox">
-          <div class="filters" id="filters"></div>
-      <div class="brain-grid">
-        <div class="stagebox"><canvas id="kg" aria-label="Interactive knowledge graph of an illustrative lab"></canvas></div>
-        <aside class="panel" id="panel">
-          <div id="pDefault">
-            <div class="p-type mono">How to read this</div>
-            <h3 class="p-name">Every dot is one fact from the lab</h3>
-            <p class="p-body">Lines show which facts belong to the same experiment. Click any dot to see where it came from.</p>
-            <div class="key" id="pKey"></div>
-          </div>
-          <div id="pNode" hidden>
-            <div class="p-chip" id="pChip"></div>
-            <h3 class="p-name" id="pName"></h3>
-            <p class="p-what" id="pWhat"></p>
-            <p class="p-body" id="pBody"></p>
-            <div class="p-sec" id="pIssues"></div>
-            <div class="p-sec" id="pSrc"></div>
-            <div class="p-sec" id="pLinks"></div>
-            <button class="p-back" id="pBack"><i class="ph ph-arrow-left"></i>How to read this</button>
-          </div>
-        </aside>
-      </div>
+        <div class="s-num">02 · Understand &amp; diagnose</div>
+        <h3 class="s-h">One brain that understands every run, and checks it</h3>
+        <p class="s-line">Every run becomes linked facts. Obtimize then checks the whole graph for gaps and contradictions before anyone relies on it. Click an issue to see it in the graph.</p>
+        <div class="fcols">
+          <div><b>Connected memory</b><p>Each run linked to its doses, cell line, passage, lot, protocol version, images and result.</p><small>Run → doses → cells → protocol → result</small></div>
+          <div><b>Knows what can be compared</b><p>Assay versions, lots and plates are tracked per result, so unlike runs are never pooled.</p><small>Batch effects flagged, not averaged</small></div>
+          <div><b>Draft until signed</b><p>Anything extracted stays a draft until a named scientist verifies it.</p><small>Failed runs kept, never dropped</small></div>
         </div>
-      
-    </section>
-
-    <section class="slide" data-n="03" id="s3">
-      <div class="s-text">
-        <div class="s-num">03 · Diagnose</div>
-        <h3 class="s-h">Finds problems before they cost you a run</h3>
-        <p class="s-line">An optimizer fed bad data gives confident wrong answers. So Obtimize checks first.</p>
-        <ul class="feats">
-          <li><i class="ph ph-warning"></i><div><b>Gaps and errors</b><span>Missing outcomes, unlabeled photos, and doses that don't match their dilution sheets.</span><em class="ftag">Missing outcome · unlabeled image · dose mismatch</em></div></li>
-          <li><i class="ph ph-stack"></i><div><b>What can be compared</b><span>Flags assay version changes and batch effects instead of silently pooling them.</span><em class="ftag">Assay version · lot · plate</em></div></li>
-          <li><i class="ph ph-copy"></i><div><b>Repeated runs</b><span>Catches planned experiments that repeat ones you already ran.</span><em class="ftag">Checked against every past run</em></div></li>
-        </ul>
       </div>
-      <div class="s-vis glass">
-        <div class="tbl" id="tbl">
-          <div class="tr0"><span>Run</span><span>CHIR</span><span>VEGF</span><span>Lot</span><span>Passage</span><span>Outcome</span></div>
-          <div class="trw" data-iss="Assay v1, not comparable"><span>05</span><span>3 µM</span><span>25</span><span>A</span><span>12</span><span>CD31+ low</span></div>
-          <div class="trw"><span>07</span><span>4 µM</span><span>100</span><span>A</span><span>12</span><span>CD31+ high</span></div>
-          <div class="trw" data-iss="Lot and passage both changed"><span>09</span><span>4 µM</span><span>100</span><span>B</span><span>18</span><span>CD31+ low</span></div>
-          <div class="trw" data-iss="Dose is 80, not 100"><span>12</span><span>3 µM</span><span>100</span><span>A</span><span>12</span><span>CD31+ high</span></div>
-          <div class="trw" data-iss="No outcome recorded"><span>14</span><span>4 µM</span><span>50</span><span>A</span><span>12</span><span>none</span></div>
-          <div class="trw" data-iss="Repeats Run 05"><span>16</span><span>3 µM</span><span>25</span><span>A</span><span>12</span><span>planned</span></div>
-          <div class="scan"></div>
+      <div class="s-vis brainbox">
+        <div class="filters" id="filters"></div>
+        <div class="brain-grid">
+          <div class="stagebox"><canvas id="kg" aria-label="Interactive knowledge graph of an illustrative lab"></canvas></div>
+          <aside class="panel" id="panel">
+            <div id="pDefault">
+              <div class="p-type">Diagnostics</div>
+              <h3 class="p-name">5 issues found across 6 runs</h3>
+              <div class="diag" id="diag"></div>
+              <button class="p-key-btn" id="pKeyBtn">How to read the graph</button>
+              <div class="key" id="pKey" hidden></div>
+            </div>
+            <div id="pNode" hidden>
+              <div class="p-chip" id="pChip"></div>
+              <h3 class="p-name" id="pName"></h3>
+              <p class="p-what" id="pWhat"></p>
+              <p class="p-body" id="pBody"></p>
+              <div class="p-sec" id="pIssues"></div>
+              <div class="p-sec" id="pSrc"></div>
+              <div class="p-sec" id="pLinks"></div>
+              <button class="p-back" id="pBack"><i class="ph ph-arrow-left"></i>All diagnostics</button>
+            </div>
+          </aside>
         </div>
       </div>
     </section>
 
-    <section class="slide" data-n="04" id="s4">
+    <section class="branch" id="branch">
+      <div class="br-root"><span class="hub-dot"><i class="ph ph-brain"></i></span><b>What the brain gives your team</b></div>
+      <svg class="br-lines" id="brLines" aria-hidden="true"></svg>
+      <div class="br-cols">
+        <a class="br-col" href="#ask"><i class="ph ph-chat-circle-text"></i><b>Ask your lab's history</b><p>Questions answered from your own records, with every source cited.</p><span>Try it below</span></a>
+        <a class="br-col" href="#brain"><i class="ph ph-stethoscope"></i><b>Catch problems early</b><p>Missing outcomes, mismatched assays and repeated runs, flagged automatically.</p><span>See diagnostics</span></a>
+        <a class="br-col" href="#impact"><i class="ph ph-target"></i><b>Plan the next round</b><p>The most informative wells and a range that holds, within your budget.</p><span>See the engine</span></a>
+        <a class="br-col" href="#partner"><i class="ph ph-plugs"></i><b>Power your AI tools</b><p>The same trusted context can feed the AI assistants your lab already uses.</p><span>With design partners</span></a>
+      </div>
+    </section>
+
+    <section class="slide" data-n="03" id="impact">
       <div class="s-text">
-        <div class="s-num">04 · Recommend</div>
-        <h3 class="s-h">Tells you what to run next</h3>
-        <p class="s-line">Verified records become a plan that fits your well budget, or an honest "not yet".</p>
-        <ul class="feats">
-          <li><i class="ph ph-flask"></i><div><b>Next experiments</b><span>The wells that teach you the most per round, not repeats of the best run.</span><em class="ftag">Fits a fixed well budget</em></div></li>
-          <li><i class="ph ph-crosshair"></i><div><b>A robust range</b><span>Conditions that hold across run-to-run noise, which matters at scale-up.</span><em class="ftag">A range, not one fragile point</em></div></li>
-          <li><i class="ph ph-hand-palm"></i><div><b>Says when it can't</b><span>If the data can't support a decision, it asks for replicates first.</span><em class="ftag">"Run 2 replicates first"</em></div></li>
-        </ul>
+        <div class="s-num">03 · Optimize</div>
+        <h3 class="s-h">An optimization engine built for noisy biology</h3>
+        <p class="s-line">Verified records become the next round of experiments and a range you can trust. When the data can't support a decision, it says so.</p>
+        <div class="fcols">
+          <div><b>The most informative wells</b><p>Chosen to teach you the most per round within a fixed well budget, not repeats of the best run.</p><small>Fits your plate and budget</small></div>
+          <div><b>A range, not a point</b><p>Conditions that hold across run-to-run noise, which is what matters at scale-up.</p><small>Robust operating region</small></div>
+          <div><b>Honest when unsure</b><p>If noise is too high or runs aren't comparable, it asks for replicates first.</p><small>"Repeat 2 wells before deciding"</small></div>
+        </div>
         <a class="btn btn-primary s-cta" href="#ask">Ask your lab's history <i class="ph ph-arrow-down"></i></a>
       </div>
-      <div class="s-vis glass">
-        <div class="plate-h"><span>Next round · 24-well plate</span><span class="lg"><i class="b"></i>Run next<i class="a"></i>Replicate</span></div>
-        <div class="plate" id="plate"></div>
-        <div class="range"><span>Robust range</span><div class="rbar"><i></i></div><small>CHIR 3 to 4 µM · VEGF 100 ng/mL · lot A</small></div>
+      <div class="s-vis opt">
+        <div class="opt-plan">
+          <div class="opt-h">Next round<span>24-well plate</span></div>
+          <div class="plate" id="plate"></div>
+          <div class="recs">
+            <div class="rec-h">Run next</div>
+            <div class="rec"><b>B3</b><span>CHIR 3.0 µM · VEGF 100</span></div><div class="rec"><b>B4</b><span>CHIR 3.5 µM · VEGF 100</span></div><div class="rec"><b>B5</b><span>CHIR 4.0 µM · VEGF 100</span></div>
+            <div class="rec"><b>C3</b><span>CHIR 3.0 µM · VEGF 120</span></div><div class="rec"><b>C4</b><span>CHIR 3.5 µM · VEGF 120</span></div><div class="rec"><b>C5</b><span>CHIR 4.0 µM · VEGF 80</span></div>
+            <div class="rec-h warn">Repeat first</div>
+            <div class="rec warn"><b>A4</b><span>Replicate of Run 14</span></div><div class="rec warn"><b>D4</b><span>Lot B control</span></div>
+          </div>
+        </div>
+        <div class="opt-bench">
+          <div class="opt-h">Benchmarks<span>synthetic test problems</span></div>
+          <svg class="conv" viewBox="0 0 320 170" role="img" aria-label="Best result by round: Obtimize plateaus at round 5, standard method at round 10">
+            <g class="gridl"><line x1="30" y1="20" x2="310" y2="20"/><line x1="30" y1="70" x2="310" y2="70"/><line x1="30" y1="120" x2="310" y2="120"/></g>
+            <line x1="30" y1="145" x2="310" y2="145" stroke="#d9d7d0"/>
+            <path class="ln std" d="M30 140 L58 128 L86 112 L114 98 L142 84 L170 70 L198 58 L226 46 L254 36 L282 30 L310 28"/>
+            <path class="ln opt" d="M30 140 L58 104 L86 72 L114 50 L142 34 L170 29 L198 28 L226 28 L254 28 L282 28 L310 28"/>
+            <line class="mark5" x1="142" y1="20" x2="142" y2="145"/>
+            <text x="142" y="14" text-anchor="middle">round 5</text><text x="310" y="162" text-anchor="end">round 10</text><text x="30" y="162">round 1</text>
+            <g class="lg"><circle cx="196" cy="104" r="4" fill="#3f7fe6"/><text x="204" y="108">Obtimize</text><circle cx="196" cy="122" r="4" fill="#9aa3b5"/><text x="204" y="126">Standard optimizer</text></g>
+          </svg>
+          <div class="stats">
+            <div><b><span data-count="2" data-dur="1600">0</span>×</b><small>fewer rounds to the same result</small></div>
+            <div><b><span data-count="66" data-dur="1800">0</span>/66</b><small>reported regions held true</small></div>
+            <div><b>2→<span data-count="36" data-dur="1800">0</span>%</b><small>reliable regions found</small></div>
+          </div>
+          <p class="opt-note">From our PLOS ONE manuscript. Wet-lab validation is in progress.</p>
+        </div>
       </div>
     </section>
   </div>
 
-
-
-  <!-- Impact -->
-  <section id="impact">
-    <div class="rv">
-      <h2>Faster, cheaper process development</h2>
-      <p class="sub">Every differentiation run costs weeks and thousands of dollars in media, cells and scientist time. Obtimize gets labs to a reliable answer with fewer of them.</p>
-    </div>
-    <div class="impact">
-      <div class="glass spot imp big rv">
-        <div>
-          <div class="n"><b data-count="2">0</b><span>×</span></div>
-          <h3>Fewer experimental rounds</h3>
-          <p>In benchmarks, our framework matched a standard optimizer's result in 5 rounds instead of 10. For a real differentiation program, that projects to roughly 4 months saved.</p>
-        </div>
-        <svg class="conv" viewBox="0 0 320 170" role="img" aria-label="Best result by round: Obtimize plateaus at round 5, standard method at round 10">
-          <g class="gridl"><line x1="30" y1="20" x2="310" y2="20"/><line x1="30" y1="70" x2="310" y2="70"/><line x1="30" y1="120" x2="310" y2="120"/></g>
-          <line x1="30" y1="145" x2="310" y2="145" stroke="rgb(15 26 43 / .2)"/>
-          <path class="ln std" d="M30 140 L58 128 L86 112 L114 98 L142 84 L170 70 L198 58 L226 46 L254 36 L282 30 L310 28"/>
-          <path class="ln opt" d="M30 140 L58 104 L86 72 L114 50 L142 34 L170 29 L198 28 L226 28 L254 28 L282 28 L310 28"/>
-          <line class="mark5" x1="142" y1="20" x2="142" y2="145"/>
-          <text x="142" y="14" text-anchor="middle">round 5</text>
-          <text x="310" y="162" text-anchor="end">round 10</text><text x="30" y="162">1</text>
-          <g class="lg"><circle cx="190" cy="104" r="4" fill="#2440e6"/><text x="198" y="108">Obtimize</text><circle cx="190" cy="122" r="4" fill="#d14d8a"/><text x="198" y="126">Standard</text></g>
-        </svg>
-      </div>
-      <div class="glass spot imp rv">
-        <div class="n"><b data-count="66">0</b><span>/66</span></div>
-        <h3>Reliable operating regions</h3>
-        <p>Every operating region it reported in benchmarks contained the true answer. When the data wasn't enough, it said so.</p>
-      </div>
-      <div class="glass spot imp rv">
-        <div class="n"><b data-count="36">0</b><span>%</span></div>
-        <h3>Reliable regions found</h3>
-        <p>Up from 2% with a standard approach, an 18× gain across 92,400 benchmark evaluations.</p>
-        <div class="grow"><div><span>Standard</span><i style="--w:5.5%"></i><em>2%</em></div><div><span>Obtimize</span><i style="--w:100%"></i><em>36%</em></div></div>
-      </div>
-      <div class="glass spot imp rv" style="grid-column:span 2">
-        <i class="ph ph-timer ic"></i>
-        <h3>Data cleanup in minutes, not weeks</h3>
-        <p>The manual work that stalled our own project becomes a draft table that scientists confirm. Our target is under 10 minutes a week.</p>
-      </div>
-    </div>
-    <div class="facts-row rv">
-      <div class="fact"><i class="ph ph-article"></i><div><b>Peer-review track</b><span>Optimization framework benchmarked and written up for PLOS ONE.</span></div></div>
-      <div class="fact"><i class="ph ph-flask"></i><div><b>Real lab data</b><span>Built at NutriGene AI Biotech, Hong Kong, on stem cell manufacturing files.</span></div></div>
-      <div class="fact"><i class="ph ph-test-tube"></i><div><b>Honest about status</b><span>Benchmarks use synthetic test problems. Wet-lab validation is in progress.</span></div></div>
-    </div>
-  </section>
 
   <!-- Ask -->
   <section id="ask">
@@ -1157,7 +1260,7 @@ document.querySelectorAll('.spot').forEach(el=>el.addEventListener('pointermove'
   let W,H,img,hover=null;const CYC=13000;
   function build(){const d=devicePixelRatio||1;W=c.clientWidth;H=c.clientHeight;c.width=W*d;c.height=H*d;x.setTransform(d,0,0,d,0,0);
     const g=document.createElement('canvas'),N=90;g.width=N;g.height=N;const gx=g.getContext('2d'),id=gx.createImageData(N,N);
-    for(let j=0;j<N;j++)for(let i=0;i<N;i++){const z=f(i/N,1-j/N),k=(j*N+i)*4,S=[[255,255,255],[220,227,255],[110,134,240],[36,64,230]],q=Math.min(2.999,z*3),m=Math.floor(q),r=q-m,A=S[m],B=S[m+1];id.data[k]=A[0]+(B[0]-A[0])*r;id.data[k+1]=A[1]+(B[1]-A[1])*r;id.data[k+2]=A[2]+(B[2]-A[2])*r;id.data[k+3]=255}
+    for(let j=0;j<N;j++)for(let i=0;i<N;i++){const z=f(i/N,1-j/N),k=(j*N+i)*4,S=[[255,255,255],[220,227,255],[110,134,240],[63,127,230]],q=Math.min(2.999,z*3),m=Math.floor(q),r=q-m,A=S[m],B=S[m+1];id.data[k]=A[0]+(B[0]-A[0])*r;id.data[k+1]=A[1]+(B[1]-A[1])*r;id.data[k+2]=A[2]+(B[2]-A[2])*r;id.data[k+3]=255}
     gx.putImageData(id,0,0);img=g}
   const P=(u,v)=>[u*W,(1-v)*H];
   const ease=k=>1-Math.pow(1-Math.max(0,Math.min(1,k)),3);
@@ -1185,9 +1288,9 @@ document.querySelectorAll('.spot').forEach(el=>el.addEventListener('pointermove'
     // next wells drop in with labels
     const pulse=reduce?0:(Math.sin(now/450)+1)/2;
     next.forEach(([u,v],i)=>{const k=ease((t-7600-i*320)/500);if(k<=0)return;const[px,py]=P(u,v);
-      const needRep=t>10200&&rep2.some(r=>r[0]===u&&r[1]===v);const col=needRep?'#c9801c':'#2440e6';
+      const needRep=t>10200&&rep2.some(r=>r[0]===u&&r[1]===v);const col=needRep?'#c9801c':'#3f7fe6';
       x.beginPath();x.arc(px,py-(1-k)*18,(6+pulse*1.5)*k,0,6.28);x.strokeStyle=col;x.lineWidth=2;x.stroke();x.lineWidth=1;
-      x.beginPath();x.arc(px,py,12+pulse*6,0,6.28);x.strokeStyle=needRep?`rgba(201,128,28,${.4*(1-pulse)})`:`rgba(36,64,230,${.35*(1-pulse)})`;x.stroke();
+      x.beginPath();x.arc(px,py,12+pulse*6,0,6.28);x.strokeStyle=needRep?`rgba(201,128,28,${.4*(1-pulse)})`:`rgba(63,127,230,${.35*(1-pulse)})`;x.stroke();
       x.globalAlpha=k;x.fillStyle=col;x.font='500 10px "Inter",sans-serif';x.fillText(wells[i]+(needRep?' ×2':''),px+10,py-8);x.globalAlpha=1});
     if(!reduce)requestAnimationFrame(draw);
   }
@@ -1209,7 +1312,7 @@ document.querySelectorAll('.spot').forEach(el=>el.addEventListener('pointermove'
   const CAPS=["Your lab's files stream in, read-only, exactly as they are saved today.","Every condition, cell line, passage and result is linked into one graph.","Problems light up before anyone relies on the data.","The brain opens out into a plan, a range, and what to fix first."];
   const FACTS=['<b>Run 07</b>: CHIR 4 µM, VEGF 100, P12 → CD31+ high','<b>Run 09</b>: lot B, passage 18 → CD31+ low','<b>Run 12</b>: dilution sheet says 80, not 100','<b>Run 05</b>: purity assay v1, not v2','<b>Run 14</b>: no outcome recorded','<b>Protocol v3</b>: day 4 feeding changed','<b>12 photos</b>: no run label'];
   const ISS=['Missing outcome','Assay mismatch','Calc error','Repeated run'];
-  const cols=['#2440e6','#d14d8a','#7c879a','#5fb58a','#8db8f7'];
+  const cols=['#3f7fe6','#d14d8a','#7c879a','#5fb58a','#8db8f7'];
   let W,H,C,R,nodes=[],edges=[],active=false,shown=-1,lastS=-1;
   let seed=5;const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
   const rel=el=>{const r=el.getBoundingClientRect(),v=vis.getBoundingClientRect();return{x:r.left-v.left,y:r.top-v.top,w:r.width,h:r.height}};
@@ -1234,13 +1337,13 @@ document.querySelectorAll('.spot').forEach(el=>el.addEventListener('pointermove'
     x.clearRect(0,0,W,H);
     // ring around the brain fills with overall progress
     x.lineWidth=3;x.strokeStyle='rgba(15,26,43,.07)';x.beginPath();x.arc(C[0],C[1],R+16,0,6.283);x.stroke();
-    x.strokeStyle='#2440e6';x.lineCap='round';x.beginPath();x.arc(C[0],C[1],R+16,-Math.PI/2,-Math.PI/2+6.283*p);x.stroke();x.lineCap='butt';
+    x.strokeStyle='#3f7fe6';x.lineCap='round';x.beginPath();x.arc(C[0],C[1],R+16,-Math.PI/2,-Math.PI/2+6.283*p);x.stroke();x.lineCap='butt';
     // files stream down into the brain
     files.forEach((el,i)=>{const f=rel(el),a=[f.x+f.w/2,f.y+f.h+2],ang=-Math.PI/2+(i-3.5)*.17,b=[C[0]+Math.cos(ang)*(R+16),C[1]+Math.sin(ang)*(R+16)],k=clamp(A*1.25-i*.03);
       if(k<=0)return;line(a,b,k,'rgba(209,77,138,.28)',1.3);
       if(k>=1&&!reduce&&p<.8)for(let j=0;j<2;j++)dot(a,b,((now/2000)+i*.12+j*.5)%1,'#d14d8a',2.4)});
     // graph forms inside the brain ring
-    edges.forEach(([i,j])=>{const k=clamp(B*nodes.length-Math.max(i,j));if(k<=0)return;const a=nodes[i],b=nodes[j];x.strokeStyle='rgba(36,64,230,.28)';x.lineWidth=1;x.beginPath();x.moveTo(a.x,a.y);x.lineTo(a.x+(b.x-a.x)*k,a.y+(b.y-a.y)*k);x.stroke()});
+    edges.forEach(([i,j])=>{const k=clamp(B*nodes.length-Math.max(i,j));if(k<=0)return;const a=nodes[i],b=nodes[j];x.strokeStyle='rgba(63,127,230,.28)';x.lineWidth=1;x.beginPath();x.moveTo(a.x,a.y);x.lineTo(a.x+(b.x-a.x)*k,a.y+(b.y-a.y)*k);x.stroke()});
     const issIdx=[2,9,17,24];
     nodes.forEach((n,i)=>{const k=clamp(B*nodes.length-i);if(k<=0)return;const q=issIdx.indexOf(i),hot=q>=0&&Cd>.15+q*.2;
       x.beginPath();x.arc(n.x,n.y,(hot?6:n.r)*k,0,6.28);x.fillStyle=hot?'#c9801c':n.c;x.fill();
@@ -1250,96 +1353,77 @@ document.querySelectorAll('.spot').forEach(el=>el.addEventListener('pointermove'
         x.fillStyle='rgba(255,255,255,.95)';x.beginPath();x.roundRect?x.roundRect(lx-6,ly-11,tw+12,22,7):x.rect(lx-6,ly-11,tw+12,22);x.fill();x.fillStyle='#b06d10';x.fillText(lab,lx,ly+4)}});
     // brain opens out into three outputs
     outs.forEach((el,i)=>{const k=clamp(D*1.4-i*.2);if(k<=0)return;const o=rel(el),a=[C[0]+(i-1)*40,C[1]+R+16],b=[o.x+o.w/2,o.y-2];
-      line(a,b,k,'rgba(36,64,230,.45)',1.6);if(k>=1&&!reduce)dot(a,b,((now/1700)+i*.3)%1,'#2440e6',2.8)});
+      line(a,b,k,'rgba(63,127,230,.45)',1.6);if(k>=1&&!reduce)dot(a,b,((now/1700)+i*.3)%1,'#3f7fe6',2.8)});
     // and into the chat
-    if(E>0){const c=rel(chat),mid=rel(outs[1]),a=[mid.x+mid.w/2,mid.y+mid.h+2],b=[c.x+c.w/2,c.y-2];line(a,b,E,'rgba(36,64,230,.45)',1.6)}
+    if(E>0){const c=rel(chat),mid=rel(outs[1]),a=[mid.x+mid.w/2,mid.y+mid.h+2],b=[c.x+c.w/2,c.y-2];line(a,b,E,'rgba(63,127,230,.45)',1.6)}
     requestAnimationFrame(frame);
   }
   size();addEventListener('resize',size);
   new IntersectionObserver(es=>es.forEach(e=>{active=e.isIntersecting;if(active){size();requestAnimationFrame(frame)}})).observe(scene);
 })();
 
-// Chapters: slides reveal on entry, spine fills with scroll, each visual loops while visible
+// Chapters v3: slides reveal on entry; one continuous connector; each visual loops while on screen
 (()=>{
   const wrap=document.getElementById('chx');if(!wrap)return;
-  const slides=[...wrap.querySelectorAll('.slide')],fill=document.getElementById('spineFill');
-  const vis=new Set();
-  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');vis.add(e.target)}else vis.delete(e.target)}),{threshold:.25});
-  slides.forEach(s=>io.observe(s));
-  let on=false;
-  (function spine(){requestAnimationFrame(spine);const r=wrap.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)return;
-    const k=Math.max(0,Math.min(1,(innerHeight*.5-r.top)/r.height));fill.style.setProperty('--fill',(k*100)+'%');
-    slides.forEach(s=>s.classList.toggle('lit',s.offsetTop+s.offsetHeight/2<=k*r.height+2))})();
-  const isOn=i=>vis.has(slides[i])&&!reduceM;
+  const slides=[...wrap.querySelectorAll('.slide')],branch=document.getElementById('branch'),vis=new Set();
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');vis.add(e.target)}else vis.delete(e.target)}),{threshold:.15});
+  slides.forEach(s=>io.observe(s));if(branch)io.observe(branch);
+  const isOn=el=>vis.has(el)&&!reduceM;
 
-  // One continuous pipeline across the slides: a line grows from each visual into the next as you scroll,
-// carrying particles (pink = raw files, blue = linked knowledge). Drawn on one fixed canvas, only while visible.
-(()=>{const cv=document.getElementById('flowCv'),x=cv.getContext('2d');const visEls=slides.map(s=>s.querySelector('.s-vis'));const cta=document.querySelector('.s-cta');
-  let on=false;new IntersectionObserver(es=>es.forEach(e=>{on=e.isIntersecting;cv.style.display=on?'block':'none'})).observe(wrap);
+  // one thin connector: slide 1 -> slide 2 -> branch -> slide 3 -> chat
+  const cv=document.getElementById('flowCv'),x=cv.getContext('2d');let on=false;
+  new IntersectionObserver(es=>es.forEach(e=>{on=e.isIntersecting;cv.style.display=on?'block':'none'})).observe(wrap);
   const size=()=>{const d=Math.min(2,devicePixelRatio||1);cv.width=innerWidth*d;cv.height=innerHeight*d;x.setTransform(d,0,0,d,0,0)};size();addEventListener('resize',size);
-  const clamp=v=>Math.max(0,Math.min(1,v));
+  const clamp=v=>Math.max(0,Math.min(1,v)),R=el=>el.getBoundingClientRect();
   const pt=(a,b,t)=>{const my=(a[1]+b[1])/2,u=1-t;return[u*u*u*a[0]+3*u*u*t*a[0]+3*u*t*t*b[0]+t*t*t*b[0],u*u*u*a[1]+3*u*u*t*my+3*u*t*t*my+t*t*t*b[1]]};
-  const COLS=[[209,77,138],[36,64,230],[36,64,230],[36,64,230]];
-  (function f(now){requestAnimationFrame(f);if(!on)return;x.clearRect(0,0,innerWidth,innerHeight);
-    const fe=slides.map(s=>s.querySelector('.feats')),pi=slides.map(s=>s.querySelector('.s-num'));const segs=[];for(let i=0;i<slides.length-1;i++){const A=fe[i].getBoundingClientRect(),B=pi[i+1].getBoundingClientRect();segs.push([[A.left+A.width/2,A.bottom+6],[B.left+B.width/2,B.top-4],COLS[i]])}
-    const C=cta.getBoundingClientRect(),Q=document.getElementById('ask').getBoundingClientRect();segs.push([[C.left+C.width/2,C.bottom+6],[C.left+C.width/2,Q.top+40],COLS[3]]);
-    segs.forEach(([a,b,c],i)=>{if(b[1]<-50||a[1]>innerHeight+50)return;
-      const k=clamp((innerHeight*.7-a[1])/Math.max(1,b[1]-a[1]));if(k<=0)return;
-            x.lineWidth=2.5;x.strokeStyle=`rgba(${c},.85)`;x.beginPath();for(let j=0;j<=60*k;j++){const[px,py]=pt(a,b,j/60);j?x.lineTo(px,py):x.moveTo(px,py)}x.stroke();
-      const [hx,hy]=pt(a,b,k);x.beginPath();x.arc(hx,hy,5,0,6.28);x.fillStyle=`rgb(${c})`;x.fill();
-      if(!reduceM)for(let j=0;j<5;j++){const t=((now/2600)+j/5)%1;if(t>k)continue;const[px,py]=pt(a,b,t);x.beginPath();x.arc(px,py,3.2,0,6.28);x.fillStyle=`rgb(${c})`;x.globalAlpha=.9;x.fill();x.globalAlpha=1}
-    })})();
-})();
+  const bot=el=>{const r=R(el);return[r.left+r.width/2,r.bottom+8]},top=el=>{const r=R(el);return[r.left+r.width/2,r.top-6]};
+  function segs(){const out=[[bot(slides[0].querySelector('.fcols')),top(slides[1].querySelector('.s-num'))]];
+    if(branch){out.push([bot(slides[1].querySelector('.fcols')),top(branch.querySelector('.br-root'))]);out.push([bot(branch.querySelectorAll('.br-col')[2]),top(slides[2].querySelector('.s-num'))])}
+    const cta=slides[2].querySelector('.s-cta'),a=bot(cta);out.push([a,[a[0],R(document.getElementById('ask')).top+30]]);return out}
+  (function f(now){requestAnimationFrame(f);if(!on)return;x.clearRect(0,0,innerWidth,innerHeight);x.fillStyle=x.strokeStyle='#3f7fe6';x.lineWidth=1.5;
+    segs().forEach(([a,b])=>{if(b[1]<-60||a[1]>innerHeight+60)return;const k=clamp((innerHeight*.72-a[1])/Math.max(1,b[1]-a[1]));if(k<=0)return;
+      x.beginPath();for(let j=0;j<=60*k;j++){const[px,py]=pt(a,b,j/60);j?x.lineTo(px,py):x.moveTo(px,py)}x.stroke();
+      if(!reduceM){const[px,py]=pt(a,b,((now/1800)%1)*k);x.beginPath();x.arc(px,py,3,0,6.28);x.fill()}})})();
 
-// 01: files read and linked one after another
-  (()=>{const rows=[...document.querySelectorAll('#drive .frow')],cnt=document.getElementById('driveCount');let i=0;
-    const tick=()=>{if(!isOn(0)){setTimeout(tick,500);return}
-      if(i===rows.length){setTimeout(()=>{rows.forEach(r=>r.className='frow');i=0;cnt.textContent='0 of 8 linked';tick()},1800);return}
-      const r=rows[i];r.classList.add('reading');setTimeout(()=>{r.classList.remove('reading');r.classList.add('done');i++;cnt.textContent=i+' of 8 linked';setTimeout(tick,180)},620)};
-    if(reduceM){rows.forEach(r=>r.classList.add('done'));cnt.textContent='8 of 8 linked'}else tick()})();
+  // 01 Ingest: real-looking materials get fingerprinted and linked into the hub
+  (()=>{const s1=slides[0],mats=[...s1.querySelectorAll('.mat')],svg=document.getElementById('matLinks'),hub=document.getElementById('hub'),cnt=document.getElementById('hubCount');if(!mats.length)return;
+    let seed=3;const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
+    let h='';for(let i=0;i<150;i++){const c=i<95,cx=c?76+(rnd()-.5)*30:32+(rnd()-.5)*36,cy=c?24+(rnd()-.5)*24:50+(rnd()-.5)*22;h+=`<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="1.1" fill="${c?'#3f7fe6':'#9aa3b5'}" opacity=".75"/>`}
+    h+='<polygon points="58,8 104,9 102,42 60,40" fill="none" stroke="#0b1238" stroke-width="1" stroke-dasharray="3 2"/><text x="62" y="62" font-size="8.5" fill="#4a5068" font-family="Helvetica Neue,Arial">CD31+ gate</text>';
+    document.getElementById('pvFcs').innerHTML=h;
+    h='';for(let i=0;i<28;i++){const cx=rnd()*120,cy=rnd()*72,rx=5+rnd()*7,ry=3+rnd()*5,a=rnd()*180;h+=`<ellipse cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" rx="${rx.toFixed(1)}" ry="${ry.toFixed(1)}" transform="rotate(${a.toFixed(0)} ${cx.toFixed(1)} ${cy.toFixed(1)})" fill="#eef0ea" stroke="#848c80" stroke-width="1"/>`}
+    document.getElementById('pvTif').innerHTML=h;
+    document.getElementById('pvPlate').innerHTML=Array.from({length:24},(_,i)=>`<i class="${[2,3,8,9,14,15].includes(i)?'f':''}"></i>`).join('');
+    const lay=()=>{const v=R(s1.querySelector('.ingest')),hb=R(hub);svg.setAttribute('viewBox',`0 0 ${v.width} ${v.height}`);
+      svg.innerHTML=mats.map(m=>{const r=R(m),ax=r.left-v.left+r.width/2,ay=r.bottom-v.top,bx=hb.left-v.left+hb.width/2,by=hb.top-v.top,my=(ay+by)/2;return `<path d="M${ax} ${ay} C${ax} ${my} ${bx} ${my} ${bx} ${by}"/>`}).join('')};
+    addEventListener('resize',lay);
+    let i=0;const tick=()=>{if(!isOn(s1)){setTimeout(tick,500);return}
+      if(i===0)lay();
+      if(i===mats.length){setTimeout(()=>{mats.forEach(m=>m.className='mat');i=0;cnt.textContent='0 of 5 sources linked';tick()},2800);return}
+      const m=mats[i],p=svg.children[i];m.classList.add('active');p.style.setProperty('--len',p.getTotalLength());p.classList.add('on');
+      setTimeout(()=>{m.classList.remove('active');m.classList.add('linked');i++;cnt.textContent=i+' of 5 sources linked';setTimeout(tick,260)},780)};
+    if(reduceM){lay();mats.forEach(m=>m.classList.add('linked'));cnt.textContent='5 of 5 sources linked'}else tick()})();
 
-  // 02: rotating 3D knowledge graph + synthesis feed
-  (()=>{const c=document.getElementById('sphere');if(!c)return;const x=c.getContext('2d');let W,H;
-    const size=()=>{const d=devicePixelRatio||1;W=c.clientWidth;H=c.clientHeight;c.width=W*d;c.height=H*d;x.setTransform(d,0,0,d,0,0)};size();addEventListener('resize',size);
-    const types=[['#2440e6',5.5],['#d14d8a',3.6],['#7c879a',3.4],['#5fb58a',3.4],['#c9801c',4.6]];
-    const N=60,P=[];for(let i=0;i<N;i++){const y=1-(i/(N-1))*2,r=Math.sqrt(1-y*y),t=i*2.39996;P.push({x:Math.cos(t)*r,y,z:Math.sin(t)*r,t:i%9===0?4:i%5===0?0:i%3===0?1:i%2?2:3})}
-    const labels={0:'Run 07',10:'Run 09',25:'Run 12',40:'Run 14',5:'Protocol v3',30:'Lot B'};
-    const E=[];P.forEach((a,i)=>P.map((b,j)=>[j,(a.x-b.x)**2+(a.y-b.y)**2+(a.z-b.z)**2]).filter(([j])=>j>i).sort((p,q)=>p[1]-q[1]).slice(0,2).forEach(([j])=>E.push([i,j])));
-    let ang=0;
-    (function draw(){requestAnimationFrame(draw);if(!vis.has(slides[1])&&!reduceM)return;
-      ang+=reduceM?0:.0035;const R=Math.min(W,H)*.32,cx=W/2,cy=H*.42,ca=Math.cos(ang),sa=Math.sin(ang),tilt=.35,ct=Math.cos(tilt),st=Math.sin(tilt);
-      const Q=P.map(p=>{const x1=p.x*ca+p.z*sa,z1=-p.x*sa+p.z*ca,y1=p.y*ct-z1*st,z2=p.y*st+z1*ct;const s=1/(1.9-z2*.6);return{sx:cx+x1*R*s*1.3,sy:cy+y1*R*s*1.3,z:z2,s}});
-      x.clearRect(0,0,W,H);
-      E.forEach(([i,j])=>{const a=Q[i],b=Q[j],al=.08+.22*((a.z+b.z)/2+1)/2;x.strokeStyle=`rgba(36,64,230,${al})`;x.lineWidth=1;x.beginPath();x.moveTo(a.sx,a.sy);x.lineTo(b.sx,b.sy);x.stroke()});
-      const g=x.createRadialGradient(cx-8,cy-8,4,cx,cy,34);g.addColorStop(0,'#fff');g.addColorStop(.5,'#8db8f7');g.addColorStop(1,'#2440e6');
-      x.beginPath();x.arc(cx,cy,30,0,6.283);x.fillStyle=g;x.shadowColor='rgba(36,64,230,.5)';x.shadowBlur=30;x.fill();x.shadowBlur=0;
-      Q.map((q,i)=>[q,i]).sort((a,b)=>a[0].z-b[0].z).forEach(([q,i])=>{const[col,r]=types[P[i].t],al=.35+.65*(q.z+1)/2;x.globalAlpha=al;x.beginPath();x.arc(q.sx,q.sy,r*q.s*1.4,0,6.283);x.fillStyle=col;x.fill();
-        if(labels[i]&&q.z>-.1){x.font='600 12px "Inter",sans-serif';const tw=x.measureText(labels[i]).width;x.fillStyle='rgba(255,255,255,.92)';x.beginPath();x.roundRect?x.roundRect(q.sx+9,q.sy-10,tw+12,20,6):x.rect(q.sx+9,q.sy-10,tw+12,20);x.fill();x.fillStyle='#0f1a2b';x.fillText(labels[i],q.sx+15,q.sy+4)}
-        x.globalAlpha=1})})();
-    const F=['<b>Run 07</b>: CHIR 4 µM, VEGF 100, P12 → CD31+ high','<b>Run 09</b>: lot B, passage 18 → CD31+ low','<b>Protocol v3</b>: day 4 feeding changed','<b>Run 12</b>: dilution sheet says 80, not 100','<b>Run 14</b>: no outcome recorded','<b>12 photos</b>: no run label'];
-    const L=document.getElementById('feedL');if(!L)return;let k=0;const show=()=>{L.innerHTML=[0,1,2].map(j=>`<div>${F[(k+j)%F.length]}</div>`).join('')};show();
-    setInterval(()=>{if(isOn(1)){k=(k+1)%F.length;show()}},1600)})();
+  // branch lines from the brain into four abilities
+  (()=>{if(!branch)return;const svg=document.getElementById('brLines');
+    const lay=()=>{const b=R(branch),r=R(branch.querySelector('.br-root'));svg.setAttribute('viewBox',`0 0 ${b.width} ${b.height}`);const ax=r.left-b.left+r.width/2,ay=r.bottom-b.top;
+      svg.innerHTML=[...branch.querySelectorAll('.br-col')].map(c=>{const q=R(c),bx=q.left-b.left+1,by=q.top-b.top,my=(ay+by)/2;return `<path d="M${ax} ${ay} C${ax} ${my} ${bx} ${my} ${bx} ${by}"/>`}).join('');
+      [...svg.children].forEach(p=>p.style.setProperty('--len',p.getTotalLength()))};
+    lay();addEventListener('resize',lay)})();
 
-  // 03: scan line moves down the runs and flags issues
-  (()=>{const rows=[...document.querySelectorAll('#tbl .trw')],scan=document.querySelector('#tbl .scan');let i=0;
-    const tick=()=>{if(!isOn(2)){setTimeout(tick,500);return}
-      if(i===rows.length){setTimeout(()=>{rows.forEach(r=>r.classList.remove('flag'));i=0;tick()},2400);return}
-      const r=rows[i];scan.style.setProperty('--sy',r.offsetTop+'px');setTimeout(()=>{if(r.dataset.iss)r.classList.add('flag');i++;setTimeout(tick,350)},500)};
-    if(reduceM)rows.forEach(r=>r.dataset.iss&&r.classList.add('flag'));else tick()})();
-
-  // 04: wells light up for the next round
-  (()=>{const pl=document.getElementById('plate'),names=[];for(const r of 'ABCD')for(let c=1;c<=6;c++)names.push(r+c);
-    pl.innerHTML=names.map(n=>`<div class="well">${n}</div>`).join('');const W=[...pl.children];
-    const seq=[[8,'b'],[9,'b'],[14,'b'],[15,'b'],[10,'b'],[16,'b'],[3,'a'],[21,'a']];let i=0;
-    const tick=()=>{if(!isOn(3)){setTimeout(tick,500);return}
-      if(i===seq.length){setTimeout(()=>{W.forEach(w=>w.className='well');i=0;tick()},2600);return}
-      W[seq[i][0]].classList.add(seq[i][1]);i++;setTimeout(tick,380)};
+  // 03 Optimize: wells for the next round light up
+  (()=>{const s3=slides[2],pl=document.getElementById('plate');if(!pl||!s3)return;const names=[];for(const r of 'ABCD')for(let c=1;c<=6;c++)names.push(r+c);
+    pl.innerHTML=names.map(n=>`<div class="well" title="${n}">${n}</div>`).join('');const W=[...pl.children];
+    const seq=[[8,'b'],[9,'b'],[10,'b'],[14,'b'],[15,'b'],[16,'b'],[3,'a'],[21,'a']];let i=0;
+    const tick=()=>{if(!isOn(s3)){setTimeout(tick,500);return}
+      if(i===seq.length){setTimeout(()=>{W.forEach(w=>w.className='well');i=0;tick()},3200);return}
+      W[seq[i][0]].classList.add(seq[i][1]);i++;setTimeout(tick,330)};
     if(reduceM)seq.forEach(([n,c])=>W[n].classList.add(c));else tick()})();
 })();
 
 // ---------- Shared illustrative lab ----------
 const LAB={
- types:{run:['Run','#2440e6'],cond:['Condition','#d14d8a'],cell:['Cells','#8a95a8'],proto:['Protocol','#a7b0bf'],image:['Image','#5fb58a'],result:['Result','#9ec3f5'],issue:['Issue found','#c9801c']},
+ types:{run:['Run','#3f7fe6'],cond:['Condition','#1f9e8f'],cell:['Cells','#8a95a8'],proto:['Protocol','#a7b0bf'],image:['Image','#5fb58a'],result:['Result','#9ec3f5'],issue:['Issue found','#c9801c']},
  nodes:[
   ['R05','run','Run 05','CHIR 3 µM, VEGF 25 ng/mL on coating lot A. Purity measured with assay v1.',['run_sheet_05.xlsx']],
   ['R07','run','Run 07','Best result so far. CHIR 4 µM, VEGF 100 ng/mL, lot A, passage 12.',['run_sheet_07.xlsx','CD31_d10_R07.fcs']],
@@ -1396,6 +1480,11 @@ const LAB={
     $('pLinks').innerHTML=Object.keys(groups).length?`<h4>Linked to</h4><div class="row">${Object.entries(groups).map(([t,ms])=>ms.map(m=>`<span><i style="background:${LAB.types[t][1]}"></i>${m.label}</span>`).join('')).join('')}</div>`:'';
   }
   $('pBack').onclick=()=>{sel=null;show(null)};
+  const SEV={X14:['h','High'],Xcl:['h','High'],Xas:['m','Medium'],Xrp:['m','Medium'],Xph:['l','Low']};
+  const dg=document.getElementById('diag');
+  if(dg){dg.innerHTML=N.filter(n=>n.t==='issue').map(n=>{const run=[...n.nb].find(m=>m.t==='run');return `<button class="dg" data-id="${n.id}"><i class="${SEV[n.id][0]}"></i><b>${n.label}</b><span>${run?run.label+' · ':''}${SEV[n.id][1]} priority</span></button>`}).join('');
+    dg.querySelectorAll('.dg').forEach(b=>b.onclick=()=>{sel=byId[b.dataset.id];show(sel);alpha=Math.max(alpha,.3)});
+    const kb=document.getElementById('pKeyBtn');kb.onclick=()=>{const k=document.getElementById('pKey');k.hidden=!k.hidden;kb.textContent=k.hidden?'How to read the graph':'Hide the key'}}
   function tick(){
     const k=alpha;
     for(let i=0;i<N.length;i++){const a=N[i];if(!vis(a))continue;
@@ -1406,7 +1495,8 @@ const LAB={
   }
   function draw(){
     x.clearRect(0,0,W,H);const focus=hover||sel;const dimT=n=>hl&&n.t!==hl;
-    E.forEach(([a,b])=>{if(!vis(a)||!vis(b))return;const hot=(focus&&(a===focus||b===focus))||(hl&&!focus&&(a.t===hl||b.t===hl));x.strokeStyle=hot?'rgba(36,64,230,.75)':focus?'rgba(15,26,43,.06)':(a.t==='issue'||b.t==='issue')?'rgba(201,128,28,.3)':'rgba(15,26,43,.16)';x.lineWidth=hot?1.6:1;x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke()});
+    E.forEach(([a,b])=>{if(!vis(a)||!vis(b))return;const hot=(focus&&(a===focus||b===focus))||(hl&&!focus&&(a.t===hl||b.t===hl));x.strokeStyle=hot?'rgba(63,127,230,.75)':focus?'rgba(15,26,43,.06)':(a.t==='issue'||b.t==='issue')?'rgba(201,128,28,.3)':'rgba(15,26,43,.16)';x.lineWidth=hot?1.6:1;x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke()});
+    const tnow=performance.now();E.forEach(([a,b],i)=>{if(i%2)return;const t=((tnow/2200)+i*.137)%1,px=a.x+(b.x-a.x)*t,py=a.y+(b.y-a.y)*t,dm=(focus&&!(a===focus||b===focus))||(hl&&!focus&&a.t!==hl&&b.t!==hl);x.globalAlpha=dm?.15:.8;x.beginPath();x.arc(px,py,1.9,0,6.28);x.fillStyle=(a.t==='issue'||b.t==='issue')?'#b5720f':'#3f7fe6';x.fill();x.globalAlpha=1});
     N.forEach(n=>{if(!vis(n))return;const dim=(focus&&n!==focus&&!focus.nb.has(n))||(!focus&&dimT(n));x.globalAlpha=dim?.25:1;const col=LAB.types[n.t][1];
       if(n.t==='issue'){x.beginPath();x.arc(n.x,n.y,n.r+5+Math.sin(performance.now()/300)*2,0,6.28);x.strokeStyle='rgba(201,128,28,.35)';x.stroke()}
       x.beginPath();x.arc(n.x,n.y,n.r,0,6.28);x.fillStyle=col;x.fill();
