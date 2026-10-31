@@ -1340,6 +1340,40 @@ body,body *:not(.ph):not(i),button,input,textarea,select,svg text{font-family:"I
 .fc-row b{text-align:right;font-weight:600}
 .fc-row:last-child b{color:var(--accent)}
 .funnel .fn.zero{align-self:end !important;margin-top:0}
+
+/* story: shorter on both sides */
+.chapters{grid-auto-rows:auto !important}
+.ch{padding:0 0 16px !important}
+.ch h3{font-size:17px !important;margin-top:4px}
+.ch p{font-size:14px !important;line-height:1.5 !important;margin-top:3px}
+.bstory{padding:72px 0 !important;min-height:0 !important}
+.bstory .story{margin-top:28px !important}
+.funnel{padding:22px 26px !important;grid-template-rows:auto auto auto auto !important;align-content:start !important}
+.funnel .fn:not(.zero){margin-top:14px;padding-top:12px !important}
+.funnel .fn:not(.zero) .n{font-size:48px !important}
+.funnel .fn:not(.zero) .l b{font-size:14.5px !important;margin:8px 0 3px}
+.funnel .fn:not(.zero) .l{font-size:13px}
+.fun-chart{padding:18px 0 14px;gap:9px}
+.fc-row{font-size:12.5px}
+.funnel .fn.zero{padding-top:14px !important;margin-top:4px}
+.funnel .fn.zero .n{font-size:48px !important}
+
+/* branch: pure-CSS symmetric tree (always aligned): stem, rail, one drop per column centre */
+.br-lines{display:none !important}
+.br-cols{position:relative;margin-top:84px !important;column-gap:32px}
+.br-cols::before{content:"";position:absolute;left:50%;top:-84px;width:2px;height:42px;margin-left:-1px;background:var(--accent)}
+.br-cols::after{content:"";position:absolute;top:-42px;height:2px;background:var(--accent);left:calc((100% - 96px) / 8);right:calc((100% - 96px) / 8)}
+.br-col{position:relative;text-align:center;padding-top:0 !important;border:0 !important}
+.br-col::after{content:"";position:absolute;left:50%;top:-42px;width:2px;height:30px;margin-left:-1px;background:var(--accent);transition:width .2s}
+.br-col::before{display:block !important;content:"";position:absolute;left:50%;top:-14px;width:12px;height:12px;margin-left:-7px;border-radius:50%;background:#fff;border:2px solid var(--accent)}
+.br-col:hover::after{width:3px}
+.br-col:hover::before{background:var(--accent)}
+.br-col .ph{display:block;margin:6px auto 0}
+.br-col .br-pv{text-align:left}
+.br-time{align-items:center}
+@media (max-width:960px){.br-cols::after,.br-col::after{display:none}}
+.funnel{align-self:center !important;height:auto !important}
+.bstory .story{align-items:center !important}
 </style>
 </head>
 <body>
@@ -1897,7 +1931,7 @@ document.querySelectorAll('.spot').forEach(el=>el.addEventListener('pointermove'
   const pt=(a,b,t)=>{const my=(a[1]+b[1])/2,u=1-t;return[u*u*u*a[0]+3*u*u*t*a[0]+3*u*t*t*b[0]+t*t*t*b[0],u*u*u*a[1]+3*u*u*t*my+3*u*t*t*my+t*t*t*b[1]]};
   const bot=el=>{const r=R(el);return[r.left+r.width/2,r.bottom+8]},top=el=>{const r=R(el);return[r.left+r.width/2,r.top-6]};
   function segs(){const out=[[bot(slides[0].querySelector('.fcols')),top(slides[1].querySelector('.s-num'))]];
-    if(branch){out.push([bot(slides[1].querySelector('.fcols')),top(branch.querySelector('.br-root'))]);branch.querySelectorAll('.br-col').forEach(c=>out.push([bot(c),top(slides[2].querySelector('.s-num'))]))}
+    if(branch){out.push([bot(slides[1].querySelector('.fcols')),top(branch.querySelector('.br-root'))]);{const yb=R(branch.querySelector('.br-cols')).bottom+14;branch.querySelectorAll('.br-col').forEach(c=>{const r=R(c);out.push([[r.left+r.width/2,yb],top(slides[2].querySelector('.s-num'))])})}}
     return out}
   (function f(now){requestAnimationFrame(f);if(!on)return;x.clearRect(0,0,innerWidth,innerHeight);x.fillStyle=x.strokeStyle='#1F3FD8';x.lineWidth=2;
     segs().forEach(([a,b])=>{if(b[1]<-60||a[1]>innerHeight+60)return;const k=clamp((innerHeight*.72-a[1])/Math.max(1,b[1]-a[1]));if(k<=0)return;
