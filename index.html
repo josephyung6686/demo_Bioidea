@@ -98,6 +98,21 @@ section{padding:120px 0}
 h2{font-size:clamp(32px,3.8vw,50px);line-height:1.06;letter-spacing:-.04em;font-weight:500;max-width:22ch}
 .sub{color:var(--ink-2);font-size:18px;max-width:60ch;margin-top:18px}
 
+/* Brand story */
+.mission{font-size:clamp(30px,3.6vw,48px);line-height:1.15;letter-spacing:-.035em;font-weight:400;max-width:24ch;color:var(--ink)}
+.mission em{font-style:italic;color:var(--accent)}
+.bstory .story{margin-top:72px}
+.chapters{display:grid;gap:0;position:relative;padding-left:28px}
+.chapters::before{content:"";position:absolute;left:4px;top:8px;bottom:8px;width:1px;background:linear-gradient(var(--accent),rgb(95 212 196 / .05))}
+.ch{position:relative;padding:0 0 34px}
+.ch::before{content:"";position:absolute;left:-28px;top:7px;width:9px;height:9px;border-radius:50%;background:var(--bg);border:2px solid var(--accent)}
+.ch-k{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.ch h3{font-size:22px;font-weight:500;letter-spacing:-.02em;margin-top:6px}
+.ch p{color:var(--ink-2);margin-top:6px;max-width:50ch}
+.f-h{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);padding-bottom:6px}
+.fbar{display:block;height:3px;border-radius:3px;margin-top:10px;width:0;background:linear-gradient(90deg,var(--accent),rgb(127 168 214 / .6));transition:width 1.4s var(--ease) .3s}
+.funnel.in .fbar{width:var(--w)}
+.bstory .pull{margin:56px 0 0;max-width:40ch;font-size:26px}
 /* Story */
 .story{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}
 .story-text p{color:var(--ink-2);font-size:18px;margin-top:20px;max-width:52ch}
@@ -132,30 +147,36 @@ h2{font-size:clamp(32px,3.8vw,50px);line-height:1.06;letter-spacing:-.04em;font-
 .tint-a{background:linear-gradient(135deg,rgb(95 212 196 / .16),rgb(56 120 190 / .05) 60%,rgb(255 255 255 / .02))}
 .tint-b{background:linear-gradient(200deg,rgb(127 168 214 / .14),rgb(255 255 255 / .02) 70%)}
 
-/* Pipeline */
-.pipeline{margin-top:56px;padding:28px;display:grid;grid-template-columns:.8fr 44px 1.5fr 44px 1fr;align-items:center}
-.stage-h{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:12px;display:flex;align-items:center;gap:8px}
-.stage-h b{color:var(--accent);font-weight:500}
-.src{display:grid;gap:8px}
-.src div{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:12px;font-size:14px;border:1px solid var(--line);background:rgb(255 255 255 / .03)}
-.src .ph{font-size:18px;color:var(--accent)}
-.link{height:2px;border-radius:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent) 0 0/60% 100% no-repeat,rgb(95 212 196 / .15);animation:flow 2.2s linear infinite}
-@keyframes flow{from{background-position:-100% 0}to{background-position:250% 0}}
-.brain{border-radius:14px;border:1px solid var(--line);background:radial-gradient(70% 70% at 50% 45%,rgb(95 212 196 / .10),transparent 70%),rgb(0 0 0 / .25)}
-.brain svg{display:block;width:100%;height:auto}
-.brain text{font-family:"JetBrains Mono",monospace;font-size:11px;fill:#a9b4bf}
-.brain .run text{fill:#eef2f5;font-size:12px}
-.edge{stroke:rgb(255 255 255 / .16);stroke-width:1}
-.edge.hot{stroke:#5fd4c4;stroke-opacity:.6;stroke-dasharray:4 6;animation:dash 1.6s linear infinite}
-@keyframes dash{to{stroke-dashoffset:-20}}
-.recipe{display:grid;gap:8px}
-.rx{padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:rgb(255 255 255 / .03);font-size:13px;color:var(--ink-2)}
-.rx b{display:block;color:var(--ink);font-weight:500;font-size:14px;margin-bottom:2px}
-.rx.ok{border-color:rgb(95 212 196 / .35);background:rgb(95 212 196 / .08)}
-.rx.warn{border-color:rgb(243 201 139 / .3);background:rgb(243 201 139 / .05)}
-.rx.warn b{color:var(--warn)}
-.wells{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-top:8px}
-.wells span{font-family:"JetBrains Mono",monospace;font-size:10.5px;padding:4px 6px;border-radius:6px;background:rgb(0 0 0 / .3);color:var(--ink-2);text-align:center}
+/* Pipeline rail */
+.rail-wrap{margin-top:56px;position:relative}
+.rail{display:block;width:100%;height:24px;margin-bottom:14px}
+.stages{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.stage{padding:24px;transition:border-color .4s,transform .4s var(--ease),background .4s}
+.stage.active{border-color:rgb(95 212 196 / .5);transform:translateY(-4px);background:linear-gradient(160deg,rgb(95 212 196 / .14),rgb(255 255 255 / .02))}
+.st-n{font-size:12px;color:var(--accent)}
+.stage h3{font-size:22px;font-weight:500;letter-spacing:-.02em;margin-top:8px;display:flex;align-items:center;gap:10px}
+.stage h3 .ph{color:var(--accent);font-size:22px}
+.stage p{color:var(--ink-2);font-size:14px;margin-top:8px}
+.stage .chips{padding-top:16px}
+.warnchips li{color:var(--warn);border-color:rgb(243 201 139 / .25)}
+
+/* Interactive brain */
+.brainbox{margin-top:48px;padding:18px}
+.filters{display:flex;flex-wrap:wrap;gap:8px;padding:4px 4px 14px}
+.filters button{font:inherit;font-size:13px;color:var(--ink-2);background:rgb(255 255 255 / .03);border:1px solid var(--line);border-radius:999px;padding:6px 12px;display:flex;align-items:center;gap:8px;cursor:pointer;transition:opacity .2s,border-color .2s}
+.filters button i{width:9px;height:9px;border-radius:50%;display:inline-block}
+.filters button.off{opacity:.35}
+.filters button:hover{border-color:rgb(255 255 255 / .2)}
+.brain-grid{display:grid;grid-template-columns:1fr 300px;gap:14px}
+.stagebox{position:relative;height:540px;border-radius:14px;border:1px solid var(--line);background:radial-gradient(60% 60% at 50% 50%,rgb(95 212 196 / .07),transparent 70%),rgb(0 0 0 / .25);overflow:hidden}
+.stagebox canvas{position:absolute;inset:0;width:100%;height:100%;cursor:grab;touch-action:none}
+.stagebox canvas.dragging{cursor:grabbing}
+.panel{border-radius:14px;border:1px solid var(--line);background:rgb(0 0 0 / .22);padding:22px}
+.p-type{font-size:12px;color:var(--accent);text-transform:uppercase;letter-spacing:.08em}
+.p-name{font-size:22px;font-weight:500;letter-spacing:-.02em;margin-top:8px}
+.p-body{color:var(--ink-2);font-size:14px;margin-top:10px}
+.p-links{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.p-links span{font-family:"JetBrains Mono",monospace;font-size:11px;border:1px solid var(--line);border-radius:6px;padding:4px 7px;color:var(--ink-2)}
 .pipe-note{font-size:12px;color:var(--ink-3);margin-top:14px}
 
 /* Impact */
@@ -173,20 +194,71 @@ h2{font-size:clamp(32px,3.8vw,50px);line-height:1.06;letter-spacing:-.04em;font-
 .imp .ic{font-size:30px;color:var(--accent)}
 .foot-note{font-size:13px;color:var(--ink-3);margin-top:18px}
 
-/* Ask demo */
-.ask{display:grid;grid-template-columns:1fr 1.1fr;gap:56px;align-items:center}
-.chat{padding:24px;display:grid;gap:14px}
-.msg{padding:14px 16px;border-radius:14px;font-size:15px;max-width:90%}
-.msg.q{justify-self:end;background:rgb(95 212 196 / .14);border:1px solid rgb(95 212 196 / .25)}
-.msg.a{background:rgb(255 255 255 / .04);border:1px solid var(--line);color:var(--ink-2)}
-.msg.a b{color:var(--ink);font-weight:500}
-.cite{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
-.cite span{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--accent);border:1px solid rgb(95 212 196 / .3);border-radius:6px;padding:3px 7px}
-.flag{display:flex;gap:10px;align-items:flex-start;font-size:14px;padding:12px 14px;border-radius:12px;border:1px solid rgb(243 201 139 / .25);background:rgb(243 201 139 / .05);color:var(--ink-2)}
-.flag .ph{color:var(--warn);font-size:18px;margin-top:1px}
-.ask ul{list-style:none;margin-top:28px;display:grid;gap:14px}
-.ask li{display:flex;gap:12px;color:var(--ink-2)}
-.ask li .ph{color:var(--accent);font-size:20px;margin-top:2px}
+/* Impact charts */
+.imp .n b{font-weight:inherit}
+.conv{width:100%;height:auto;margin-top:24px}
+.conv text{font-family:"JetBrains Mono",monospace;font-size:10px;fill:#77838f}
+.conv .gridl line{stroke:rgb(255 255 255 / .05)}
+.conv .ln{fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:420;stroke-dashoffset:420;transition:stroke-dashoffset 2.2s var(--ease)}
+.conv .std{stroke:#7fa8d6;transition-delay:.2s}
+.conv .opt{stroke:#5fd4c4;transition-delay:.5s}
+.conv .mark5{stroke:rgb(95 212 196 / .5);stroke-dasharray:3 4;opacity:0;transition:opacity .6s 2s}
+.imp.in .conv .ln{stroke-dashoffset:0}
+.imp.in .conv .mark5{opacity:1}
+.grow{display:grid;gap:8px;margin-top:18px;font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--ink-3)}
+.grow div{display:grid;grid-template-columns:64px 1fr 34px;align-items:center;gap:8px}
+.grow i{display:block;height:8px;border-radius:999px;width:0;background:#7fa8d6;transition:width 1.6s var(--ease) .4s}
+.grow div:last-child i{background:var(--accent)}
+.imp.in .grow i{width:var(--w)}
+.grow em{font-style:normal;color:var(--ink-2)}
+
+/* Headline word reveal */
+h2 .w{display:inline-block;opacity:0;transform:translateY(.35em);filter:blur(6px);transition:opacity .7s var(--ease),transform .7s var(--ease),filter .7s var(--ease)}
+h2.show .w{opacity:1;transform:none;filter:none}
+
+/* Ask app */
+.app{margin-top:48px;display:flex;flex-direction:column;height:640px;padding:0}
+.app-bar{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--line);font-size:12px;color:var(--ink-3)}
+.dots{display:flex;gap:6px}.dots i{width:10px;height:10px;border-radius:50%;background:rgb(255 255 255 / .12)}
+.demo{margin-left:auto;color:var(--accent);border:1px solid rgb(95 212 196 / .3);border-radius:999px;padding:2px 8px}
+.convo{flex:1;overflow-y:auto;padding:26px 28px;display:flex;flex-direction:column;gap:22px;scroll-behavior:smooth}
+.empty{margin:auto;text-align:center;max-width:620px}
+.empty-mark{display:grid;place-items:center;margin-bottom:16px}
+.empty-mark .mark{width:40px;height:40px}
+.empty h3{font-size:24px;font-weight:500;letter-spacing:-.02em}
+.sugg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:24px}
+.sugg button,.follow button{font:inherit;text-align:left;font-size:14px;color:var(--ink);background:rgb(255 255 255 / .03);border:1px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer;display:flex;gap:10px;align-items:flex-start;transition:border-color .2s,background .2s,transform .2s var(--ease)}
+.sugg button:hover,.follow button:hover{border-color:rgb(95 212 196 / .4);background:rgb(95 212 196 / .06);transform:translateY(-1px)}
+.sugg .ph,.follow .ph{color:var(--accent);margin-top:3px}
+.uq{align-self:flex-end;max-width:70%;background:rgb(95 212 196 / .13);border:1px solid rgb(95 212 196 / .25);padding:12px 16px;border-radius:16px 16px 4px 16px;font-size:15px;animation:pop .4s var(--ease)}
+@keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.turn{display:grid;gap:14px;animation:pop .4s var(--ease)}
+.steps{display:grid;gap:6px}
+.step{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink-3)}
+.step .ic{width:16px;height:16px;border-radius:50%;border:2px solid rgb(95 212 196 / .25);border-top-color:var(--accent);animation:spin .8s linear infinite}
+.step.done{color:var(--ink-2)}
+.step.done .ic{animation:none;border:0;background:var(--accent);display:grid;place-items:center}
+.step.done .ic::after{content:"";width:6px;height:3px;border-left:2px solid var(--accent-ink);border-bottom:2px solid var(--accent-ink);transform:rotate(-45deg) translate(1px,-1px)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.lbl{font-size:12px;font-family:"JetBrains Mono",monospace;color:var(--ink-3);display:flex;align-items:center;gap:8px}
+.srcs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.src-c{border:1px solid var(--line);background:rgb(255 255 255 / .03);border-radius:12px;padding:10px 12px;font-size:12px;color:var(--ink-3);transition:border-color .2s,background .2s;animation:pop .4s var(--ease) both}
+.src-c b{display:block;color:var(--ink);font-weight:500;font-size:12.5px;font-family:"JetBrains Mono",monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:4px}
+.src-c .num{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:5px;background:rgb(95 212 196 / .15);color:var(--accent);font-size:11px;margin-right:6px}
+.src-c.hl{border-color:var(--accent);background:rgb(95 212 196 / .10)}
+.ans{font-size:16px;line-height:1.7;color:var(--ink)}
+.ans sup{display:inline-grid;place-items:center;min-width:17px;height:17px;padding:0 4px;margin:0 2px;border-radius:5px;background:rgb(95 212 196 / .16);color:var(--accent);font-size:10.5px;font-family:"JetBrains Mono",monospace;vertical-align:2px;cursor:pointer}
+.ans sup:hover{background:var(--accent);color:var(--accent-ink)}
+.ans .caret{display:inline-block;width:8px;height:16px;background:var(--accent);vertical-align:-2px;margin-left:2px;animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+.follow{display:flex;flex-wrap:wrap;gap:8px}
+.follow button{font-size:13px;padding:8px 12px;border-radius:999px}
+.composer{display:flex;align-items:center;gap:10px;margin:0 18px 18px;padding:8px 8px 8px 16px;border-radius:999px;border:1px solid rgb(255 255 255 / .14);background:rgb(0 0 0 / .25)}
+.composer:focus-within{border-color:rgb(95 212 196 / .5)}
+.composer .ph-sparkle{color:var(--accent);font-size:18px}
+.composer input{flex:1;background:none;border:0;outline:0;color:var(--ink);font:inherit;font-size:15px}
+.composer input::placeholder{color:var(--ink-3)}
+.composer button{width:38px;height:38px;border-radius:50%;border:0;cursor:pointer;background:linear-gradient(180deg,#8be6da,var(--accent));color:var(--accent-ink);font-size:18px;display:grid;place-items:center}
 
 /* Trust */
 .trust{display:grid;grid-template-columns:repeat(3,1fr);gap:40px 48px;margin-top:56px}
@@ -194,6 +266,19 @@ h2{font-size:clamp(32px,3.8vw,50px);line-height:1.06;letter-spacing:-.04em;font-
 .tr h3{font-size:18px;font-weight:500;margin-top:12px;letter-spacing:-.01em}
 .tr p{color:var(--ink-2);font-size:15px;margin-top:6px;max-width:34ch}
 
+/* Trust cards */
+.trust-cards{gap:14px}
+.trust-cards .tr{font:inherit;color:inherit;text-align:left;padding:24px;cursor:pointer;display:block;width:100%;transition:border-color .3s,transform .3s var(--ease)}
+.trust-cards .tr:hover{border-color:rgb(95 212 196 / .35);transform:translateY(-2px)}
+.tr .more{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--ease)}
+.tr .more p{overflow:hidden;color:var(--ink);font-size:14px;margin:0}
+.tr[aria-expanded="true"] .more{grid-template-rows:1fr}
+.tr[aria-expanded="true"] .more p{margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+.tr .plus{position:absolute;top:20px;right:20px;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line);color:var(--ink-2);transition:transform .35s var(--ease),background .3s}
+.tr[aria-expanded="true"] .plus{transform:rotate(45deg);background:rgb(95 212 196 / .15);color:var(--accent)}
+
+/* Research facts (in impact) */
+.facts-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
 /* Research */
 .research{padding:56px;display:grid;grid-template-columns:1.2fr 1fr;gap:56px;align-items:center}
 .facts{display:grid;gap:12px}
@@ -209,13 +294,19 @@ h2{font-size:clamp(32px,3.8vw,50px);line-height:1.06;letter-spacing:-.04em;font-
 .vision .sub{margin:20px auto 0}
 .vision .ctas{justify-content:center}
 
-footer{padding:56px 0 48px;color:var(--ink-3);font-size:14px}
-.foot{display:flex;justify-content:space-between;align-items:center;gap:24px;border-top:1px solid var(--line);padding-top:32px;flex-wrap:wrap}
+footer{padding:64px 0 40px;color:var(--ink-3);font-size:14px;border-top:1px solid var(--line);margin-top:40px}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.3fr;gap:40px;padding-bottom:48px}
+.foot-brand p{margin-top:14px;max-width:34ch;color:var(--ink-2)}
+.foot-brand .loc{color:var(--ink-3);font-size:13px}
+.foot-grid h4{font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:400;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:14px}
+.foot-grid div>a{display:block;color:var(--ink-2);margin-top:8px;transition:color .2s}
+.foot-grid div>a:hover{color:var(--accent)}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:24px;border-top:1px solid var(--line);padding-top:24px;flex-wrap:wrap;font-size:13px}
 
 /* Reveal */
 .rv{opacity:0;transform:translateY(22px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
 .rv.in{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.gloss::after{display:none}.link,.edge.hot{animation:none}html{scroll-behavior:auto}}
+@media (prefers-reduced-motion:reduce){h2 .w{opacity:1;transform:none;filter:none;transition:none}.conv .ln{stroke-dashoffset:0;transition:none}.grow i{width:var(--w);transition:none}.rv{opacity:1;transform:none;transition:none}.gloss::after{display:none}.link,.edge.hot{animation:none}html{scroll-behavior:auto}}
 
 /* Mobile */
 @media (max-width:960px){
@@ -228,8 +319,14 @@ footer{padding:56px 0 48px;color:var(--ink-3);font-size:14px}
   .person{grid-template-columns:1fr}
   .s2,.s4{grid-column:auto}
   .imp.big{grid-row:auto}
-  .pipeline{grid-template-columns:1fr;padding:18px}
-  .link{width:2px;height:32px;justify-self:center;background:rgb(95 212 196 / .4);animation:none}
+  .stages{grid-template-columns:1fr}
+  .rail{display:none}
+  .brain-grid{grid-template-columns:1fr}
+  .stagebox{height:420px}
+  .foot-grid,.facts-row{grid-template-columns:1fr}
+  .sugg,.srcs{grid-template-columns:1fr}
+  .app{height:600px}
+  .convo{padding:18px}
   .research{padding:28px}
   .funnel{padding:20px 24px}
   .fn{grid-template-columns:90px 1fr}.fn .n{font-size:42px}
@@ -252,8 +349,9 @@ footer{padding:56px 0 48px;color:var(--ink-3);font-size:14px}
         <a href="#story">Our story</a>
         <a href="#product">Product</a>
         <a href="#how">How it works</a>
+        <a href="#brain">The brain</a>
         <a href="#impact">Impact</a>
-        <a href="#research">Research</a>
+        <a href="#ask">Ask</a>
         <a href="#team">Team</a>
       </div>
       <a href="#partner" class="btn btn-primary">Become a design partner</a>
@@ -301,57 +399,39 @@ footer{padding:56px 0 48px;color:var(--ink-3);font-size:14px}
 
 <main class="wrap">
 
-  <!-- Founder story -->
-  <section id="story" class="story">
-    <div class="story-text rv">
-      <h2>Why we started Obtimize</h2>
-      <p>This summer we were building an optimization system for <b>iPSC to endothelial cell differentiation</b> at <b>NutriGene AI</b>, a biotech company in Hong Kong.</p>
-      <p>The lab sent us around 300 instrument files covering three different experiments, all mixed together. We pulled out 31 data points. <b>Not one was ready for optimization.</b></p>
-      <div class="pull">Before AI can help scientists design better experiments, it has to understand what the lab has already done.</div>
-    </div>
-    <div class="glass spot funnel rv">
-      <div class="fn"><div class="n">300</div><div class="l"><b>Instrument files</b>Flow exports, images, plate reads, protocols</div></div>
-      <div class="fn"><div class="n">3</div><div class="l"><b>Experiments, mixed together</b>No record of which file belonged where</div></div>
-      <div class="fn"><div class="n">31</div><div class="l"><b>Data points identified</b>Conditions and outcomes scattered across files</div></div>
-      <div class="fn zero"><div class="n">0</div><div class="l"><b>Ready for optimization</b>So we started building Obtimize</div></div>
-    </div>
-  </section>
-
-  <!-- Team -->
-  <section id="team" class="team">
-    <h2 class="rv">Founders</h2>
-    <div class="people">
-      <div class="glass spot person rv">
-        <div class="avatar">JY</div>
-        <div>
-          <h3>Joseph Yung</h3>
-          <div class="role">Co-founder, Columbia Engineering</div>
-          <p>Co-developed the optimization system for stem cell manufacturing at NutriGene AI in Hong Kong. Previously built a GPU computer vision pipeline at Columbia's Morphogenesis and Developmental Biomechanics Lab, shipped enterprise AI search at AIkonic, and worked in Strategy and Transactions at EY.</p>
-        </div>
+  <!-- Brand story -->
+  <section id="story" class="bstory">
+    <p class="mission rv">We're building the AI brain that lets every lab <em>learn from every experiment</em> it has ever run.</p>
+    <div class="story">
+      <div class="chapters">
+        <div class="ch rv"><div class="ch-k mono">The project</div><h3>Teaching AI to grow better cells</h3><p>This summer at NutriGene AI in Hong Kong, we built an AI system to find better recipes for turning stem cells into blood vessel cells, a key step toward new cell therapies.</p></div>
+        <div class="ch rv"><div class="ch-k mono">The wall</div><h3>300 files, nothing usable</h3><p>The lab's history arrived as about 300 files: flow cytometry exports, microscope photos, plate reads and protocols, with three experiments mixed together. We found 31 data points. Not one was ready for the AI.</p></div>
+        <div class="ch rv"><div class="ch-k mono">The insight</div><h3>The AI wasn't the hard part</h3><p>Understanding what the lab had already done was. Small biotech teams without a data team hit this wall every day, and general AI tools can't read their biology files.</p></div>
+        <div class="ch rv"><div class="ch-k mono">What we're building</div><h3>A memory every lab can use</h3><p>Obtimize turns a lab's own history into one trusted record, so scientists and their AI tools can finally learn from it.</p></div>
       </div>
-      <div class="glass spot person rv">
-        <div class="avatar">AK</div>
-        <div>
-          <h3>Alana Kwan</h3>
-          <div class="role">Co-founder, Columbia Chemical Engineering</div>
-          <p>Studies Chemical Engineering with a concentration in Data and Computational Science and a minor in AI. Leads product, turning what scientists actually need into what we build, with hands-on experience building AI products and prototypes.</p>
-        </div>
+      <div class="glass spot funnel rv">
+        <div class="f-h mono">From one lab's real data</div>
+        <div class="fn"><div class="n" data-count="300">0</div><div class="l"><b>Instrument files</b>Flow exports, photos, plate reads, protocols<i class="fbar" style="--w:100%"></i></div></div>
+        <div class="fn"><div class="n" data-count="3">0</div><div class="l"><b>Experiments, mixed together</b>No record of which file belonged where<i class="fbar" style="--w:62%"></i></div></div>
+        <div class="fn"><div class="n" data-count="31">0</div><div class="l"><b>Data points found</b>Conditions and outcomes scattered across files<i class="fbar" style="--w:30%"></i></div></div>
+        <div class="fn zero"><div class="n">0</div><div class="l"><b>Ready for AI</b>So we started building Obtimize<i class="fbar" style="--w:3%"></i></div></div>
       </div>
     </div>
+    <div class="pull rv">Before AI can help scientists design better experiments, it has to understand what the lab has already done.</div>
   </section>
 
   <!-- Product -->
   <section id="product">
     <div class="rv">
-      <h2>What Obtimize does</h2>
-      <p class="sub">A lab-wide second brain that understands experiments, not just documents. It keeps everything your lab knows in one connected memory and puts it to work.</p>
+      <h2>Built for biotech teams without a data team</h2>
+      <p class="sub">Small cell therapy startups and research labs run on shared drives, spreadsheets and memory, organized by hand. General AI tools can't read a flow cytometry file or tell a passage 12 run from a passage 18 one. Obtimize can.</p>
     </div>
     <div class="bento">
       <div class="cell glass spot gloss s4 tint-a rv">
         <i class="ph ph-plugs-connected"></i>
-        <h3>Connects to the tools you already use</h3>
-        <p>No migration and no re-entry. Obtimize reads from where your data already lives and keeps every original file untouched.</p>
-        <ul class="chips"><li>Lab notebooks</li><li>Spreadsheets</li><li>Flow cytometry</li><li>Microscopy</li><li>Protocols</li></ul>
+        <h3>Reads biology files natively</h3>
+        <p>The files generic AI can't understand are the ones Obtimize was built for. No migration, no re-typing, originals untouched.</p>
+        <ul class="chips"><li>FCS gating</li><li>Microscope TIFFs</li><li>Plate maps</li><li>Run sheets</li><li>Protocol PDFs</li><li>Non-English protocols</li></ul>
       </div>
       <div class="cell glass spot gloss s2 rv">
         <i class="ph ph-graph"></i>
@@ -380,81 +460,74 @@ footer{padding:56px 0 48px;color:var(--ink-3);font-size:14px}
   <section id="how">
     <div class="rv">
       <h2>How it works</h2>
-      <p class="sub">Lab files go in. Obtimize links them into one record of every experiment, then plans the next round within your well budget.</p>
+      <p class="sub">Obtimize runs every file a lab produces through four steps. Each step exists because skipping it is how labs end up repeating runs or optimizing on bad data.</p>
     </div>
 
-    <div class="glass spot pipeline rv">
-      <div>
-        <div class="stage-h"><b>1</b> Your lab's data</div>
-        <div class="src">
-          <div><i class="ph ph-book-open-text"></i>Lab notebooks</div>
-          <div><i class="ph ph-table"></i>Spreadsheets</div>
-          <div><i class="ph ph-chart-scatter"></i>Flow cytometry</div>
-          <div><i class="ph ph-microscope"></i>Microscope images</div>
-          <div><i class="ph ph-file-text"></i>Protocols</div>
+    <div class="rail-wrap rv">
+      <svg class="rail" viewBox="0 0 1000 24" preserveAspectRatio="none" aria-hidden="true">
+        <path id="railPath" d="M 20 12 L 980 12" stroke="rgb(95 212 196 / .25)" stroke-width="2" fill="none"/>
+        <circle r="4" fill="#5fd4c4"><animateMotion dur="4s" repeatCount="indefinite"><mpath href="#railPath"/></animateMotion></circle>
+        <circle r="3" fill="#7fa8d6"><animateMotion dur="4s" begin="1.3s" repeatCount="indefinite"><mpath href="#railPath"/></animateMotion></circle>
+        <circle r="3" fill="#e9eef2"><animateMotion dur="4s" begin="2.6s" repeatCount="indefinite"><mpath href="#railPath"/></animateMotion></circle>
+      </svg>
+      <div class="stages">
+        <div class="stage glass spot" data-i="0">
+          <div class="st-n mono">01</div>
+          <h3><i class="ph ph-tray-arrow-down"></i>Ingest</h3>
+          <p>Reads everything the lab already produces, read-only, with originals checksummed.</p>
+          <ul class="chips"><li>Run sheets</li><li>FCS files</li><li>Microscope photos</li><li>Plate reads</li><li>Protocol changes</li><li>Calculation sheets</li><li>Notebooks</li><li>Slack threads</li></ul>
         </div>
-      </div>
-
-      <div class="link"></div>
-
-      <div>
-        <div class="stage-h"><b>2</b> Second brain</div>
-        <div class="brain">
-          <svg viewBox="0 0 520 380" role="img" aria-label="Knowledge graph linking runs to conditions, protocol versions and results">
-            <g>
-              <line class="edge hot" x1="140" y1="150" x2="70" y2="60"/>
-              <line class="edge hot" x1="140" y1="150" x2="260" y2="50"/>
-              <line class="edge" x1="140" y1="150" x2="70" y2="260"/>
-              <line class="edge hot" x1="140" y1="150" x2="260" y2="190"/>
-              <line class="edge" x1="140" y1="150" x2="90" y2="345"/>
-              <line class="edge" x1="350" y1="140" x2="260" y2="50"/>
-              <line class="edge" x1="350" y1="140" x2="450" y2="60"/>
-              <line class="edge hot" x1="350" y1="140" x2="260" y2="190"/>
-              <line class="edge" x1="350" y1="140" x2="460" y2="200"/>
-              <line class="edge" x1="240" y1="290" x2="70" y2="260"/>
-              <line class="edge" x1="240" y1="290" x2="260" y2="190"/>
-              <line class="edge" x1="240" y1="290" x2="270" y2="355" style="stroke:#f3c98b;stroke-dasharray:3 4;stroke-opacity:.7"/>
-              <line class="edge" x1="430" y1="290" x2="450" y2="60"/>
-              <line class="edge" x1="430" y1="290" x2="260" y2="190"/>
-              <line class="edge" x1="430" y1="290" x2="460" y2="355"/>
-            </g>
-            <g fill="#7fa8d6">
-              <circle cx="70" cy="60" r="5"/><circle cx="260" cy="50" r="5"/><circle cx="450" cy="60" r="5"/><circle cx="70" cy="260" r="5"/><circle cx="260" cy="190" r="6"/><circle cx="460" cy="200" r="5"/>
-            </g>
-            <g fill="#e9eef2"><circle cx="90" cy="345" r="4"/><circle cx="460" cy="355" r="4"/></g>
-            <circle cx="270" cy="355" r="4" fill="#f3c98b"/>
-            <text x="82" y="64">CHIR 4 µM</text>
-            <text x="272" y="54">VEGF 50 ng/mL</text>
-            <text x="392" y="40">Coating lot B</text>
-            <text x="82" y="264">Passage 12</text>
-            <text x="274" y="194">Protocol v3</text>
-            <text x="404" y="222">Passage 18</text>
-            <text x="102" y="349">CD31+ high</text>
-            <text x="282" y="359" style="fill:#f3c98b">No outcome yet</text>
-            <text x="390" y="375">Low yield</text>
-            <g class="run" fill="#5fd4c4">
-              <circle cx="140" cy="150" r="9"/><circle cx="350" cy="140" r="9"/><circle cx="240" cy="290" r="9"/><circle cx="430" cy="290" r="9"/>
-              <circle cx="140" cy="150" r="16" fill="none" stroke="#5fd4c4" stroke-opacity=".4"/>
-              <text x="156" y="146">Run 07</text><text x="366" y="136">Run 09</text><text x="182" y="294">Run 14</text><text x="372" y="294">Run 05</text>
-            </g>
-          </svg>
+        <div class="stage glass spot" data-i="1">
+          <div class="st-n mono">02</div>
+          <h3><i class="ph ph-graph"></i>Understand</h3>
+          <p>Rebuilds each experiment as linked facts in the lab's knowledge graph.</p>
+          <ul class="chips"><li>Conditions</li><li>Cell line</li><li>Passage</li><li>Reagent lot</li><li>Protocol version</li><li>Operator</li><li>Outcome</li></ul>
         </div>
-      </div>
-
-      <div class="link"></div>
-
-      <div>
-        <div class="stage-h"><b>3</b> Next round</div>
-        <div class="recipe">
-          <div class="rx ok"><b>Robust region found</b>CHIR mid range, VEGF high range</div>
-          <div class="rx"><b>6 wells recommended</b>Chosen to learn the most per well
-            <div class="wells"><span>A1</span><span>A2</span><span>A3</span><span>B1</span><span>B2</span><span>B3</span></div>
-          </div>
-          <div class="rx warn"><b>Diagnostic</b>Run 14 has no outcome. Replicate the edge region before scaling.</div>
+        <div class="stage glass spot" data-i="2">
+          <div class="st-n mono">03</div>
+          <h3><i class="ph ph-stethoscope"></i>Diagnose</h3>
+          <p>Finds gaps and contradictions before anyone trusts the data.</p>
+          <ul class="chips warnchips"><li>Missing outcomes</li><li>Unlabeled images</li><li>Assay version mismatch</li><li>Batch effects</li><li>Calculation errors</li><li>Repeated runs</li></ul>
+        </div>
+        <div class="stage glass spot" data-i="3">
+          <div class="st-n mono">04</div>
+          <h3><i class="ph ph-target"></i>Recommend</h3>
+          <p>Turns verified records into the next round, or says what to fix first.</p>
+          <ul class="chips"><li>Next experiments</li><li>Robust operating range</li><li>Replicates needed</li><li>Cited answers</li></ul>
         </div>
       </div>
     </div>
-    <p class="pipe-note rv">Illustrative example. Values are not from a customer lab.</p>
+  </section>
+
+  <!-- Interactive brain -->
+  <section id="brain">
+    <div class="rv">
+      <h2>Inside the second brain</h2>
+      <p class="sub">An illustrative lab, as Obtimize sees it. Drag any node, filter by type, or click one to see where it came from.</p>
+    </div>
+    <div class="glass brainbox rv">
+      <div class="filters" id="filters"></div>
+      <div class="brain-grid">
+        <div class="stagebox"><canvas id="kg" aria-label="Interactive knowledge graph of an illustrative lab"></canvas></div>
+        <aside class="panel" id="panel">
+          <div class="p-type mono">Select a node</div>
+          <h3 class="p-name">Click anything in the graph</h3>
+          <p class="p-body">Runs link to their conditions, cells, protocol version, images and results. Orange nodes are problems Obtimize found on its own.</p>
+          <div class="p-links"></div>
+        </aside>
+      </div>
+    </div>
+    <p class="pipe-note rv">Illustrative data. Not from a customer lab.</p>
+  </section>
+
+  <!-- Why -->
+  <section id="why">
+    <h2 class="rv">Why it's built this way</h2>
+    <div class="trust">
+      <div class="tr rv"><i class="ph ph-files"></i><h3>Files, not forms</h3><p>Scientists won't re-type their work into new software. So Obtimize reads the run sheets, photos and exports they already save.</p></div>
+      <div class="tr rv"><i class="ph ph-graph"></i><h3>A graph, not a folder</h3><p>A result only means something next to its lot, passage and protocol version. So every fact is stored as a link, not a file.</p></div>
+      <div class="tr rv"><i class="ph ph-stethoscope"></i><h3>Diagnose before optimizing</h3><p>An optimizer fed bad data gives confident wrong answers. So Obtimize fixes gaps first, and holds back when the data can't support a decision.</p></div>
+    </div>
   </section>
 
   <!-- Impact -->
@@ -466,24 +539,31 @@ footer{padding:56px 0 48px;color:var(--ink-3);font-size:14px}
     <div class="impact">
       <div class="glass spot imp big rv">
         <div>
-          <div class="n">2<span>×</span></div>
+          <div class="n"><b data-count="2">0</b><span>×</span></div>
           <h3>Fewer experimental rounds</h3>
           <p>In benchmarks, our framework matched a standard optimizer's result in 5 rounds instead of 10. For a real differentiation program, that projects to roughly 4 months saved.</p>
         </div>
-        <div class="bars mono">
-          <div class="bar">Standard<i style="width:100%;background:rgb(127 168 214 / .55)"></i></div>
-          <div class="bar">Obtimize<i style="width:50%;background:var(--accent)"></i></div>
-        </div>
+        <svg class="conv" viewBox="0 0 320 170" role="img" aria-label="Best result by round: Obtimize plateaus at round 5, standard method at round 10">
+          <g class="gridl"><line x1="30" y1="20" x2="310" y2="20"/><line x1="30" y1="70" x2="310" y2="70"/><line x1="30" y1="120" x2="310" y2="120"/></g>
+          <line x1="30" y1="145" x2="310" y2="145" stroke="rgb(255 255 255 / .2)"/>
+          <path class="ln std" d="M30 140 L58 128 L86 112 L114 98 L142 84 L170 70 L198 58 L226 46 L254 36 L282 30 L310 28"/>
+          <path class="ln opt" d="M30 140 L58 104 L86 72 L114 50 L142 34 L170 29 L198 28 L226 28 L254 28 L282 28 L310 28"/>
+          <line class="mark5" x1="142" y1="20" x2="142" y2="145"/>
+          <text x="142" y="14" text-anchor="middle">round 5</text>
+          <text x="310" y="162" text-anchor="end">round 10</text><text x="30" y="162">1</text>
+          <g class="lg"><circle cx="190" cy="104" r="4" fill="#5fd4c4"/><text x="198" y="108">Obtimize</text><circle cx="190" cy="122" r="4" fill="#7fa8d6"/><text x="198" y="126">Standard</text></g>
+        </svg>
       </div>
       <div class="glass spot imp rv">
-        <div class="n">66<span>/66</span></div>
+        <div class="n"><b data-count="66">0</b><span>/66</span></div>
         <h3>Reliable operating regions</h3>
         <p>Every operating region it reported in benchmarks contained the true answer. When the data wasn't enough, it said so.</p>
       </div>
       <div class="glass spot imp rv">
-        <i class="ph ph-copy ic"></i>
-        <h3>No repeated runs</h3>
-        <p>Flags planned experiments that repeat ones you already ran, before you spend the wells.</p>
+        <div class="n"><b data-count="36">0</b><span>%</span></div>
+        <h3>Reliable regions found</h3>
+        <p>Up from 2% with a standard approach, an 18× gain across 92,400 benchmark evaluations.</p>
+        <div class="grow"><div><span>Standard</span><i style="--w:5.5%"></i><em>2%</em></div><div><span>Obtimize</span><i style="--w:100%"></i><em>36%</em></div></div>
       </div>
       <div class="glass spot imp rv" style="grid-column:span 2">
         <i class="ph ph-timer ic"></i>
@@ -491,53 +571,73 @@ footer{padding:56px 0 48px;color:var(--ink-3);font-size:14px}
         <p>The manual work that stalled our own project becomes a draft table that scientists confirm. Our target is under 10 minutes a week.</p>
       </div>
     </div>
-    <p class="foot-note rv">Benchmark results are from synthetic test problems in our manuscript. Wet-lab validation is in progress.</p>
+    <div class="facts-row rv">
+      <div class="fact"><i class="ph ph-article"></i><div><b>Peer-review track</b><span>Optimization framework benchmarked and written up for PLOS ONE.</span></div></div>
+      <div class="fact"><i class="ph ph-flask"></i><div><b>Real lab data</b><span>Built at NutriGene AI Biotech, Hong Kong, on stem cell manufacturing files.</span></div></div>
+      <div class="fact"><i class="ph ph-test-tube"></i><div><b>Honest about status</b><span>Benchmarks use synthetic test problems. Wet-lab validation is in progress.</span></div></div>
+    </div>
   </section>
 
-  <!-- Ask demo -->
-  <section class="ask">
+  <!-- Ask -->
+  <section id="ask">
     <div class="rv">
       <h2>Ask your lab's history</h2>
-      <ul>
-        <li><i class="ph ph-link"></i>Every answer links back to the run and file it came from.</li>
-        <li><i class="ph ph-bell-ringing"></i>It speaks up first when a result is missing or a planned experiment repeats an old one.</li>
-        <li><i class="ph ph-robot"></i>The same context can feed the AI assistants your lab already uses.</li>
-      </ul>
+      <p class="sub">Every answer is built from your own records and cites the exact files it used. Try it on the illustrative lab above.</p>
     </div>
-    <div class="glass spot chat rv" role="img" aria-label="Example conversation with Obtimize, illustrative data">
-      <div class="msg q">Why did run 09 underperform compared with run 07?</div>
-      <div class="msg a">Run 09 used <b>coating lot B</b> and was seeded at <b>passage 18</b>. Every other condition matched run 07.
-        <div class="cite"><span>run_07.fcs</span><span>run_09.fcs</span><span>protocol_v3.docx</span></div>
+    <div class="glass app rv">
+      <div class="app-bar mono"><span class="dots"><i></i><i></i><i></i></span>Obtimize · Differentiation program<span class="demo">Demo</span></div>
+      <div class="convo" id="convo">
+        <div class="empty" id="empty">
+          <div class="empty-mark"><span class="mark"></span></div>
+          <h3>What do you want to know about your experiments?</h3>
+          <div class="sugg" id="sugg"></div>
+        </div>
       </div>
-      <div class="flag"><i class="ph ph-warning"></i>Run 14 has no outcome recorded.</div>
-      <div class="flag"><i class="ph ph-copy"></i>Planned run 16 repeats the conditions of run 05.</div>
+      <form class="composer" id="composer" autocomplete="off">
+        <i class="ph ph-sparkle"></i>
+        <input id="q" placeholder="Ask about runs, conditions, images or results" aria-label="Ask Obtimize a question">
+        <button type="submit" aria-label="Send"><i class="ph ph-arrow-up"></i></button>
+      </form>
     </div>
+    <p class="pipe-note rv">Scripted demo on illustrative data. Answers show how Obtimize responds; they are not live model output.</p>
   </section>
 
   <!-- Trust -->
   <section id="trust">
-    <h2 class="rv">How we handle your data</h2>
-        <div class="trust">
-      <div class="tr rv"><i class="ph ph-lock-key"></i><h3>Read-only connections</h3><p>Obtimize never writes to your drives or instruments.</p></div>
-      <div class="tr rv"><i class="ph ph-fingerprint"></i><h3>Originals preserved</h3><p>Every source file is kept unchanged and checksummed, so every number traces back.</p></div>
-      <div class="tr rv"><i class="ph ph-seal-check"></i><h3>Draft vs. signed</h3><p>Software estimates stay drafts until a scientist verifies them.</p></div>
-      <div class="tr rv"><i class="ph ph-quotes"></i><h3>Every claim cited</h3><p>Answers link to the runs and files they came from. No invented data.</p></div>
-      <div class="tr rv"><i class="ph ph-hand-palm"></i><h3>Abstains when unsure</h3><p>If the data can't support a decision, it says so and asks for replicates.</p></div>
-      <div class="tr rv"><i class="ph ph-stack"></i><h3>Knows what can be compared</h3><p>Flags mismatched assay versions, batch effects and wells sharing one plate, instead of silently pooling them.</p></div>
+    <h2 class="rv">Your data stays yours</h2>
+    <p class="sub rv">Process data is a cell therapy company's most valuable IP. Obtimize is designed so it never leaves your control.</p>
+        <div class="trust trust-cards">
+      <button class="tr glass spot rv" aria-expanded="false"><i class="ph ph-cloud-check"></i><h3>Isolated environment per lab</h3><p>Each lab's data lives in its own private cloud environment, separate from every other customer.</p><div class="more"><p>Separate storage, compute and keys for each customer. No shared databases, so one lab's records can never surface in another lab's answers.</p></div><span class="plus"><i class="ph ph-plus"></i></span></button>
+      <button class="tr glass spot rv" aria-expanded="false"><i class="ph ph-shield-check"></i><h3>Encrypted end to end</h3><p>Data is encrypted in transit and at rest, with role-based access and a full audit log of who saw what.</p><div class="more"><p>TLS in transit, encryption at rest, single sign-on, and permissions down to the program level. Every query and export is written to an audit log your team can review.</p></div><span class="plus"><i class="ph ph-plus"></i></span></button>
+      <button class="tr glass spot rv" aria-expanded="false"><i class="ph ph-prohibit"></i><h3>Never used to train for others</h3><p>Your records are never shared or used to train models for other customers. You can export or delete them anytime.</p><div class="more"><p>Your data trains only your lab's models. Leaving is simple: export everything in open formats, and we delete the rest.</p></div><span class="plus"><i class="ph ph-plus"></i></span></button>
+      <button class="tr glass spot rv" aria-expanded="false"><i class="ph ph-lock-key"></i><h3>Read-only connections</h3><p>Obtimize never writes to your drives or instruments.</p><div class="more"><p>Connectors use read-only credentials scoped to the folders you choose. Instruments and drives are never modified.</p></div><span class="plus"><i class="ph ph-plus"></i></span></button>
+      <button class="tr glass spot rv" aria-expanded="false"><i class="ph ph-fingerprint"></i><h3>Originals preserved</h3><p>Every source file is kept unchanged and checksummed, so every number traces back.</p><div class="more"><p>Each file is fingerprinted when ingested. If a number is questioned, you can open the exact original file it came from.</p></div><span class="plus"><i class="ph ph-plus"></i></span></button>
+      <button class="tr glass spot rv" aria-expanded="false"><i class="ph ph-seal-check"></i><h3>Draft vs. signed</h3><p>Software estimates stay drafts until a scientist verifies them.</p><div class="more"><p>Anything the software extracts or calculates is marked as a draft. A named scientist signs it before it feeds the optimizer.</p></div><span class="plus"><i class="ph ph-plus"></i></span></button>
+      <button class="tr glass spot rv" aria-expanded="false"><i class="ph ph-quotes"></i><h3>Every claim cited</h3><p>Answers link to the runs and files they came from. No invented data.</p><div class="more"><p>Answers carry numbered citations to runs and files. If no source supports a claim, Obtimize doesn't make it.</p></div><span class="plus"><i class="ph ph-plus"></i></span></button>
+      <button class="tr glass spot rv" aria-expanded="false"><i class="ph ph-hand-palm"></i><h3>Abstains when unsure</h3><p>If the data can't support a decision, it says so and asks for replicates.</p><div class="more"><p>When noise is too high or runs aren't comparable, the recommendation is to fix the data first, for example "run 2 replicates".</p></div><span class="plus"><i class="ph ph-plus"></i></span></button>
+      <button class="tr glass spot rv" aria-expanded="false"><i class="ph ph-stack"></i><h3>Knows what can be compared</h3><p>Flags mismatched assay versions, batch effects and wells sharing one plate, instead of silently pooling them.</p><div class="more"><p>Wells on one plate share a cell prep and assay run, so they aren't counted as independent batches. Assay versions and lots are tracked per result.</p></div><span class="plus"><i class="ph ph-plus"></i></span></button>
     </div>
   </section>
 
-  <!-- Research -->
-  <section id="research">
-    <div class="glass spot research rv">
-      <div>
-        <h2>Research</h2>
-        <p class="sub">The recommendation engine comes from an optimization framework we developed and benchmarked this summer, built for limited budgets and noisy biology.</p>
+  <!-- Team -->
+  <section id="team" class="team">
+    <h2 class="rv">Founders</h2>
+    <div class="people">
+      <div class="glass spot person rv">
+        <div class="avatar">JY</div>
+        <div>
+          <h3>Joseph Yung</h3>
+          <div class="role">Co-founder, Columbia Engineering</div>
+          <p>Co-developed the optimization system for stem cell manufacturing at NutriGene AI in Hong Kong. Previously built a GPU computer vision pipeline at Columbia's Morphogenesis and Developmental Biomechanics Lab, shipped enterprise AI search at AIkonic, and worked in Strategy and Transactions at EY.</p>
+        </div>
       </div>
-      <div class="facts">
-        <div class="fact"><i class="ph ph-article"></i><div><b>Optimization framework</b><span>Developed, benchmarked and written up for PLOS ONE.</span></div></div>
-        <div class="fact"><i class="ph ph-flask"></i><div><b>Real lab data pipeline</b><span>Tested on files from a working cell therapy lab.</span></div></div>
-        <div class="fact"><i class="ph ph-dna"></i><div><b>Built with a working lab</b><span>Developed at NutriGene AI Biotech in Hong Kong on real stem cell manufacturing data.</span></div></div>
+      <div class="glass spot person rv">
+        <div class="avatar">AK</div>
+        <div>
+          <h3>Alana Kwan</h3>
+          <div class="role">Co-founder, Columbia Chemical Engineering</div>
+          <p>Studies Chemical Engineering with a concentration in Data and Computational Science and a minor in AI. Leads product, turning what scientists actually need into what we build, with hands-on experience building AI products and prototypes.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -553,10 +653,19 @@ footer{padding:56px 0 48px;color:var(--ink-3);font-size:14px}
 </main>
 
 <footer class="wrap">
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <a href="#" class="brand"><span class="mark"></span>Obtimize</a>
+      <p>The AI second brain for cell therapy R&amp;D. From experimental data to better biological decisions.</p>
+      <p class="loc">Founded at Columbia University, New York</p>
+    </div>
+    <div><h4>Product</h4><a href="#product">What it does</a><a href="#how">How it works</a><a href="#brain">The second brain</a><a href="#ask">Ask your lab</a></div>
+    <div><h4>Company</h4><a href="#story">Our story</a><a href="#team">Founders</a><a href="#impact">Impact</a><a href="#trust">Security</a></div>
+    <div><h4>Contact</h4><a href="mailto:kwungfund@gmail.com">kwungfund@gmail.com</a><a href="#partner">Become a design partner</a></div>
+  </div>
   <div class="foot">
-    <a href="#" class="brand"><span class="mark"></span>Obtimize</a>
-    <span>From experimental data to better biological decisions.</span>
-    <span>&copy; 2026 Obtimize</span>
+    <span>&copy; 2026 Obtimize. All rights reserved.</span>
+    <span>Illustrative product data on this site is not from a customer lab.</span>
   </div>
 </footer>
 
@@ -564,6 +673,26 @@ footer{padding:56px 0 48px;color:var(--ink-3);font-size:14px}
 // Reveal content in sequence as it enters view
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll('.rv').forEach((el,i)=>{el.style.transitionDelay=(i%4)*70+'ms';io.observe(el)});
+
+// Headlines reveal word by word
+const reduceM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+document.querySelectorAll('h2').forEach(h=>{
+  h.innerHTML=h.textContent.trim().split(/\s+/).map((w,i)=>`<span class="w" style="transition-delay:${i*60}ms">${w}</span>`).join(' ');
+  new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){h.classList.add('show');o.disconnect()}}),{threshold:.4}).observe(h);
+});
+// Numbers count up when their card enters view
+document.querySelectorAll('[data-count]').forEach(el=>{
+  const to=+el.dataset.count;
+  new IntersectionObserver((es,o)=>es.forEach(e=>{if(!e.isIntersecting)return;o.disconnect();
+    if(reduceM){el.textContent=to;return}
+    const t0=performance.now(),d=1400;(function f(t){const k=Math.min(1,(t-t0)/d),v=1-Math.pow(1-k,3);el.textContent=Math.round(to*v);if(k<1)requestAnimationFrame(f)})(t0)}),{threshold:.5}).observe(el);
+});
+// Expandable trust cards
+document.querySelectorAll('.trust-cards .tr').forEach(b=>b.addEventListener('click',()=>b.setAttribute('aria-expanded',b.getAttribute('aria-expanded')!=='true')));
+// Pipeline: highlight stages in sequence
+(()=>{const st=[...document.querySelectorAll('.stage')];if(!st.length)return;let i=0,paused=false;
+  st.forEach(s=>{s.addEventListener('mouseenter',()=>{paused=true;st.forEach(x=>x.classList.toggle('active',x===s))});s.addEventListener('mouseleave',()=>paused=false)});
+  const step=()=>{if(!paused){st.forEach((x,j)=>x.classList.toggle('active',j===i));i=(i+1)%st.length}};step();if(!reduceM)setInterval(step,2200)})();
 
 // Glass spotlight follows the pointer
 document.querySelectorAll('.spot').forEach(el=>el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect();el.style.setProperty('--mx',e.clientX-r.left+'px');el.style.setProperty('--my',e.clientY-r.top+'px')}));
@@ -603,6 +732,138 @@ document.querySelectorAll('.spot').forEach(el=>el.addEventListener('pointermove'
     if(!reduce)requestAnimationFrame(draw);
   }
   build();addEventListener('resize',()=>{build()});requestAnimationFrame(draw);
+})();
+// ---------- Shared illustrative lab ----------
+const LAB={
+ types:{run:['Run','#5fd4c4'],cond:['Condition','#7fa8d6'],cell:['Cells','#e9eef2'],proto:['Protocol','#9aa7b4'],image:['Image','#b9dd9a'],result:['Result','#a6e3d8'],issue:['Issue found','#f3c98b']},
+ nodes:[
+  ['R05','run','Run 05','CHIR 3 µM, VEGF 25 ng/mL on coating lot A. Purity measured with assay v1.',['run_sheet_05.xlsx']],
+  ['R07','run','Run 07','Best result so far. CHIR 4 µM, VEGF 100 ng/mL, lot A, passage 12.',['run_sheet_07.xlsx','CD31_d10_R07.fcs']],
+  ['R09','run','Run 09','Same doses as Run 07, but coating lot B and passage 18.',['run_sheet_09.xlsx','CD31_d10_R09.fcs']],
+  ['R12','run','Run 12','CHIR 3 µM, VEGF 100 ng/mL. High purity.',['run_sheet_12.xlsx','dilution_R12.xlsx']],
+  ['R14','run','Run 14','CHIR 4 µM, VEGF 50 ng/mL. No outcome was ever recorded.',['run_sheet_14.xlsx']],
+  ['R16','run','Run 16 (planned)','Planned for next week. Same conditions as Run 05.',['plan_nov.xlsx']],
+  ['C3','cond','CHIR 3 µM','Wnt activation dose.',[]],['C4','cond','CHIR 4 µM','Wnt activation dose.',[]],
+  ['V25','cond','VEGF 25 ng/mL','',[]],['V50','cond','VEGF 50 ng/mL','',[]],['V100','cond','VEGF 100 ng/mL','',[]],
+  ['LA','cond','Coating lot A','',['coating_log.xlsx']],['LB','cond','Coating lot B','Received in October.',['coating_log.xlsx']],
+  ['iA','cell','iPSC line A','The line used across this program.',['cell_log_oct.xlsx']],
+  ['P12','cell','Passage 12','',['cell_log_oct.xlsx']],['P18','cell','Passage 18','',['cell_log_oct.xlsx']],
+  ['pv2','proto','Protocol v2','Earlier feeding schedule.',['protocol_v2.docx']],['pv3','proto','Protocol v3','Current protocol. Changed day 4 feeding.',['protocol_v3.docx']],
+  ['I07','image','Day 6 images, Run 07','',['d6_R07_01.tif']],['I09','image','Day 6 images, Run 09','Lower confluence visible.',['d6_R09_01.tif']],
+  ['Rh','result','CD31+ high','',['CD31_d10_R07.fcs']],['Rl','result','CD31+ low','',['CD31_d10_R09.fcs']],
+  ['X14','issue','Missing outcome','Run 14 has no recorded result. Ask the operator to fill it in.',['run_sheet_14.xlsx']],
+  ['Xas','issue','Assay version mismatch','Run 05 used purity assay v1. Later runs used v2. Not directly comparable.',['assay_SOP_v2.pdf']],
+  ['Xrp','issue','Repeated run','Planned Run 16 repeats Run 05 conditions.',['plan_nov.xlsx']],
+  ['Xcl','issue','Calculation mismatch','Run 12 dilution sheet implies 80 ng/mL, not the 100 ng/mL recorded.',['dilution_R12.xlsx']],
+  ['Xph','issue','12 unlabeled photos','Images with no condition or run label.',['/microscopy/oct/']]
+ ],
+ edges:'R05-C3 R05-V25 R05-LA R05-P12 R05-pv2 R05-Rl R05-Xas R07-C4 R07-V100 R07-LA R07-P12 R07-pv3 R07-I07 R07-Rh R09-C4 R09-V100 R09-LB R09-P18 R09-pv3 R09-I09 R09-Rl R12-C3 R12-V100 R12-LA R12-P12 R12-pv3 R12-Rh R12-Xcl R14-C4 R14-V50 R14-LA R14-P12 R14-pv3 R14-X14 R14-Xph R16-C3 R16-V25 R16-LA R16-pv2 R16-Xrp R05-iA R07-iA R09-iA R12-iA R14-iA R16-iA'.split(' ').map(e=>e.split('-'))
+};
+
+// ---------- Interactive knowledge graph ----------
+(()=>{
+  const c=document.getElementById('kg');if(!c)return;const x=c.getContext('2d');
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const N=LAB.nodes.map(([id,t,label,detail,src])=>({id,t,label,detail,src,x:0,y:0,vx:0,vy:0,r:t==='run'?10:t==='issue'?8:6}));
+  const byId=Object.fromEntries(N.map(n=>[n.id,n]));
+  const E=LAB.edges.map(([a,b])=>[byId[a],byId[b]]);
+  N.forEach(n=>n.nb=new Set());E.forEach(([a,b])=>{a.nb.add(b);b.nb.add(a)});
+  const on=Object.fromEntries(Object.keys(LAB.types).map(k=>[k,true]));
+  let W,H,hover=null,sel=null,drag=null,moved=false,alpha=1;
+  const vis=n=>on[n.t];
+  function size(){const d=devicePixelRatio||1;W=c.clientWidth;H=c.clientHeight;c.width=W*d;c.height=H*d;x.setTransform(d,0,0,d,0,0)}
+  size();N.forEach((n,i)=>{const a=i/N.length*6.28;n.x=W/2+Math.cos(a)*W*.3;n.y=H/2+Math.sin(a)*H*.3});
+  // filters
+  const f=document.getElementById('filters');
+  Object.entries(LAB.types).forEach(([k,[name,col]])=>{const b=document.createElement('button');b.innerHTML=`<i style="background:${col}"></i>${name}`;b.onclick=()=>{on[k]=!on[k];b.classList.toggle('off',!on[k]);alpha=1};f.appendChild(b)});
+  const panel=document.getElementById('panel');
+  function show(n){
+    panel.querySelector('.p-type').textContent=LAB.types[n.t][0];
+    panel.querySelector('.p-name').textContent=n.label;
+    panel.querySelector('.p-body').textContent=n.detail||`Linked to ${n.nb.size} other facts in the lab's memory.`;
+    panel.querySelector('.p-links').innerHTML=[...n.src.map(s=>`<span style="color:var(--accent)">${s}</span>`),...[...n.nb].map(m=>`<span>${m.label}</span>`)].join('');
+  }
+  function tick(){
+    const k=alpha;
+    for(let i=0;i<N.length;i++){const a=N[i];if(!vis(a))continue;
+      for(let j=i+1;j<N.length;j++){const b=N[j];if(!vis(b))continue;let dx=b.x-a.x,dy=b.y-a.y,d2=dx*dx+dy*dy+.01,d=Math.sqrt(d2),F=2400/d2*k;dx/=d;dy/=d;a.vx-=dx*F;a.vy-=dy*F;b.vx+=dx*F;b.vy+=dy*F}}
+    E.forEach(([a,b])=>{if(!vis(a)||!vis(b))return;let dx=b.x-a.x,dy=b.y-a.y,d=Math.hypot(dx,dy)||1,L=a.t==='cell'&&a.id==='iA'||b.id==='iA'?120:70,F=(d-L)*.02*k;dx/=d;dy/=d;a.vx+=dx*F;a.vy+=dy*F;b.vx-=dx*F;b.vy-=dy*F});
+    N.forEach(n=>{if(!vis(n))return;n.vx+=(W/2-n.x)*.002*k;n.vy+=(H/2-n.y)*.002*k;if(n===drag){n.vx=n.vy=0;return}n.vx*=.82;n.vy*=.82;n.x+=n.vx;n.y+=n.vy;n.x=Math.max(20,Math.min(W-20,n.x));n.y=Math.max(20,Math.min(H-20,n.y))});
+    alpha=Math.max(alpha*.995,reduce?0:.06);
+  }
+  function draw(){
+    x.clearRect(0,0,W,H);const focus=hover||sel;
+    E.forEach(([a,b])=>{if(!vis(a)||!vis(b))return;const hot=focus&&(a===focus||b===focus);x.strokeStyle=hot?'rgba(95,212,196,.75)':focus?'rgba(255,255,255,.05)':(a.t==='issue'||b.t==='issue')?'rgba(243,201,139,.3)':'rgba(255,255,255,.13)';x.lineWidth=hot?1.6:1;x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke()});
+    N.forEach(n=>{if(!vis(n))return;const dim=focus&&n!==focus&&!focus.nb.has(n);x.globalAlpha=dim?.25:1;const col=LAB.types[n.t][1];
+      if(n.t==='issue'){x.beginPath();x.arc(n.x,n.y,n.r+5+Math.sin(performance.now()/300)*2,0,6.28);x.strokeStyle='rgba(243,201,139,.35)';x.stroke()}
+      x.beginPath();x.arc(n.x,n.y,n.r,0,6.28);x.fillStyle=col;x.fill();
+      if(n===sel){x.beginPath();x.arc(n.x,n.y,n.r+6,0,6.28);x.strokeStyle=col;x.lineWidth=1.5;x.stroke();x.lineWidth=1}
+      const showL=n.t==='run'||n.t==='issue'||n===focus||(focus&&focus.nb.has(n));
+      if(showL){x.font=`${n.t==='run'?'500 12px':'11px'} "JetBrains Mono",monospace`;x.fillStyle=n.t==='issue'?'#f3c98b':n.t==='run'?'#eef2f5':'#a9b4bf';x.fillText(n.label,n.x+n.r+6,n.y+4)}
+      x.globalAlpha=1});
+  }
+  function loop(){tick();draw();requestAnimationFrame(loop)}
+  const pick=e=>{const r=c.getBoundingClientRect(),px=e.clientX-r.left,py=e.clientY-r.top;let best=null,bd=18;N.forEach(n=>{if(!vis(n))return;const d=Math.hypot(n.x-px,n.y-py)-n.r;if(d<bd){bd=d;best=n}});return[best,px,py]};
+  c.addEventListener('pointerdown',e=>{const[n]=pick(e);if(n){drag=n;moved=false;c.setPointerCapture(e.pointerId);c.classList.add('dragging');alpha=Math.max(alpha,.5)}});
+  c.addEventListener('pointermove',e=>{const[n,px,py]=pick(e);if(drag){drag.x=px;drag.y=py;moved=true;alpha=Math.max(alpha,.3)}else{hover=n;c.style.cursor=n?'pointer':'grab'}});
+  c.addEventListener('pointerup',()=>{if(drag&&!moved){sel=drag;show(drag)}drag=null;c.classList.remove('dragging')});
+  c.addEventListener('pointerleave',()=>{hover=null});
+  addEventListener('resize',()=>{size();alpha=1});
+  for(let i=0;i<200;i++)tick();alpha=.4;
+  sel=byId.R09;show(sel);loop();
+})();
+
+// ---------- Ask demo (scripted, cited answers) ----------
+(()=>{
+  const convo=document.getElementById('convo');if(!convo)return;
+  const QA=[
+   {q:'Have we tried VEGF above 50 ng/mL?',k:/vegf|50|dose/i,
+    steps:['Searching 4 run sheets and 9 flow files','Matching runs with VEGF above 50 ng/mL','Checking which runs are comparable'],
+    src:[['Run sheet','run_sheet_07.xlsx'],['Run sheet','run_sheet_09.xlsx'],['Run sheet','run_sheet_12.xlsx'],['Dilution calc','dilution_R12.xlsx']],
+    a:'Yes. Three runs used VEGF at 100 ng/mL: Run 07 [1], Run 09 [2] and Run 12 [3]. Runs 07 and 12 gave high CD31+ purity. Run 09 underperformed, but it also changed coating lot and passage, so VEGF alone does not explain it. One caution: Run 12\'s dilution sheet implies the real dose was closer to 80 ng/mL [4].',
+    f:[1,3]},
+   {q:'Why did Run 09 underperform Run 07?',k:/09|underperform|worse|fail/i,
+    steps:['Comparing every recorded condition for Runs 07 and 09','Reading cell and coating logs','Checking day 6 microscope images'],
+    src:[['Run sheet','run_sheet_09.xlsx'],['Cell log','cell_log_oct.xlsx'],['Protocol','protocol_v3.docx'],['Image','d6_R09_01.tif']],
+    a:'Two things changed between the runs. Run 09 used coating lot B instead of lot A [1], and its cells were seeded at passage 18 instead of 12 [2]. Doses and protocol were identical [3]. Day 6 images already show lower confluence [4]. With only one run on lot B, the two causes can\'t be separated yet. A single control run would settle it: Run 07 conditions on lot B at passage 12.',
+    f:[2,3]},
+   {q:'What should we run next?',k:/next|recommend|plan|should/i,
+    steps:['Loading verified runs only','Fitting the response across CHIR and VEGF','Choosing 6 wells within budget'],
+    src:[['Issue','run_sheet_14.xlsx'],['Run sheet','run_sheet_07.xlsx'],['Run sheet','run_sheet_12.xlsx'],['Plan','plan_nov.xlsx']],
+    a:'First, close one gap: Run 14 has no recorded outcome [1]. Then run 6 wells with CHIR between 3 and 4 µM and VEGF at 100 ng/mL on coating lot A [2][3]. That is where results are consistently high, and these wells test the edges of the range instead of repeating the best run. Drop planned Run 16. It repeats Run 05 [4].',
+    f:[0,3]},
+   {q:'What data is missing or inconsistent?',k:/missing|gap|inconsist|wrong|error/i,
+    steps:['Scanning all records for gaps','Checking assay versions and units','Cross-checking calculations against run sheets'],
+    src:[['Run sheet','run_sheet_14.xlsx'],['Folder','/microscopy/oct/'],['SOP','assay_SOP_v2.pdf'],['Dilution calc','dilution_R12.xlsx']],
+    a:'Four issues need a scientist\'s eyes. Run 14 has no outcome [1]. 12 microscope photos have no run or condition label [2]. Run 05 used purity assay v1 while later runs used v2, so they should not be compared directly [3]. Run 12\'s dilution sheet does not match its recorded VEGF dose [4].',
+    f:[0,2]}
+  ];
+  const sugg=document.getElementById('sugg'),empty=document.getElementById('empty'),form=document.getElementById('composer'),inp=document.getElementById('q');
+  const icons=['ph-magnifying-glass','ph-question','ph-target','ph-warning'];
+  QA.forEach((d,i)=>{const b=document.createElement('button');b.innerHTML=`<i class="ph ${icons[i]}"></i>${d.q}`;b.onclick=()=>ask(i);sugg.appendChild(b)});
+  let busy=false;const wait=ms=>new Promise(r=>setTimeout(r,ms));
+  const end=()=>{convo.scrollTop=convo.scrollHeight};
+  form.addEventListener('submit',e=>{e.preventDefault();const t=inp.value.trim();if(!t)return;inp.value='';const i=QA.findIndex(d=>d.k.test(t));ask(i,t)});
+  async function ask(i,text){
+    if(busy)return;busy=true;empty&&empty.remove();
+    const d=QA[i];const u=document.createElement('div');u.className='uq';u.textContent=text||d.q;convo.appendChild(u);end();
+    const t=document.createElement('div');t.className='turn';convo.appendChild(t);
+    if(!d){await wait(500);t.innerHTML='<div class="ans">This demo answers four example questions about the illustrative lab. Try one of these:</div>';t.appendChild(follow([0,1,2,3]));end();busy=false;return}
+    const st=document.createElement('div');st.className='steps';t.appendChild(st);
+    for(const s of d.steps){const el=document.createElement('div');el.className='step';el.innerHTML=`<span class="ic"></span>${s}`;st.appendChild(el);end();await wait(650);el.classList.add('done')}
+    t.insertAdjacentHTML('beforeend','<div class="lbl"><i class="ph ph-books"></i>Sources</div>');
+    const sr=document.createElement('div');sr.className='srcs';
+    d.src.forEach(([ty,fn],j)=>{sr.insertAdjacentHTML('beforeend',`<div class="src-c" style="animation-delay:${j*80}ms"><span class="num">${j+1}</span>${ty}<b>${fn}</b></div>`)});
+    t.appendChild(sr);end();await wait(450);
+    t.insertAdjacentHTML('beforeend','<div class="lbl"><i class="ph ph-sparkle"></i>Answer</div>');
+    const a=document.createElement('div');a.className='ans';t.appendChild(a);
+    const words=d.a.split(' ');let html='';
+    for(const w of words){html+=w.replace(/\[(\d)\]/g,'<sup data-n="$1">$1</sup>')+' ';a.innerHTML=html+'<span class="caret"></span>';end();await wait(28)}
+    a.innerHTML=html;
+    a.querySelectorAll('sup').forEach(s=>{const card=sr.children[s.dataset.n-1];s.onmouseenter=()=>card.classList.add('hl');s.onmouseleave=()=>card.classList.remove('hl')});
+    t.appendChild(follow(d.f));end();busy=false;
+  }
+  function follow(ids){const f=document.createElement('div');f.className='follow';ids.forEach(j=>{const b=document.createElement('button');b.innerHTML=`<i class="ph ph-arrow-bend-down-right"></i>${QA[j].q}`;b.onclick=()=>ask(j);f.appendChild(b)});return f}
 })();
 </script>
 </body>
