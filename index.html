@@ -980,6 +980,104 @@ h2,.typed-h,.s-h{font-weight:600}
 .agent::before{content:"";position:absolute;left:50%;top:-31px;width:3px;height:30px;margin-left:-1.5px;background:repeating-linear-gradient(var(--accent) 0 6px,transparent 6px 10px);background-size:3px 10px;animation:dashdown .6s linear infinite}
 .agent::after{content:"";position:absolute;left:50%;top:-6px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 5px rgb(31 63 216 / .15)}
 @keyframes dashdown{to{background-position:0 10px}}
+
+/* hero card: opaque so background lines never show through */
+.hero .map-card{background:#fff;box-shadow:0 0 0 12px rgb(255 255 255 / .55)}
+/* step control: clearly a control, not body text */
+.prog{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:14px;padding:0 0 0;border:0;background:none;position:relative}
+.prog::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:#e3e6ec;border-radius:2px}
+.prog .pf{position:absolute;left:0;bottom:0;top:auto;height:2px;border-radius:2px;background:var(--accent);z-index:1}
+.prog span,.prog span.done,.prog span.on{display:flex;align-items:center;justify-content:center;gap:7px;height:40px;padding:0;margin:0;border:0 !important;font:500 13px/1 var(--sans);letter-spacing:0;text-transform:none;color:#0E1116;opacity:.42;transition:opacity .3s,color .3s}
+.prog span em{font:500 10.5px/1 var(--mono);font-style:normal;padding:3px 5px;border-radius:4px;border:1px solid currentColor}
+.prog span.done{opacity:1}
+.prog span.on{opacity:1;color:var(--accent);font-weight:600}
+.prog span.on em{background:var(--accent);border-color:var(--accent);color:#fff}
+/* quieter supporting text inside the card */
+.status{font:400 14px var(--sans);letter-spacing:0;margin-top:10px}
+.map-top .legend{font:400 12.5px var(--sans);letter-spacing:0}
+.ax-x,.ax-y{font:400 12px var(--sans) !important;letter-spacing:0 !important;text-transform:none !important}
+.map-side .map-out-h{font:600 11px var(--mono);letter-spacing:.06em;opacity:.6}
+/* colour key under the results, clear of the chart */
+.key-cb{margin-top:18px}
+.key-cb .cbar{position:static;display:flex;align-items:center;gap:8px;padding:0;border:0;background:none;font:400 12px var(--sans);letter-spacing:0}
+.key-cb .cbar i{width:56px;height:6px;border-radius:3px;border:0}
+.key-cb .cbar em{font-style:normal;margin-left:4px}
+
+/* one line weight: 2px for every connector, rail and branch */
+.br-lines path{stroke-width:2}
+.br-col{border-top-width:2px}
+.s-vis .fcols::before{height:2px;top:-1px}
+.mat-links path{stroke-width:2}
+/* brain left, agent right */
+.brain-grid{grid-template-columns:1.35fr 1fr;gap:16px;align-items:stretch}
+.stagebox{height:560px}
+.agent{margin-top:0;display:flex;flex-direction:column}
+.agent::before{left:-17px;top:50%;width:16px;height:2px;margin:0;background:repeating-linear-gradient(90deg,var(--accent) 0 6px,transparent 6px 10px);background-size:10px 2px;animation:dashright .6s linear infinite}
+.agent::after{left:-6px;top:50%;margin:-5px 0 0}
+@keyframes dashright{to{background-position:10px 0}}
+.ag-iss .diag{grid-template-columns:1fr 1fr}
+.ag-steps{grid-template-columns:1fr}
+.ag-log{font-size:12px}
+.panel{left:12px;right:auto;top:12px}
+@media (max-width:960px){.brain-grid{grid-template-columns:1fr}.agent::before,.agent::after{display:none}.stagebox{height:380px}}
+
+/* graph stretches to match the agent column */
+.brain-grid .stagebox{height:auto;min-height:600px}
+/* agent: compact single-column issue list */
+.ag-iss .diag{grid-template-columns:1fr;gap:6px}
+.ag-iss .dg{padding:9px 12px;display:flex !important;justify-content:space-between;align-items:baseline;gap:10px}
+.ag-iss .dg span{white-space:nowrap}
+.ag-step{padding:10px 12px}.ag-step span{font-size:12.5px;line-height:1.45}
+/* Optimize uses a different block: three solid blue-tint tiles, no rail */
+#impact .s-vis .fcols{border:0;background:none;gap:12px;padding:0 26px 26px}
+#impact .s-vis .fcols::before,#impact .s-vis .fcols>div::before,#impact .s-vis .fcols>div::after{display:none}
+#impact .s-vis .fcols>div{border:0 !important;border-radius:10px;background:#eef1fd;padding:18px 18px 16px;counter-increment:optb;position:relative}
+#impact .s-vis .fcols{counter-reset:optb}
+#impact .s-vis .fcols>div b::before{content:"0" counter(optb);display:block;font:600 11px var(--mono);color:var(--accent);margin-bottom:8px;letter-spacing:.04em}
+
+/* benchmarks band above the final stage */
+.bench-band{order:4;width:100%;max-width:1000px;margin-top:24px;background:#fff;border:1px solid var(--line);border-radius:12px;text-align:left}
+.bench-band .opt-bench{display:grid;grid-template-columns:1.1fr 1fr;grid-template-rows:auto 1fr auto;column-gap:32px;padding:22px 26px;border:0}
+.bench-band .opt-h{grid-column:1/-1}
+.bench-band .conv{grid-column:1;grid-row:2;margin-top:10px}
+.bench-band .stats{grid-column:2;grid-row:2;grid-template-columns:1fr;border-top:0;align-content:center}
+.bench-band .stats>div{display:grid;grid-template-columns:120px 1fr;align-items:center;padding:12px 0;border-left:0 !important;border-top:1px solid var(--line)}
+.bench-band .stats>div:first-child{border-top:0}
+.bench-band .stats b{font-size:30px}
+.bench-band .stats small{font:400 13.5px var(--sans);letter-spacing:0}
+.bench-band .opt-note{grid-column:1/-1;margin-top:10px;font-size:12.5px}
+/* final stage: Optimize | Ask, grey divider */
+#impact .s-vis.opt{order:5;margin-top:16px;grid-template-columns:1fr 1fr}
+.opt-plan{border-right:1px solid #d9dce3}
+.opt-ask{padding:26px;display:flex;flex-direction:column;min-width:0}
+.opt-ask .app{margin:14px 0 0;border:1px solid var(--line);box-shadow:none;height:560px;border-radius:10px;background:#fff}
+.opt-ask .sugg{grid-template-columns:1fr}
+#impact .s-vis .fcols{grid-column:1/-1;border-top:1px solid var(--line);padding-top:22px}
+@media (max-width:960px){.bench-band .opt-bench{grid-template-columns:1fr}.bench-band .conv,.bench-band .stats{grid-column:1;grid-row:auto}#impact .s-vis.opt{grid-template-columns:1fr}.opt-plan{border-right:0;border-bottom:1px solid #d9dce3}}
+
+/* step colours: ingest teal, brain blue, diagnose amber, optimize indigo */
+#s1{--c:#0f8f7f;--ct:#e6f5f2}#brain{--c:#1F3FD8;--ct:#eef1fd}#impact{--c:#5b3fd8;--ct:#f0ecfd}
+.slide .s-num{color:var(--c);border-color:color-mix(in srgb,var(--c) 35%,#fff)}
+.slide .fcols small,.slide .fcols>div::before{color:var(--c)}
+.slide .s-vis .fcols::before{background:var(--c)}
+.slide .s-vis .fcols>div::before{border-color:var(--c)}
+.slide .s-vis .fcols>div+div::after{box-shadow:inset 0 0 0 3px #fff,inset 0 0 0 6px var(--c)}
+#impact .s-vis .fcols>div{background:var(--ct)}#impact .s-vis .fcols>div b::before{color:var(--c)}
+.ag-step{background:#fff8ec;border-color:#f3dfb8}.ag-step .ph{color:#b5720f}
+.agent .ag-dot,.ag-line.ok i{background:#b5720f;border-color:#b5720f}
+.br-col:nth-child(1){--c:#1F3FD8}.br-col:nth-child(2){--c:#b5720f}.br-col:nth-child(3){--c:#5b3fd8}.br-col:nth-child(4){--c:#0f8f7f}
+.br-col .ph,.br-col span{color:var(--c)}
+/* rail heading */
+.rail-h{margin:22px 0 10px;font:600 11.5px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--c,#0E1116)}
+.s-vis .fcols{margin-top:0}
+#impact .rail-h{padding:0 26px;grid-column:1/-1}
+/* branch columns: no border to cut into, a node dot instead */
+.br-col{border-top:0;padding-top:26px;position:relative}
+.br-col::before{content:"";position:absolute;left:16px;top:-6px;width:12px;height:12px;border-radius:50%;background:#fff;border:2px solid var(--c)}
+
+.ag-next{opacity:0;transition:opacity .4s}
+.ag-next:has(.ag-step){opacity:1}
+.ag-iss .diag:not(:has(.show)){display:none}
 </style>
 </head>
 <body>
@@ -1022,12 +1120,11 @@ h2,.typed-h,.s-h{font-weight:600}
       </div>
       <p class="map-cap">Stem cell differentiation, CHIR × VEGF (illustrative). Dots are past runs, shading is predicted CD31+ purity, rings are the wells it recommends.</p>
       <div class="status mono" id="mapStatus"><span class="sdot"></span><span id="mapStatusT">Loading past runs</span></div>
-      <div class="prog" id="mapProg"><div class="pf" id="mapPF"></div><span>Load runs</span><span>Fit model</span><span>Find region</span><span>Place wells</span><span>Flag</span></div>
+      <div class="prog" id="mapProg"><div class="pf" id="mapPF"></div><span><em>01</em>Load runs</span><span><em>02</em>Fit model</span><span><em>03</em>Find region</span><span><em>04</em>Place wells</span><span><em>05</em>Flag</span></div>
       <div class="map-body">
         <div class="plot">
         <canvas id="map"></canvas>
         <div class="tip mono" id="mapTip"></div>
-        <div class="cbar mono"><span>Low</span><i></i><span>High</span><em>CD31+ purity</em></div>
         <div class="ax-x">CHIR99021 dose</div>
         <div class="ax-y">VEGF dose</div>
       </div>
@@ -1038,6 +1135,7 @@ h2,.typed-h,.s-h{font-weight:600}
             <div data-ph="2"><b>Run next: 6 wells</b>The most informative experiments</div>
             <div class="warn" data-ph="3"><b>Repeat first: 2 wells</b>Too noisy to trust yet</div>
           </div>
+          <div class="key-cb"><div class="cbar"><span>Low</span><i></i><span>High</span><em>CD31+ purity</em></div></div>
         </aside>
       </div>
     </div>
@@ -1171,8 +1269,8 @@ h2,.typed-h,.s-h{font-weight:600}
     <section class="slide" data-n="03" id="impact">
       <div class="s-text">
         <div class="s-num">03 · Optimize</div>
-        <h3 class="s-h">An optimization engine built for noisy biology</h3>
-        <p class="s-line">Verified records become the next round of experiments and a range you can trust. When the data can't support a decision, it says so.</p>
+        <h3 class="s-h">An optimization engine built for stem cell manufacturing</h3>
+        <p class="s-line">Built for the realities of differentiation: few wells per round, noisy readouts and line-to-line variation. It plans your next plate, finds a range that holds, and lets you question every run.</p>
         <div class="fcols">
           <div><b>The most informative wells</b><p>Chosen to teach you the most per round within a fixed well budget, not repeats of the best run.</p><small>Fits your plate and budget</small></div>
           <div><b>A range, not a point</b><p>Conditions that hold across run-to-run noise, which is what matters at scale-up.</p><small>Robust operating region</small></div>
@@ -1193,7 +1291,7 @@ h2,.typed-h,.s-h{font-weight:600}
           </div>
         </div>
         <div class="opt-bench">
-          <div class="opt-h">Benchmarks<span>synthetic test problems</span></div>
+          <div class="opt-h">How it performs<span>simulated differentiation, same well budget</span></div>
           <svg class="conv" viewBox="0 0 320 170" role="img" aria-label="Best result by round: Obtimize plateaus at round 5, standard method at round 10">
             <g class="gridl"><line x1="30" y1="20" x2="310" y2="20"/><line x1="30" y1="70" x2="310" y2="70"/><line x1="30" y1="120" x2="310" y2="120"/></g>
             <line x1="30" y1="145" x2="310" y2="145" stroke="#d9d7d0"/>
@@ -1208,7 +1306,7 @@ h2,.typed-h,.s-h{font-weight:600}
             <div><b><span data-count="66" data-dur="1800">0</span>/66</b><small>reported regions held true</small></div>
             <div><b>2→<span data-count="36" data-dur="1800">0</span>%</b><small>reliable regions found</small></div>
           </div>
-          <p class="opt-note">From our PLOS ONE manuscript. Wet-lab validation is in progress.</p>
+          <p class="opt-note">Benchmarks on simulated stem cell differentiation problems, compared with a standard optimizer at the same well budget. From our PLOS ONE manuscript; wet-lab validation is in progress.</p>
         </div>
       </div>
     </section>
@@ -1509,8 +1607,19 @@ document.querySelectorAll('.spot').forEach(el=>el.addEventListener('pointermove'
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');vis.add(e.target)}else vis.delete(e.target)}),{threshold:.15});
   slides.forEach(s=>io.observe(s));if(branch)io.observe(branch);
   const isOn=el=>vis.has(el)&&!reduceM;
+
+  // final stage: benchmarks band on top, then Optimize | Ask side by side
+  (()=>{const imp=document.getElementById('impact'),optv=imp&&imp.querySelector('.s-vis.opt'),bench=optv&&optv.querySelector('.opt-bench'),askSec=document.getElementById('ask'),app=askSec&&askSec.querySelector('.app');if(!optv||!bench||!app)return;
+    const band=document.createElement('div');band.className='bench-band';band.appendChild(bench);optv.parentNode.insertBefore(band,optv);
+    const right=document.createElement('div');right.className='opt-ask';right.innerHTML='<div class="opt-h">Ask your lab<span>cited answers</span></div>';right.appendChild(app);
+    optv.insertBefore(right,optv.querySelector('.fcols'));askSec.removeAttribute('id');askSec.style.display='none';right.id='ask';
+    const cta=imp.querySelector('.s-cta');if(cta)cta.style.display='none'})();
+
+  // per-step colours and a heading above each feature rail
+  const HEADS={s1:'What ingest guarantees',brain:'What the brain keeps track of',impact:'How the engine decides'};
+  slides.forEach(sl=>{const f=sl.querySelector('.fcols');if(!f)return;const h=document.createElement('div');h.className='rail-h';h.textContent=HEADS[sl.id]||'';f.parentNode.insertBefore(h,f)});
   // feature notes surface as cards inside each slide's visual
-  slides.forEach(sl=>{const f=sl.querySelector('.fcols'),v=sl.querySelector('.s-vis');if(f&&v)v.appendChild(f)});
+  slides.forEach(sl=>{const f=sl.querySelector('.fcols'),v=sl.querySelector('.s-vis');if(f&&v){const h=sl.querySelector('.rail-h');if(h)v.appendChild(h);v.appendChild(f)}});
 
   // one thin connector: slide 1 -> slide 2 -> branch -> slide 3 -> chat
   const cv=document.getElementById('flowCv'),x=cv.getContext('2d');let on=false;
@@ -1520,11 +1629,11 @@ document.querySelectorAll('.spot').forEach(el=>el.addEventListener('pointermove'
   const pt=(a,b,t)=>{const my=(a[1]+b[1])/2,u=1-t;return[u*u*u*a[0]+3*u*u*t*a[0]+3*u*t*t*b[0]+t*t*t*b[0],u*u*u*a[1]+3*u*u*t*my+3*u*t*t*my+t*t*t*b[1]]};
   const bot=el=>{const r=R(el);return[r.left+r.width/2,r.bottom+8]},top=el=>{const r=R(el);return[r.left+r.width/2,r.top-6]};
   function segs(){const out=[[bot(slides[0].querySelector('.fcols')),top(slides[1].querySelector('.s-num'))]];
-    if(branch){out.push([bot(slides[1].querySelector('.fcols')),top(branch.querySelector('.br-root'))]);out.push([bot(branch.querySelectorAll('.br-col')[2]),top(slides[2].querySelector('.s-num'))])}
-    const cta=slides[2].querySelector('.s-cta'),a=bot(cta);out.push([a,[a[0],R(document.getElementById('ask')).top+30]]);return out}
-  (function f(now){requestAnimationFrame(f);if(!on)return;x.clearRect(0,0,innerWidth,innerHeight);x.fillStyle=x.strokeStyle='#1F3FD8';x.lineWidth=1.5;
+    if(branch){out.push([bot(slides[1].querySelector('.fcols')),top(branch.querySelector('.br-root'))]);branch.querySelectorAll('.br-col').forEach(c=>out.push([bot(c),top(slides[2].querySelector('.s-num'))]))}
+    return out}
+  (function f(now){requestAnimationFrame(f);if(!on)return;x.clearRect(0,0,innerWidth,innerHeight);x.fillStyle=x.strokeStyle='#1F3FD8';x.lineWidth=2;
     segs().forEach(([a,b])=>{if(b[1]<-60||a[1]>innerHeight+60)return;const k=clamp((innerHeight*.72-a[1])/Math.max(1,b[1]-a[1]));if(k<=0)return;
-      x.lineWidth=3;x.lineCap='round';x.globalAlpha=.25;x.beginPath();for(let j=0;j<=60;j++){const[px,py]=pt(a,b,j/60);j?x.lineTo(px,py):x.moveTo(px,py)}x.stroke();
+      x.lineWidth=2;x.lineCap='round';x.globalAlpha=.25;x.beginPath();for(let j=0;j<=60;j++){const[px,py]=pt(a,b,j/60);j?x.lineTo(px,py):x.moveTo(px,py)}x.stroke();
       x.globalAlpha=1;x.beginPath();for(let j=0;j<=60*k;j++){const[px,py]=pt(a,b,j/60);j?x.lineTo(px,py):x.moveTo(px,py)}x.stroke();
       const[hx,hy]=pt(a,b,k);x.beginPath();x.arc(hx,hy,6,0,6.28);x.fill();x.globalAlpha=.18;x.beginPath();x.arc(hx,hy,12,0,6.28);x.fill();x.globalAlpha=1;
       if(!reduceM)for(let q=0;q<3;q++){const t=(((now/1400)+q/3)%1)*k;for(let z=0;z<8;z++){const tt=t-z*.012;if(tt<0)break;const[px,py]=pt(a,b,tt);x.globalAlpha=(1-z/8)*.9;x.beginPath();x.arc(px,py,4.5-z*.4,0,6.28);x.fillStyle='#fff';x.fill();x.fillStyle='#1F3FD8';x.beginPath();x.arc(px,py,3.2-z*.3,0,6.28);x.fill()}}x.globalAlpha=1})})();
@@ -1551,7 +1660,7 @@ document.querySelectorAll('.spot').forEach(el=>el.addEventListener('pointermove'
   // branch lines from the brain into four abilities
   (()=>{if(!branch)return;const svg=document.getElementById('brLines');
     const lay=()=>{const b=R(branch),r=R(branch.querySelector('.br-root'));svg.setAttribute('viewBox',`0 0 ${b.width} ${b.height}`);const ax=r.left-b.left+r.width/2,ay=r.bottom-b.top;
-      svg.innerHTML=[...branch.querySelectorAll('.br-col')].map(c=>{const q=R(c),bx=q.left-b.left+1,by=q.top-b.top,my=(ay+by)/2;return `<path d="M${ax} ${ay} C${ax} ${my} ${bx} ${my} ${bx} ${by}"/>`}).join('');
+      svg.innerHTML=[...branch.querySelectorAll('.br-col')].map(c=>{const q=R(c),bx=q.left-b.left+22,by=q.top-b.top,my=(ay+by)/2;return `<path d="M${ax} ${ay} C${ax} ${my} ${bx} ${my} ${bx} ${by}"/>`}).join('');
       [...svg.children].forEach(p=>p.style.setProperty('--len',p.getTotalLength()))};
     lay();addEventListener('resize',lay)})();
 
@@ -1640,13 +1749,13 @@ const LAB={
   function tick(){
     const k=alpha;
     for(let i=0;i<N.length;i++){const a=N[i];if(!vis(a))continue;
-      for(let j=i+1;j<N.length;j++){const b=N[j];if(!vis(b))continue;let dx=b.x-a.x,dy=b.y-a.y,d2=dx*dx+dy*dy+.01,d=Math.sqrt(d2),F=2400/d2*k;dx/=d;dy/=d;a.vx-=dx*F;a.vy-=dy*F;b.vx+=dx*F;b.vy+=dy*F}}
+      for(let j=i+1;j<N.length;j++){const b=N[j];if(!vis(b))continue;let dx=b.x-a.x,dy=b.y-a.y,d2=dx*dx+dy*dy+.01,d=Math.sqrt(d2),F=5200/d2*k;dx/=d;dy/=d;a.vx-=dx*F;a.vy-=dy*F;b.vx+=dx*F;b.vy+=dy*F}}
     E.forEach(([a,b])=>{if(!vis(a)||!vis(b))return;let dx=b.x-a.x,dy=b.y-a.y,d=Math.hypot(dx,dy)||1,L=a.t==='cell'&&a.id==='iA'||b.id==='iA'?120:70,F=(d-L)*.02*k;dx/=d;dy/=d;a.vx+=dx*F;a.vy+=dy*F;b.vx-=dx*F;b.vy-=dy*F});
-    N.forEach(n=>{if(!vis(n))return;n.vx+=(W/2-n.x)*.002*k;n.vy+=(H/2-n.y)*.002*k;if(n===drag){n.vx=n.vy=0;return}n.vx*=.82;n.vy*=.82;n.x+=n.vx;n.y+=n.vy;n.x=Math.max(20,Math.min(W-20,n.x));n.y=Math.max(20,Math.min(H-20,n.y))});
+    N.forEach(n=>{if(!vis(n))return;n.vx+=(W/2-n.x)*.002*k;n.vy+=(H/2-n.y)*.002*k;if(n===drag){n.vx=n.vy=0;return}n.vx*=.82;n.vy*=.82;n.x+=n.vx;n.y+=n.vy;n.x=Math.max(90,Math.min(W-90,n.x));n.y=Math.max(30,Math.min(H-30,n.y))});
     alpha=Math.max(alpha*.985,0);
   }
   function draw(){
-    x.clearRect(0,0,W,H);const focus=hover||sel;const dimT=n=>hl&&n.t!==hl;
+    x.clearRect(0,0,W,H);const focus=hover||sel;const placed=N.filter(vis).map(n=>[n.x-n.r-2,n.y-n.r-2,n.x+n.r+2,n.y+n.r+2]);const free=(a,b,c,d)=>placed.every(r=>a>r[2]||c<r[0]||b>r[3]||d<r[1]);const dimT=n=>hl&&n.t!==hl;
     E.forEach(([a,b])=>{if(!vis(a)||!vis(b))return;const hot=(focus&&(a===focus||b===focus))||(hl&&!focus&&(a.t===hl||b.t===hl));x.strokeStyle=hot?'rgba(31,63,216,.75)':focus?'rgba(15,26,43,.06)':(a.t==='issue'||b.t==='issue')?'rgba(201,128,28,.3)':'rgba(15,26,43,.16)';x.lineWidth=hot?1.6:1;x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke()});
     const tnow=performance.now();if(focus||hl)E.forEach(([a,b],i)=>{if(!((focus&&(a===focus||b===focus))||(hl&&!focus&&(a.t===hl||b.t===hl))))return;const t=((tnow/2200)+i*.137)%1,px=a.x+(b.x-a.x)*t,py=a.y+(b.y-a.y)*t,dm=(focus&&!(a===focus||b===focus))||(hl&&!focus&&a.t!==hl&&b.t!==hl);x.globalAlpha=dm?.15:.8;x.beginPath();x.arc(px,py,1.9,0,6.28);x.fillStyle=(a.t==='issue'||b.t==='issue')?'#b5720f':'#1F3FD8';x.fill();x.globalAlpha=1});
     N.forEach(n=>{if(!vis(n))return;const dim=(focus&&n!==focus&&!focus.nb.has(n))||(!focus&&dimT(n));x.globalAlpha=dim?.25:1;const col=LAB.types[n.t][1];
@@ -1654,7 +1763,7 @@ const LAB={
       x.beginPath();x.arc(n.x,n.y,n.r,0,6.28);x.fillStyle=col;x.fill();
       if(n===sel){x.beginPath();x.arc(n.x,n.y,n.r+6,0,6.28);x.strokeStyle=col;x.lineWidth=1.5;x.stroke();x.lineWidth=1}
       const showL=hl?(n.t===hl&&!focus)||n===focus||(focus&&focus.nb.has(n)):(n.t==='run'||n.t==='issue'||n===focus||(focus&&focus.nb.has(n)));
-      if(showL){x.font=`${n.t==='run'?'600 11px':'500 11px'} "JetBrains Mono",monospace`;const tw=x.measureText(n.label).width,lx=n.x+n.r+7,ly=n.y-9;
+      if(showL){x.font=`${n.t==='run'?'600 11px':'500 11px'} "JetBrains Mono",monospace`;const tw=x.measureText(n.label).width;let lx=n.x+n.r+7,ly=n.y-9;const self=placed.findIndex(r=>r[0]===n.x-n.r-2&&r[1]===n.y-n.r-2);const sv=self>=0?placed.splice(self,1)[0]:null;const must=n===focus||(focus&&focus.nb.has(n));if(!free(lx-5,ly,lx+tw+5,ly+19)){lx=n.x-n.r-7-tw;if(!free(lx-5,ly,lx+tw+5,ly+19)&&!must){if(sv)placed.push(sv);x.globalAlpha=1;return}}placed.push([lx-5,ly,lx+tw+5,ly+19]);if(sv)placed.push(sv);
         x.fillStyle='rgba(255,255,255,.92)';x.beginPath();x.roundRect?x.roundRect(lx-5,ly,tw+10,19,6):x.rect(lx-5,ly,tw+10,19);x.fill();
         x.fillStyle=n.t==='issue'?'#c9801c':n.t==='run'?'#0f1a2b':'#4a576c';x.fillText(n.label,lx,n.y+4.5)}
       x.globalAlpha=1});
@@ -1749,7 +1858,7 @@ document.querySelectorAll('canvas.flowcv').forEach(c=>{const x=c.getContext('2d'
   new IntersectionObserver(es=>es.forEach(e=>{const was=on;on=e.isIntersecting;if(on&&!was){if(!start)start=performance.now();requestAnimationFrame(draw)}}),{threshold:.1}).observe(c)});
 
 // Diagnostics as an agent at work: streams its steps, surfaces issues, then proposes next steps
-(()=>{const ag=document.getElementById('agent');if(!ag)return;const dg=document.getElementById('diag');if(dg)document.getElementById('agIss').appendChild(dg);
+(()=>{const ag=document.getElementById('agent');if(!ag)return;const bg=document.querySelector('#brain .brain-grid');if(bg)bg.appendChild(ag);const dg=document.getElementById('diag');if(dg)document.getElementById('agIss').appendChild(dg);
   const log=document.getElementById('agLog'),steps=document.getElementById('agSteps');
   const L=["Reading 16 runs and 42 files","Linked 86 facts into the graph","Checking outcomes, assay versions, doses, repeats and labels","5 issues found, 2 to fix before the next round"];
   const N=[["Record Run 14's outcome","Ask the operator. The run can't be compared until it's in."],["Re-check Run 12's dose","The dilution sheet implies 80 ng/mL, not the 100 recorded."],["Swap planned Run 16 for a lot B control","Run 16 repeats Run 05. A control separates lot from passage."]];
