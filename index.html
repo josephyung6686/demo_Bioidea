@@ -1325,6 +1325,21 @@ body,body *:not(.ph):not(i),button,input,textarea,select,svg text{font-family:"I
 .br-col .pv-s span{font-size:11px}
 .br-col .br-time{margin-top:10px}
 .br-toggle{position:relative;z-index:2}
+
+.br-lines{position:absolute;left:0;top:0;width:100%;height:100%}
+/* story card: header top, columns, proportional funnel, zero at bottom */
+.funnel{grid-template-rows:auto auto 1fr auto !important;align-content:stretch !important;row-gap:0 !important}
+.funnel .fn:not(.zero){margin-top:22px}
+.funnel .fn:not(.zero) .fbar{display:none}
+.fun-chart{grid-column:1/-1;align-self:center;display:grid;gap:12px;padding:26px 0}
+.fc-row{display:grid;grid-template-columns:96px 1fr 40px;align-items:center;gap:12px;font-size:13px}
+.fc-row i{display:block;height:10px;border-radius:999px;background:#e8ecf7;position:relative;overflow:hidden}
+.fc-row i::after{content:"";position:absolute;inset:0 auto 0 0;width:0;background:var(--accent);border-radius:999px;transition:width 1.6s var(--ease)}
+.funnel.in .fc-row i::after{width:var(--w)}
+.fc-row:nth-child(2) i::after{transition-delay:.4s}
+.fc-row b{text-align:right;font-weight:600}
+.fc-row:last-child b{color:var(--accent)}
+.funnel .fn.zero{align-self:end !important;margin-top:0}
 </style>
 </head>
 <body>
@@ -1411,6 +1426,11 @@ body,body *:not(.ph):not(i),button,input,textarea,select,svg text{font-family:"I
         <div class="fn"><div class="n" data-count="300" data-dur="2600" data-delay="0">0</div><div class="l"><b>Instrument files</b>Flow exports, photos, plate reads, protocols<i class="fbar" style="--w:100%"></i></div></div>
         <div class="fn"><div class="n" data-count="3" data-dur="2600" data-delay="500">0</div><div class="l"><b>Experiments, mixed together</b>No record of which file belonged where<i class="fbar" style="--w:62%"></i></div></div>
         <div class="fn"><div class="n" data-count="31" data-dur="2600" data-delay="1000">0</div><div class="l"><b>Data points found</b>Conditions and outcomes scattered across files<i class="fbar" style="--w:30%"></i></div></div>
+        <div class="fun-chart" aria-label="300 files reduced to 31 data points and 0 ready for AI">
+          <div class="fc-row"><span>Files</span><i style="--w:100%"></i><b>300</b></div>
+          <div class="fc-row"><span>Data points</span><i style="--w:10.3%"></i><b>31</b></div>
+          <div class="fc-row"><span>Ready for AI</span><i style="--w:0%"></i><b>0</b></div>
+        </div>
         <div class="fn zero"><div class="n">0</div><div class="l"><b>Ready for AI</b>So we started building Obtimize<i class="fbar" style="--w:3%"></i></div></div>
       </div>
     </div>
@@ -1504,7 +1524,7 @@ body,body *:not(.ph):not(i),button,input,textarea,select,svg text{font-family:"I
 
     <section class="branch" id="branch">
       <div class="br-root"><span class="hub-dot"><i class="ph ph-brain"></i></span><b>What you can do with it</b></div>
-      <svg class="br-lines" id="brLines" aria-hidden="true"></svg>
+      <svg class="br-lines" id="brLines" aria-hidden="true" preserveAspectRatio="none"></svg>
       <div class="br-toggle" role="tablist"><button class="on" data-m="with">With Obtimize</button><button data-m="without">Today, without it</button></div>
       <div class="br-cols">
         <a class="br-col" href="#ask"><i class="ph ph-chat-circle-text"></i><b>Ask with citations</b><p>Ask "what did VEGF above 50 ng/mL do?" and get an answer linked to the exact run sheets and flow files.</p><p class="br-before">Search 300 files by hand, ask whoever ran it.</p><div class="br-time"><span class="t-b">Hours to find a past run</span><span class="t-a">Seconds</span></div><div class="br-pv"><div class="pv-q">What did VEGF above 50 ng/mL do?</div><div class="pv-a">3 runs at 100 ng/mL. Runs 07 and 12 gave high CD31+ <sup>1</sup><sup>2</sup></div><div class="pv-s"><span>run_sheet_07.xlsx</span><span>run_sheet_12.xlsx</span></div></div><span>Try a question</span></a>
@@ -1907,8 +1927,8 @@ document.querySelectorAll('.spot').forEach(el=>el.addEventListener('pointermove'
 
   // branch lines from the brain into four abilities
   (()=>{if(!branch)return;const svg=document.getElementById('brLines');
-    const lay=()=>{const b=R(branch),r=R(branch.querySelector('.br-toggle')||branch.querySelector('.br-root'));svg.setAttribute('viewBox',`0 0 ${b.width} ${b.height}`);const ax=r.left-b.left+r.width/2,ay=r.bottom-b.top;
-      svg.innerHTML=[...branch.querySelectorAll('.br-col')].map(c=>{const q=R(c),ic=R(c.querySelector('.ph')),bx=ic.left-b.left+ic.width/2,by=ic.top-b.top-12,my=(ay+by)/2;return `<path d="M${ax} ${ay} C${ax} ${my} ${bx} ${my} ${bx} ${by-6}"/><circle class="br-dot" cx="${bx}" cy="${by}" r="6"/>`}).join('');
+    const lay=()=>{const b=R(svg),r=R(branch.querySelector('.br-toggle')||branch.querySelector('.br-root'));svg.setAttribute('viewBox',`0 0 ${b.width} ${b.height}`);const ax=r.left-b.left+r.width/2,ay=r.bottom-b.top;
+      svg.innerHTML=[...branch.querySelectorAll('.br-col')].map(c=>{const q=R(c),ic=R(c.querySelector('.ph')),bx=ic.left-b.left+ic.width/2,by=ic.top-b.top-22,my=(ay+by)/2;return `<path d="M${ax} ${ay} C${ax} ${my} ${bx} ${my} ${bx} ${by-6}"/><circle class="br-dot" cx="${bx}" cy="${by}" r="6"/>`}).join('');
       [...svg.querySelectorAll('path')].forEach(p=>p.style.setProperty('--len',p.getTotalLength()))};
     lay();addEventListener('resize',lay)})();
 
