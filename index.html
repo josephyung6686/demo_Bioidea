@@ -1160,6 +1160,10 @@ body,body *:not(.ph):not(i),button,input,textarea,select,svg text{font-family:"I
 .funnel .fn .l b{font-size:16px}
 .key-cb .cbar i{background:linear-gradient(90deg,#ffffff,#e8eefd 30%,#b0c6f8 65%,#6e96ee)}
 .ov-row{grid-template-columns:44px 1fr}
+
+/* next steps: plain list, no tinted background */
+.ag-step,#brain .ag-step{background:#fff !important;border:1px solid var(--line) !important;border-radius:10px}
+.ag-step .ph{color:#0E1116 !important}
 </style>
 </head>
 <body>
@@ -1947,9 +1951,9 @@ document.querySelectorAll('canvas.flowcv').forEach(c=>{const x=c.getContext('2d'
   const wait=ms=>new Promise(r=>setTimeout(r,reduceM?0:ms));let ran=false;
   async function run(){if(ran)return;ran=true;log.innerHTML='';steps.innerHTML='';const cards=dg?[...dg.children]:[];cards.forEach(c=>c.classList.remove('show'));ag.classList.remove('done');
     for(const t of L){const row=document.createElement('div');row.className='ag-line';row.innerHTML='<i></i><span></span>';log.appendChild(row);const sp=row.querySelector('span');
-      for(let i=1;i<=t.length;i++){sp.textContent=t.slice(0,i);await wait(14)}row.classList.add('ok');await wait(260)}
-    for(const c of cards){c.classList.add('show');await wait(220)}
-    for(const [h,p] of N){const d=document.createElement('div');d.className='ag-step';d.innerHTML=`<i class="ph ph-arrow-right"></i><div><b>${h}</b><span>${p}</span></div>`;steps.appendChild(d);await wait(40);d.classList.add('show');await wait(260)}
+      for(let i=1;i<=t.length;i++){sp.textContent=t.slice(0,i);await wait(5)}row.classList.add('ok');await wait(110)}
+    for(const c of cards){c.classList.add('show');await wait(90)}
+    for(const [h,p] of N){const d=document.createElement('div');d.className='ag-step';d.innerHTML=`<i class="ph ph-arrow-right"></i><div><b>${h}</b><span>${p}</span></div>`;steps.appendChild(d);await wait(40);d.classList.add('show');await wait(110)}
     ag.classList.add('done');ran=false;ag.dataset.played='1'}
   new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!ag.dataset.played)run()}),{threshold:.35}).observe(ag);
   document.getElementById('agReplay').onclick=()=>run()})();
