@@ -56,7 +56,9 @@ a{color:inherit;text-decoration:none}
 @media (prefers-reduced-transparency:reduce){.glass{background:#ffffff;backdrop-filter:none;-webkit-backdrop-filter:none}}
 
 /* Nav */
-nav{position:sticky;top:14px;z-index:50;margin-top:14px}
+nav{position:fixed;top:14px;left:50%;width:min(1192px,calc(100% - 32px));transform:translateX(-50%);z-index:50;transition:transform .45s var(--ease),opacity .3s}
+nav.hide{transform:translate(-50%,-140%);opacity:0}
+body{padding-top:88px}
 .nav{display:flex;align-items:center;justify-content:space-between;height:60px;padding:0 10px 0 20px;border-radius:999px}
 .brand{display:flex;align-items:center;gap:10px;font-weight:600;letter-spacing:-.01em;font-size:17px}
 .mark{width:26px;height:26px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ffffff,var(--accent) 45%,#2f6fd1);box-shadow:inset 0 1px 1px rgb(255 255 255 / .6),0 0 0 3px rgb(63 127 230 / .12)}
@@ -99,12 +101,12 @@ h1 em{font-style:italic;font-weight:400;background:var(--grad);-webkit-backgroun
 .prog{position:relative;display:grid;grid-template-columns:repeat(5,1fr);margin-top:10px;border-radius:999px;overflow:hidden;background:rgb(15 26 43 / .05);border:1px solid var(--line)}
 .prog span{position:relative;z-index:1;text-align:center;font-size:11px;padding:5px 0;color:var(--ink-3);transition:color .3s}
 .prog span.on{color:#fff;font-weight:600}
-.prog span.done{color:var(--ink)}
+.prog span.done{color:#fff}
 .pf{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--grad);opacity:.9}
 .tip{position:absolute;pointer-events:none;padding:8px 10px;border-radius:10px;font-size:11px;line-height:1.5;color:var(--ink);background:rgb(255 255 255 / .97);border:1px solid rgb(15 26 43 / .12);opacity:0;transform:translate(-50%,calc(-100% - 12px));transition:opacity .15s;white-space:nowrap;z-index:2}
 .tip b{color:var(--accent);font-weight:500}
 .cbar{position:absolute;right:8px;top:8px;display:flex;align-items:center;gap:6px;font-size:10px;color:var(--ink-3);padding:5px 8px;border-radius:8px;background:rgb(255 255 255 / .85)}
-.cbar i{width:60px;height:6px;border-radius:3px;background:linear-gradient(90deg,#f7f9fc,#8db8f7 35%,#3f7fe6 70%,#1f4eaa)}
+.cbar i{width:60px;height:6px;border-radius:3px;background:linear-gradient(90deg,#fafbfe,#d6e5fc 33%,#78a6f0 66%,#2f68d6);border:1px solid var(--line)}
 .cbar em{font-style:normal;margin-left:6px}
 .map-out div{transition:border-color .4s,background .4s,transform .4s var(--ease)}
 .map-out div.on{border-color:rgb(63 127 230 / .5);background:rgb(63 127 230 / .10);transform:translateY(-2px)}
@@ -120,6 +122,10 @@ h2{font-size:clamp(32px,3.8vw,50px);line-height:1.06;letter-spacing:-.026em;font
 
 /* Brand story */
 .mission{font-size:clamp(26px,3vw,40px);line-height:1.18;letter-spacing:-.025em;font-weight:400;max-width:24ch;color:var(--ink)}
+.mission{position:relative}
+.m-ghost{visibility:hidden}
+.m-live{position:absolute;inset:0}
+.m-live .tcaret{height:.9em}
 .mission strong.blue{font-weight:inherit;color:var(--accent)}
 .mission em{font-style:italic;background:var(--grad-pink);-webkit-background-clip:text;background-clip:text;color:transparent;padding-right:.06em}
 .bstory{min-height:100dvh;display:flex;flex-direction:column;justify-content:center;padding:96px 0}
@@ -515,7 +521,7 @@ footer{padding:64px 0 40px;color:var(--ink-3);font-size:14px;border-top:1px soli
 
   <!-- Brand story -->
   <section id="story" class="bstory">
-    <p class="mission rv">Obtimize is an AI second brain for cell therapy labs. It <em>remembers every experiment</em> you have run and tells you <strong class="blue">what to run next</strong>.</p>
+    <p class="mission" id="mission" aria-label="Obtimize is an AI second brain for cell therapy labs. It remembers every experiment you have run and tells you what to run next."><span class="m-ghost" aria-hidden="true">Obtimize is an AI second brain for cell therapy labs. It <em>remembers every experiment</em> you have run and tells you <strong class="blue">what to run next</strong>.</span><span class="m-live" aria-hidden="true"></span></p>
     <div class="story">
       <div class="chapters">
         <div class="ch"><div class="ch-k">The problem</div><h3>Labs lose what they learn</h3><p>Every experiment leaves files behind: flow cytometry, microscope photos, spreadsheets, protocols. They pile up in shared drives and people's heads. Failed runs are forgotten, and old ones get repeated by accident.</p></div>
@@ -816,6 +822,9 @@ footer{padding:64px 0 40px;color:var(--ink-3);font-size:14px;border-top:1px soli
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll('.rv').forEach((el,i)=>{el.style.transitionDelay=(i%4)*70+'ms';io.observe(el)});
 
+// Nav hides on scroll down, returns on scroll up
+(()=>{const nav=document.querySelector('nav');let last=scrollY;(function f(){const y=scrollY;if(Math.abs(y-last)>6){nav.classList.toggle('hide',y>last&&y>160);last=y}requestAnimationFrame(f)})()})();
+
 // Headlines reveal word by word
 const reduceM=matchMedia('(prefers-reduced-motion: reduce)').matches;
 document.querySelectorAll('h2').forEach(h=>{
@@ -835,6 +844,15 @@ document.querySelectorAll('.trust-cards .tr').forEach(b=>b.addEventListener('cli
 (()=>{const st=[...document.querySelectorAll('.stage')];if(!st.length)return;let i=0,paused=false;
   st.forEach(s=>{s.addEventListener('mouseenter',()=>{paused=true;st.forEach(x=>x.classList.toggle('active',x===s))});s.addEventListener('mouseleave',()=>paused=false)});
   const step=()=>{if(!paused){st.forEach((x,j)=>x.classList.toggle('active',j===i));i=(i+1)%st.length}};step();if(!reduceM)setInterval(step,2200)})();
+
+// Mission line types out with its colored phrases intact
+(()=>{const el=document.getElementById('mission');if(!el)return;const live=el.querySelector('.m-live'),ghost=el.querySelector('.m-ghost');
+  const segs=[...ghost.childNodes].map(n=>n.nodeType===3?['',n.textContent]:[n.outerHTML.replace(/>.*<\//s,'></'),n.textContent]);
+  if(reduceM){live.innerHTML=ghost.innerHTML;return}
+  new IntersectionObserver((es,o)=>es.forEach(e=>{if(!e.isIntersecting)return;o.disconnect();
+    const total=segs.reduce((a,s)=>a+s[1].length,0);let n=0;
+    (function step(){n++;let left=n,html='';for(const[wrap,txt]of segs){if(left<=0)break;const part=txt.slice(0,left);left-=txt.length;html+=wrap?wrap.replace('></','>'+part+'</'):part}
+      live.innerHTML=html+'<span class="tcaret"></span>';if(n<total)setTimeout(step,28);else setTimeout(()=>{live.innerHTML=html},1800)})()}),{threshold:.6}).observe(el)})();
 
 // Closing tagline types itself out when it scrolls into view
 (()=>{const el=document.getElementById('typed');if(!el)return;const t=el.dataset.text,out=document.getElementById('typedT');
@@ -888,7 +906,7 @@ document.querySelectorAll('.spot').forEach(el=>el.addEventListener('pointermove'
   let W,H,img,hover=null;const CYC=13000;
   function build(){const d=devicePixelRatio||1;W=c.clientWidth;H=c.clientHeight;c.width=W*d;c.height=H*d;x.setTransform(d,0,0,d,0,0);
     const g=document.createElement('canvas'),N=90;g.width=N;g.height=N;const gx=g.getContext('2d'),id=gx.createImageData(N,N);
-    for(let j=0;j<N;j++)for(let i=0;i<N;i++){const z=f(i/N,1-j/N),k=(j*N+i)*4,S=[[12,18,32],[61,123,224],[63,127,230],[242,248,255]],q=Math.min(2.999,z*3),m=Math.floor(q),r=q-m,A=S[m],B=S[m+1];id.data[k]=A[0]+(B[0]-A[0])*r;id.data[k+1]=A[1]+(B[1]-A[1])*r;id.data[k+2]=A[2]+(B[2]-A[2])*r;id.data[k+3]=120+z*120}
+    for(let j=0;j<N;j++)for(let i=0;i<N;i++){const z=f(i/N,1-j/N),k=(j*N+i)*4,S=[[250,251,254],[214,229,252],[120,166,240],[47,104,214]],q=Math.min(2.999,z*3),m=Math.floor(q),r=q-m,A=S[m],B=S[m+1];id.data[k]=A[0]+(B[0]-A[0])*r;id.data[k+1]=A[1]+(B[1]-A[1])*r;id.data[k+2]=A[2]+(B[2]-A[2])*r;id.data[k+3]=255}
     gx.putImageData(id,0,0);img=g}
   const P=(u,v)=>[u*W,(1-v)*H];
   const ease=k=>1-Math.pow(1-Math.max(0,Math.min(1,k)),3);
@@ -901,7 +919,7 @@ document.querySelectorAll('.spot').forEach(el=>el.addEventListener('pointermove'
     if(ph!==lastPh){lastPh=ph;stT.textContent=phases[ph][1];pspans.forEach((sp,j)=>{sp.classList.toggle('on',j===ph);sp.classList.toggle('done',j<ph)});cards.forEach(cd=>cd.classList.toggle('on',(+cd.dataset.ph===1&&ph===2)||(+cd.dataset.ph===2&&ph===3)||(+cd.dataset.ph===3&&ph===4)))}
     x.clearRect(0,0,W,H);
     // model confidence grows as runs load
-    x.globalAlpha=.15+.85*ease((t-400)/4800);x.imageSmoothingEnabled=true;x.drawImage(img,0,0,W,H);x.globalAlpha=1;
+    x.imageSmoothingEnabled=true;x.drawImage(img,0,0,W,H);const veil=1-ease((t-400)/4800);if(veil>0){x.fillStyle=`rgba(250,251,254,${(veil*.92).toFixed(3)})`;x.fillRect(0,0,W,H)}
     x.strokeStyle='rgba(15,26,43,.06)';x.lineWidth=1;for(let i=1;i<5;i++){x.beginPath();x.moveTo(W*i/5,0);x.lineTo(W*i/5,H);x.moveTo(0,H*i/5);x.lineTo(W,H*i/5);x.stroke()}
     // ticks
     x.font='10px "Inter",sans-serif';x.fillStyle='rgba(74,87,108,.85)';
