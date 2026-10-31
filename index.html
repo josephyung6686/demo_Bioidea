@@ -1158,6 +1158,8 @@ body,body *:not(.ph):not(i),button,input,textarea,select,svg text{font-family:"I
 .funnel .fn{flex:1;display:grid;grid-template-columns:110px 1fr;align-items:center;padding:0}
 .funnel .fn .n{font-size:44px}
 .funnel .fn .l b{font-size:16px}
+.key-cb .cbar i{background:linear-gradient(90deg,#ffffff,#e8eefd 30%,#b0c6f8 65%,#6e96ee)}
+.ov-row{grid-template-columns:44px 1fr}
 </style>
 </head>
 <body>
@@ -1257,10 +1259,10 @@ body,body *:not(.ph):not(i),button,input,textarea,select,svg text{font-family:"I
   </div>
     <aside class="overview rv" aria-label="Overview of the pipeline">
       <div class="ov-h">The pipeline at a glance</div>
-      <a class="ov-row" href="#s1"><span class="ov-n">01</span><div><b>Ingest</b><small>Reads your lab's files as they are, read-only</small></div><em>5 sources</em></a>
-      <a class="ov-row" href="#brain"><span class="ov-n">02</span><div><b>Understand &amp; diagnose</b><small>Links every run into one graph, then checks it</small></div><em>5 issues found</em></a>
-      <a class="ov-row" href="#impact"><span class="ov-n">03</span><div><b>Optimize</b><small>Plans the next round and a range that holds</small></div><em>6 wells</em></a>
-      <a class="ov-row" href="#ask"><span class="ov-n">04</span><div><b>Ask</b><small>Answers questions from your records, with citations</small></div><em>Try it</em></a>
+      <a class="ov-row" href="#s1"><span class="ov-n">01</span><div><b>Ingest</b><small>Reads your lab's files as they are, read-only</small></div></a>
+      <a class="ov-row" href="#brain"><span class="ov-n">02</span><div><b>Understand &amp; diagnose</b><small>Links every run into one graph, then checks it</small></div></a>
+      <a class="ov-row" href="#impact"><span class="ov-n">03</span><div><b>Optimize</b><small>Plans the next round and a range that holds</small></div></a>
+      <a class="ov-row" href="#ask"><span class="ov-n">04</span><div><b>Ask</b><small>Answers questions from your records, with citations</small></div></a>
     </aside>
   </section>
 
@@ -1566,7 +1568,7 @@ document.querySelectorAll('.spot').forEach(el=>el.addEventListener('pointermove'
   const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   const pf=document.getElementById('mapPF'),pspans=[...document.querySelectorAll('#mapProg span')];
   const tip=document.getElementById('mapTip'),stT=document.getElementById('mapStatusT'),cards=[...document.querySelectorAll('.map-out [data-ph]')];
-  const f=(u,v)=>Math.min(1,Math.exp(-(((u-.56)/.2)**2+((v-.62)/.24)**2)+.3*((u-.56)/.2)*((v-.62)/.24))*.92+.22*Math.exp(-(((u-.2)/.12)**2+((v-.25)/.14)**2)));
+  const f=(u,v)=>Math.min(1,Math.exp(-(((u-.56)/.2)**2+((v-.62)/.24)**2))*.92+.22*Math.exp(-(((u-.2)/.12)**2+((v-.25)/.14)**2)));
   const past=[[.12,.2],[.22,.35],[.3,.78],[.42,.18],[.5,.5],[.62,.7],[.7,.3],[.82,.82],[.88,.15],[.35,.55],[.58,.88],[.15,.62]];
   const next=[[.47,.66],[.66,.58],[.55,.78],[.4,.48],[.72,.74],[.52,.55]];
   const wells=['A1','A2','A3','B1','B2','B3'];
@@ -1574,11 +1576,11 @@ document.querySelectorAll('.spot').forEach(el=>el.addEventListener('pointermove'
   const chir=u=>(1+u*5).toFixed(1),vegf=v=>Math.round(v*150),pur=(u,v)=>Math.round(8+f(u,v)*62);
   // contour of the robust region, ordered by angle so it can be drawn progressively
   const th=.62,cu=.56,cv=.62,cont=[];
-  for(let a=0;a<6.283;a+=.06){let r=.02;while(r<.6&&f(cu+Math.cos(a)*r,cv+Math.sin(a)*r)>th)r+=.004;cont.push([cu+Math.cos(a)*r,cv+Math.sin(a)*r])}
+  for(let a=0;a<6.283;a+=.06){cont.push([cu+Math.cos(a)*.15,cv+Math.sin(a)*.18])}
   let W,H,img,hover=null;const CYC=13000;
   function build(){const d=devicePixelRatio||1;W=c.clientWidth;H=c.clientHeight;c.width=W*d;c.height=H*d;x.setTransform(d,0,0,d,0,0);
     const g=document.createElement('canvas'),N=90;g.width=N;g.height=N;const gx=g.getContext('2d'),id=gx.createImageData(N,N);
-    for(let j=0;j<N;j++)for(let i=0;i<N;i++){const z=f(i/N,1-j/N),k=(j*N+i)*4,S=[[255,255,255],[220,227,255],[110,134,240],[31,63,216]],q=Math.min(2.999,z*3),m=Math.floor(q),r=q-m,A=S[m],B=S[m+1];id.data[k]=A[0]+(B[0]-A[0])*r;id.data[k+1]=A[1]+(B[1]-A[1])*r;id.data[k+2]=A[2]+(B[2]-A[2])*r;id.data[k+3]=255}
+    for(let j=0;j<N;j++)for(let i=0;i<N;i++){const z=f(i/N,1-j/N),k=(j*N+i)*4,S=[[255,255,255],[232,238,253],[176,198,248],[110,150,238]],q=Math.min(2.999,z*3),m=Math.floor(q),r=q-m,A=S[m],B=S[m+1];id.data[k]=A[0]+(B[0]-A[0])*r;id.data[k+1]=A[1]+(B[1]-A[1])*r;id.data[k+2]=A[2]+(B[2]-A[2])*r;id.data[k+3]=255}
     gx.putImageData(id,0,0);img=g}
   const P=(u,v)=>[u*W,(1-v)*H];
   const ease=k=>1-Math.pow(1-Math.max(0,Math.min(1,k)),3);
