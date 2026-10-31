@@ -603,6 +603,35 @@ section{padding:112px 0}
 .s-cta{order:6;margin-top:32px}
 .brain3d{min-height:520px}
 @media (max-width:960px){.feats{grid-template-columns:1fr}.slide{margin-bottom:100px}.brain3d{min-height:400px}}
+
+/* ===== Flat, Manas-style finish ===== */
+:root{--grad:linear-gradient(#2f6fd6,#2f6fd6);--grad-pink:linear-gradient(#b8396f,#b8396f);--sans:"Suisse Intl","Helvetica Neue",Helvetica,Arial,sans-serif}
+body,button,input,.mono,.eyebrow,.s-num,.ch-k,.f-h,.p-type,.synth-h,.lbl,.tr0,.foot-grid h4{font-family:var(--sans)}
+body{letter-spacing:0;font-feature-settings:normal}
+h1,h2,.typed-h,.s-h,.mission,.vision .q{font-weight:500;letter-spacing:-.02em}
+h1 em,.mission em{background:none;-webkit-background-clip:initial;background-clip:initial;color:var(--accent);font-style:normal}
+.mission em{color:var(--pink)}
+/* buttons: solid, no motion */
+.btn{transition:background-color .2s,border-color .2s,color .2s}
+.btn:hover,.btn:active,.btn-primary:hover,.vchat:hover{transform:none}
+.btn-primary{background:#0f1a2b;color:#fff;box-shadow:none}
+.btn-primary:hover{background:#26344d}
+.btn-ghost{background:#fff;border:1px solid rgb(15 26 43 / .14);color:var(--ink)}
+.btn-ghost:hover{background:#f2f4f8}
+.composer button{background:#0f1a2b}
+/* cards: flat white, hairline border */
+.glass{background:#fff;border:1px solid rgb(15 26 43 / .08);box-shadow:0 1px 2px rgb(15 26 43 / .04);backdrop-filter:none;-webkit-backdrop-filter:none}
+.glass::before,.gloss::after,.spot::before{display:none}
+.feats li,.plan,.trust-cards .tr,.cs,.sugg button,.follow button,.stage,.src-c,.fact{background:#fff;border:1px solid rgb(15 26 43 / .08);box-shadow:none}
+.feats li:hover,.trust-cards .tr:hover,.sugg button:hover,.follow button:hover,.cs.on,.stage.active{transform:none;box-shadow:none}
+.feats li:hover,.trust-cards .tr:hover{border-color:rgb(15 26 43 / .18)}
+.nav{background:rgb(255 255 255 / .92);border:1px solid rgb(15 26 43 / .08);box-shadow:0 1px 2px rgb(15 26 43 / .04)}
+.well.b{background:var(--accent);box-shadow:none;transform:none}
+.well.a{background:var(--warn);transform:none}
+.imp.big,.vision,.cd-col.ob{background:#fff}
+.s-num{box-shadow:none}
+.panel{background:#fbfcfe}
+.p-name,.p-body,.key div,.p-sec .row span{font-family:var(--sans)}
 </style>
 </head>
 <body>
