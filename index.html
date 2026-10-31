@@ -1224,6 +1224,71 @@ body,body *:not(.ph):not(i),button,input,textarea,select,svg text{font-family:"I
 .uq{background:#fff !important;border:1px solid #0E1116 !important}
 .demo{border-color:var(--line) !important}
 .br-root,.vsteps span.on{box-shadow:none !important}
+
+/* story: card spans the full timeline height and stays inside its column */
+.bstory .story{display:grid;grid-template-columns:1fr 1fr;align-items:stretch !important;gap:56px}
+.bstory .story>*{min-width:0}
+.funnel{align-self:stretch !important;box-sizing:border-box;width:100%;max-width:100%;grid-template-rows:auto 1fr auto !important;align-content:stretch !important;padding:28px 30px !important}
+.funnel .fn{align-self:stretch;display:grid !important;grid-template-rows:auto auto 1fr auto;gap:8px}
+.funnel .fn .fbar{align-self:end;margin-top:12px !important}
+.funnel .fn.zero{align-self:end;display:flex !important}
+@media (max-width:960px){.bstory .story{grid-template-columns:1fr}}
+
+.funnel .fn:not(.zero){grid-template-columns:1fr !important;grid-template-rows:auto 1fr !important;align-content:stretch;padding-top:18px !important}
+.funnel .fn:not(.zero) .n{font-size:48px !important}
+.funnel .fn:not(.zero) .l{display:flex !important;flex-direction:column;height:100%}
+.funnel .fn:not(.zero) .l b{font-size:15px !important;margin:10px 0 4px}
+.funnel .fn:not(.zero) .l{font-size:13.5px;line-height:1.45}
+.funnel .fn:not(.zero) .fbar{margin-top:auto !important}
+.funnel .fn.zero{gap:18px !important;padding-top:20px !important}
+.funnel .fn.zero .l{display:block}
+.funnel .fn.zero .l b{display:block;font-size:17px !important;margin-bottom:2px}
+
+.br-col::before{display:none !important}
+.br-lines .br-dot{fill:#fff;stroke:var(--accent);stroke-width:2;opacity:0;transition:opacity .4s 1s}
+.branch.in .br-lines .br-dot{opacity:1}
+/* stats: content centred in the card, no empty band */
+.funnel{grid-template-rows:auto 1fr auto !important}
+.funnel .fn:not(.zero){align-self:center;grid-template-rows:auto auto !important}
+.funnel .fn:not(.zero) .l{height:auto}
+.funnel .fn:not(.zero) .fbar{margin-top:14px !important}
+.funnel .fn:not(.zero) .n{font-size:56px !important}
+
+/* stats card: fuller, evenly spaced, bars left-aligned */
+.funnel{grid-template-rows:auto 1fr auto !important}
+.funnel .fn:not(.zero){align-self:stretch;display:flex !important;flex-direction:column;justify-content:center;gap:0;border-top:1px solid var(--line) !important;margin-top:22px}
+.funnel .fn:not(.zero) .n{font-size:72px !important;letter-spacing:-.04em}
+.funnel .fn:not(.zero) .l b{font-size:16px !important;margin:16px 0 6px}
+.funnel .fn:not(.zero) .l{font-size:14px}
+.funnel .fn .fbar{align-self:flex-start !important;margin-left:0 !important;margin-top:18px !important;height:3px}
+.funnel .fn.zero .n{font-size:64px !important}
+
+/* stats card keeps timeline height; content sits together, centred */
+.funnel{grid-template-rows:auto auto auto !important;align-content:center !important;row-gap:28px !important}
+.funnel .f-h{align-self:start}
+.funnel .fn:not(.zero){margin-top:0;justify-content:flex-start}
+.funnel .fn.zero{align-self:start !important;margin-top:8px}
+
+/* chat inside the narrow Ask column: nothing overflows */
+.opt-ask{min-width:0}
+.opt-ask .app{min-width:0;width:100%}
+.opt-ask .convo{overflow-x:hidden;align-items:stretch;padding:18px 18px}
+.opt-ask .convo>*{min-width:0;max-width:100%}
+.opt-ask .turn{min-width:0;width:100%}
+.opt-ask .srcs{grid-template-columns:1fr 1fr;gap:6px}
+.opt-ask .src-c{min-width:0}
+.opt-ask .src-c b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.opt-ask .ans{font-size:13.5px;line-height:1.6;overflow-wrap:anywhere}
+.opt-ask .step{font-size:12px}
+.opt-ask .lbl{font-size:11px}
+.opt-ask .follow{flex-wrap:wrap}
+.opt-ask .follow button{font-size:12px;padding:6px 10px;max-width:100%;white-space:normal;text-align:left}
+.opt-ask .uq{max-width:85%;font-size:13px}
+.opt-ask .app-bar{font-size:12px}
+.opt-ask .demo{font-size:11px;padding:2px 8px}
+
+/* hero status: real loading spinner instead of a pulsing dot */
+.sdot{width:13px !important;height:13px !important;border-radius:50% !important;background:none !important;box-shadow:none !important;border:2px solid #d5dcf7 !important;border-top-color:var(--accent) !important;animation:spin .8s linear infinite !important;flex:none}
 </style>
 </head>
 <body>
@@ -1415,8 +1480,8 @@ body,body *:not(.ph):not(i),button,input,textarea,select,svg text{font-family:"I
     <section class="slide" data-n="03" id="impact">
       <div class="s-text">
         <div class="s-num">03 · Optimize</div>
-        <h3 class="s-h">An optimization engine built for stem cell manufacturing</h3>
-        <p class="s-line">Built for the realities of differentiation: few wells per round, noisy readouts and line-to-line variation. It plans your next plate, finds a range that holds, and lets you question every run.</p>
+        <h3 class="s-h">An optimization engine built for cell manufacturing</h3>
+        <p class="s-line">Built for the realities of cell manufacturing: few wells per round, noisy readouts and line-to-line variation. It plans your next plate, finds a range that holds, and lets you question every run.</p>
         <div class="fcols">
           <div><b>The most informative wells</b><p>Chosen to teach you the most per round within a fixed well budget, not repeats of the best run.</p><small>Fits your plate and budget</small></div>
           <div><b>A range, not a point</b><p>Conditions that hold across run-to-run noise, which is what matters at scale-up.</p><small>Robust operating region</small></div>
@@ -1437,7 +1502,7 @@ body,body *:not(.ph):not(i),button,input,textarea,select,svg text{font-family:"I
           </div>
         </div>
         <div class="opt-bench">
-          <div class="opt-h">How it performs<span>simulated differentiation, same well budget</span></div>
+          <div class="opt-h">How it performs<span>simulated cell manufacturing, same well budget</span></div>
           <svg class="conv" viewBox="0 0 320 170" role="img" aria-label="Best result by round: Obtimize plateaus at round 5, standard method at round 10">
             <g class="gridl"><line x1="30" y1="20" x2="310" y2="20"/><line x1="30" y1="70" x2="310" y2="70"/><line x1="30" y1="120" x2="310" y2="120"/></g>
             <line x1="30" y1="145" x2="310" y2="145" stroke="#d9d7d0"/>
@@ -1452,7 +1517,7 @@ body,body *:not(.ph):not(i),button,input,textarea,select,svg text{font-family:"I
             <div><b><span data-count="66" data-dur="1800">0</span>/66</b><small>reported regions held true</small></div>
             <div><b>2→<span data-count="36" data-dur="1800">0</span>%</b><small>reliable regions found</small></div>
           </div>
-          <p class="opt-note">Benchmarks on simulated stem cell differentiation problems, compared with a standard optimizer at the same well budget. From our PLOS ONE manuscript; wet-lab validation is in progress.</p>
+          <p class="opt-note">Benchmarks on simulated cell manufacturing problems, compared with a standard optimizer at the same well budget. From our PLOS ONE manuscript; wet-lab validation is in progress.</p>
         </div>
       </div>
     </section>
@@ -1806,8 +1871,8 @@ document.querySelectorAll('.spot').forEach(el=>el.addEventListener('pointermove'
   // branch lines from the brain into four abilities
   (()=>{if(!branch)return;const svg=document.getElementById('brLines');
     const lay=()=>{const b=R(branch),r=R(branch.querySelector('.br-root'));svg.setAttribute('viewBox',`0 0 ${b.width} ${b.height}`);const ax=r.left-b.left+r.width/2,ay=r.bottom-b.top;
-      svg.innerHTML=[...branch.querySelectorAll('.br-col')].map(c=>{const q=R(c),bx=q.left-b.left+22,by=q.top-b.top,my=(ay+by)/2;return `<path d="M${ax} ${ay} C${ax} ${my} ${bx} ${my} ${bx} ${by}"/>`}).join('');
-      [...svg.children].forEach(p=>p.style.setProperty('--len',p.getTotalLength()))};
+      svg.innerHTML=[...branch.querySelectorAll('.br-col')].map(c=>{const q=R(c),bx=q.left-b.left+22,by=q.top-b.top,my=(ay+by)/2;return `<path d="M${ax} ${ay} C${ax} ${my} ${bx} ${my} ${bx} ${by-6}"/><circle class="br-dot" cx="${bx}" cy="${by}" r="6"/>`}).join('');
+      [...svg.querySelectorAll('path')].forEach(p=>p.style.setProperty('--len',p.getTotalLength()))};
     lay();addEventListener('resize',lay)})();
 
   // 03 Optimize: wells for the next round light up
