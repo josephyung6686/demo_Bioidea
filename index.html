@@ -1289,6 +1289,42 @@ body,body *:not(.ph):not(i),button,input,textarea,select,svg text{font-family:"I
 
 /* hero status: real loading spinner instead of a pulsing dot */
 .sdot{width:13px !important;height:13px !important;border-radius:50% !important;background:none !important;box-shadow:none !important;border:2px solid #d5dcf7 !important;border-top-color:var(--accent) !important;animation:spin .8s linear infinite !important;flex:none}
+
+/* ability columns: before/after toggle, time line, expandable preview, hover-linked branch */
+.br-toggle{position:relative;z-index:1;display:inline-flex;margin-top:40px;border:1px solid var(--line);border-radius:999px;background:#fff;padding:3px}
+.br-toggle button{font:500 13px var(--sans);border:0;background:none;padding:7px 14px;border-radius:999px;cursor:pointer;color:#0E1116}
+.br-toggle button.on{background:#0E1116;color:#fff}
+.br-cols{margin-top:56px}
+.br-before{display:none}
+.branch.without .br-col>p:not(.br-before){display:none}
+.branch.without .br-before{display:block;font-size:14.5px;line-height:1.55;margin-top:6px}
+.br-time{margin-top:12px;font-size:12.5px;display:flex;flex-direction:column;gap:2px}
+.br-time .t-b{text-decoration:line-through;opacity:.55}
+.br-time .t-a{font-weight:600;color:var(--accent)}
+.branch.without .br-time .t-b{text-decoration:none;opacity:1;font-weight:600;color:#0E1116}
+.branch.without .br-time .t-a{display:none}
+.br-pv{margin-top:14px;border:1px solid var(--line);border-radius:10px;background:#fff;padding:10px 12px;font-size:12px;max-height:0;opacity:0;overflow:hidden;padding-top:0;padding-bottom:0;transition:max-height .45s var(--ease),opacity .3s,padding .3s}
+.br-col:hover .br-pv,.br-col:focus-visible .br-pv,.br-col.open .br-pv{max-height:180px;opacity:1;padding-top:10px;padding-bottom:10px}
+.branch.without .br-pv{display:none}
+.pv-q{font-weight:600}.pv-a{margin-top:4px}.pv-a sup{color:var(--accent);font-weight:600;margin-left:2px}
+.pv-s{display:flex;gap:4px;flex-wrap:wrap;margin-top:6px}.pv-s span{border:1px solid var(--line);border-radius:4px;padding:1px 5px;font-size:11px}
+.pv-t div{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;padding:4px 0;border-bottom:1px solid var(--line)}
+.pv-t div:last-child{border-bottom:0}.pv-t em{font-style:normal;font-weight:600}
+.pv-plate{display:grid;grid-template-columns:repeat(6,14px);gap:5px}
+.pv-plate i{width:14px;height:14px;border-radius:50%;border:1.5px solid #cfd4dd}
+.pv-plate i.b{background:var(--accent);border-color:var(--accent)}.pv-plate i.d{background:#0E1116;border-color:#0E1116}
+.pv-cap{margin-top:6px}
+.br-lines path.hot{stroke-width:3}
+.br-lines path.dim{opacity:.25}
+
+.br-toggle{display:flex;width:max-content;margin:22px auto 0}
+.br-cols{margin-top:64px !important}
+.br-pv b{display:inline;font-size:12px !important;margin:0 !important;font-weight:600}
+.br-col .br-pv span,.br-col .br-time span{display:inline;margin:0;font-size:12px;font-weight:inherit;color:inherit}
+.br-col .br-time .t-a{color:var(--accent);font-weight:600}
+.br-col .pv-s span{font-size:11px}
+.br-col .br-time{margin-top:10px}
+.br-toggle{position:relative;z-index:2}
 </style>
 </head>
 <body>
@@ -1469,11 +1505,12 @@ body,body *:not(.ph):not(i),button,input,textarea,select,svg text{font-family:"I
     <section class="branch" id="branch">
       <div class="br-root"><span class="hub-dot"><i class="ph ph-brain"></i></span><b>What you can do with it</b></div>
       <svg class="br-lines" id="brLines" aria-hidden="true"></svg>
+      <div class="br-toggle" role="tablist"><button class="on" data-m="with">With Obtimize</button><button data-m="without">Today, without it</button></div>
       <div class="br-cols">
-        <a class="br-col" href="#ask"><i class="ph ph-chat-circle-text"></i><b>Ask with citations</b><p>Ask "what did VEGF above 50 ng/mL do?" and get an answer linked to the exact run sheets and flow files.</p><span>Try a question</span></a>
-        <a class="br-col" href="#brain"><i class="ph ph-stethoscope"></i><b>Flag data problems</b><p>Every run is checked for a missing outcome, an assay version change, a dose that disagrees with its dilution sheet, or a repeat of an earlier run.</p><span>See the checks</span></a>
-        <a class="br-col" href="#impact"><i class="ph ph-target"></i><b>Plan the next plate</b><p>Recommends the wells for your next round within a fixed well budget, plus a CHIR and VEGF range that holds across noise.</p><span>See the plan</span></a>
-        <a class="br-col" href="#partner"><i class="ph ph-table"></i><b>Export clean data</b><p>Verified runs export as one table of conditions and outcomes, failed runs included, ready for your own analysis or AI tools.</p><span>Early access for design partners</span></a>
+        <a class="br-col" href="#ask"><i class="ph ph-chat-circle-text"></i><b>Ask with citations</b><p>Ask "what did VEGF above 50 ng/mL do?" and get an answer linked to the exact run sheets and flow files.</p><p class="br-before">Search 300 files by hand, ask whoever ran it.</p><div class="br-time"><span class="t-b">Hours to find a past run</span><span class="t-a">Seconds</span></div><div class="br-pv"><div class="pv-q">What did VEGF above 50 ng/mL do?</div><div class="pv-a">3 runs at 100 ng/mL. Runs 07 and 12 gave high CD31+ <sup>1</sup><sup>2</sup></div><div class="pv-s"><span>run_sheet_07.xlsx</span><span>run_sheet_12.xlsx</span></div></div><span>Try a question</span></a>
+        <a class="br-col" href="#brain"><i class="ph ph-stethoscope"></i><b>Flag data problems</b><p>Every run is checked for a missing outcome, an assay version change, a dose that disagrees with its dilution sheet, or a repeat of an earlier run.</p><p class="br-before">Errors surface after the next run fails.</p><div class="br-time"><span class="t-b">Found after a failed run</span><span class="t-a">Found before you plan</span></div><div class="br-pv"><div class="pv-t"><div><b>Run 12</b><span>VEGF 100</span><em>Sheet says 80</em></div><div><b>Run 14</b><span>Outcome</span><em>Missing</em></div><div><b>Run 05</b><span>Assay</span><em>v1, not v2</em></div></div></div><span>See the checks</span></a>
+        <a class="br-col" href="#impact"><i class="ph ph-target"></i><b>Plan the next plate</b><p>Recommends the wells for your next round within a fixed well budget, plus a CHIR and VEGF range that holds across noise.</p><p class="br-before">Pick conditions by intuition, often repeating old runs.</p><div class="br-time"><span class="t-b">10 rounds to a result</span><span class="t-a">5 rounds in benchmarks</span></div><div class="br-pv"><div class="pv-plate"><i class=""></i><i class=""></i><i class=""></i><i class="d"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="b"></i><i class="b"></i><i class="b"></i><i class=""></i><i class=""></i><i class=""></i><i class="b"></i><i class="b"></i><i class="b"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="d"></i><i class=""></i><i class=""></i></div><div class="pv-cap">6 wells to run, 2 to repeat</div></div><span>See the plan</span></a>
+        <a class="br-col" href="#partner"><i class="ph ph-table"></i><b>Export clean data</b><p>Verified runs export as one table of conditions and outcomes, failed runs included, ready for your own analysis or AI tools.</p><p class="br-before">Weeks of manual cleanup before any analysis.</p><div class="br-time"><span class="t-b">Weeks of cleanup</span><span class="t-a">One click, failed runs kept</span></div><div class="br-pv"><div class="pv-t"><div><b>Run</b><span>CHIR</span><em>CD31+</em></div><div><b>07</b><span>4 µM</span><em>high</em></div><div><b>09</b><span>4 µM</span><em>low</em></div><div><b>14</b><span>4 µM</span><em>missing</em></div></div></div><span>Early access for design partners</span></a>
       </div>
     </section>
 
@@ -1870,8 +1907,8 @@ document.querySelectorAll('.spot').forEach(el=>el.addEventListener('pointermove'
 
   // branch lines from the brain into four abilities
   (()=>{if(!branch)return;const svg=document.getElementById('brLines');
-    const lay=()=>{const b=R(branch),r=R(branch.querySelector('.br-root'));svg.setAttribute('viewBox',`0 0 ${b.width} ${b.height}`);const ax=r.left-b.left+r.width/2,ay=r.bottom-b.top;
-      svg.innerHTML=[...branch.querySelectorAll('.br-col')].map(c=>{const q=R(c),bx=q.left-b.left+22,by=q.top-b.top,my=(ay+by)/2;return `<path d="M${ax} ${ay} C${ax} ${my} ${bx} ${my} ${bx} ${by-6}"/><circle class="br-dot" cx="${bx}" cy="${by}" r="6"/>`}).join('');
+    const lay=()=>{const b=R(branch),r=R(branch.querySelector('.br-toggle')||branch.querySelector('.br-root'));svg.setAttribute('viewBox',`0 0 ${b.width} ${b.height}`);const ax=r.left-b.left+r.width/2,ay=r.bottom-b.top;
+      svg.innerHTML=[...branch.querySelectorAll('.br-col')].map(c=>{const q=R(c),ic=R(c.querySelector('.ph')),bx=ic.left-b.left+ic.width/2,by=ic.top-b.top-12,my=(ay+by)/2;return `<path d="M${ax} ${ay} C${ax} ${my} ${bx} ${my} ${bx} ${by-6}"/><circle class="br-dot" cx="${bx}" cy="${by}" r="6"/>`}).join('');
       [...svg.querySelectorAll('path')].forEach(p=>p.style.setProperty('--len',p.getTotalLength()))};
     lay();addEventListener('resize',lay)})();
 
@@ -2082,6 +2119,14 @@ document.querySelectorAll('canvas.flowcv').forEach(c=>{const x=c.getContext('2d'
     ag.classList.add('done');ran=false;ag.dataset.played='1'}
   new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!ag.dataset.played)run()}),{threshold:.35}).observe(ag);
   document.getElementById('agReplay').onclick=()=>run()})();
+
+// ability columns: toggle before/after, tap to open preview, hover lights its branch from the brain
+(()=>{const br=document.getElementById('branch');if(!br)return;
+  br.querySelectorAll('.br-toggle button').forEach(b=>b.onclick=()=>{br.querySelectorAll('.br-toggle button').forEach(x=>x.classList.toggle('on',x===b));br.classList.toggle('without',b.dataset.m==='without')});
+  const cols=[...br.querySelectorAll('.br-col')];const relay=()=>dispatchEvent(new Event('resize'));setTimeout(relay,300);new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)[50,400,900,1600].forEach(t=>setTimeout(relay,t))})).observe(br);
+  cols.forEach((c,i)=>{c.addEventListener('click',e=>{if(!c.classList.contains('open')&&matchMedia('(hover: none)').matches){e.preventDefault();c.classList.add('open')}});
+    c.addEventListener('mouseenter',()=>{const ps=[...br.querySelectorAll('.br-lines path')];ps.forEach((p,j)=>{p.classList.toggle('hot',j===i);p.classList.toggle('dim',j!==i)})});
+    c.addEventListener('mouseleave',()=>br.querySelectorAll('.br-lines path').forEach(p=>p.classList.remove('hot','dim')))})})();
 </script>
 </body>
 </html>
