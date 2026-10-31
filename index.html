@@ -341,7 +341,8 @@ h2{font-size:clamp(32px,3.8vw,50px);line-height:1.06;letter-spacing:-.026em;font
 }
 
 /* Interactive brain */
-.brainbox{margin-top:48px;padding:18px}
+.brainbox{padding:18px}
+.slide .brainbox{min-height:0}
 .filters{display:flex;flex-wrap:wrap;gap:8px;padding:4px 4px 14px}
 .filters button{font:inherit;font-size:13px;color:var(--ink-2);background:rgb(15 26 43 / .03);border:1px solid var(--line);border-radius:999px;padding:6px 12px;display:flex;align-items:center;gap:8px;cursor:pointer;transition:opacity .2s,border-color .2s}
 .filters button i{width:9px;height:9px;border-radius:50%;display:inline-block}
@@ -726,20 +727,41 @@ section{padding:112px 0}
       </div>
     </section>
 
-    <section class="slide" data-n="02">
+    <section class="slide" data-n="02" id="brain">
       <div class="s-text">
         <div class="s-num">02 · Understand</div>
         <h3 class="s-h">One brain that understands every experiment</h3>
-        <p class="s-line">Each run is rebuilt as linked facts, so the lab's history becomes something you can ask.</p>
+        <p class="s-line">Every run becomes linked facts. Highlight a type, drag a dot, or click one to see exactly where it came from.</p>
         <ul class="feats">
           <li><i class="ph ph-graph"></i><div><b>Connected scientific memory</b><span>Every run linked to its doses, cell line, passage, lot, protocol version, images and result.</span><em class="ftag">Run → doses → cells → protocol → result</em></div></li>
           <li><i class="ph ph-notebook"></i><div><b>Keeps the context</b><span>Failed runs, hypotheses and the decisions behind them, not just final numbers.</span><em class="ftag">Failed runs kept, never dropped</em></div></li>
           <li><i class="ph ph-seal-check"></i><div><b>Draft until signed</b><span>Anything the software extracts stays a draft until a scientist verifies it.</span><em class="ftag">Draft → signed by a named scientist</em></div></li>
         </ul>
       </div>
-      <div class="s-vis glass brain3d">
-        <canvas id="sphere" aria-label="A rotating knowledge graph of linked experiments"></canvas>
-        <div class="feed"><div class="synth-h">Synthesizing</div><div id="feedL"></div></div>
+      <div class="s-vis glass brainbox">
+          <div class="filters" id="filters"></div>
+      <div class="brain-grid">
+        <div class="stagebox"><canvas id="kg" aria-label="Interactive knowledge graph of an illustrative lab"></canvas></div>
+        <aside class="panel" id="panel">
+          <div id="pDefault">
+            <div class="p-type mono">How to read this</div>
+            <h3 class="p-name">Every dot is one fact from the lab</h3>
+            <p class="p-body">Lines show which facts belong to the same experiment. Click any dot to see where it came from.</p>
+            <div class="key" id="pKey"></div>
+          </div>
+          <div id="pNode" hidden>
+            <div class="p-chip" id="pChip"></div>
+            <h3 class="p-name" id="pName"></h3>
+            <p class="p-what" id="pWhat"></p>
+            <p class="p-body" id="pBody"></p>
+            <div class="p-sec" id="pIssues"></div>
+            <div class="p-sec" id="pSrc"></div>
+            <div class="p-sec" id="pLinks"></div>
+            <button class="p-back" id="pBack"><i class="ph ph-arrow-left"></i>How to read this</button>
+          </div>
+        </aside>
+      </div>
+        </div>
       </div>
     </section>
 
@@ -788,38 +810,7 @@ section{padding:112px 0}
     </section>
   </div>
 
-  <!-- Interactive brain -->
-  <section id="brain" class="brain-sec">
-    <div class="rv">
-      <h2>Explore the brain yourself</h2>
-      <p class="sub">An illustrative lab, as Obtimize sees it. Click a type to highlight it, drag any dot, or click one to see where it came from.</p>
-    </div>
-    <div class="glass brainbox rv">
-      <div class="filters" id="filters"></div>
-      <div class="brain-grid">
-        <div class="stagebox"><canvas id="kg" aria-label="Interactive knowledge graph of an illustrative lab"></canvas></div>
-        <aside class="panel" id="panel">
-          <div id="pDefault">
-            <div class="p-type mono">How to read this</div>
-            <h3 class="p-name">Every dot is one fact from the lab</h3>
-            <p class="p-body">Lines show which facts belong to the same experiment. Click any dot to see where it came from.</p>
-            <div class="key" id="pKey"></div>
-          </div>
-          <div id="pNode" hidden>
-            <div class="p-chip" id="pChip"></div>
-            <h3 class="p-name" id="pName"></h3>
-            <p class="p-what" id="pWhat"></p>
-            <p class="p-body" id="pBody"></p>
-            <div class="p-sec" id="pIssues"></div>
-            <div class="p-sec" id="pSrc"></div>
-            <div class="p-sec" id="pLinks"></div>
-            <button class="p-back" id="pBack"><i class="ph ph-arrow-left"></i>How to read this</button>
-          </div>
-        </aside>
-      </div>
-    </div>
-    <p class="pipe-note rv">Illustrative data. Not from a customer lab.</p>
-  </section>
+
 
   <!-- Impact -->
   <section id="impact">
@@ -1196,7 +1187,7 @@ document.querySelectorAll('.spot').forEach(el=>el.addEventListener('pointermove'
     if(reduceM){rows.forEach(r=>r.classList.add('done'));cnt.textContent='8 of 8 linked'}else tick()})();
 
   // 02: rotating 3D knowledge graph + synthesis feed
-  (()=>{const c=document.getElementById('sphere'),x=c.getContext('2d');let W,H;
+  (()=>{const c=document.getElementById('sphere');if(!c)return;const x=c.getContext('2d');let W,H;
     const size=()=>{const d=devicePixelRatio||1;W=c.clientWidth;H=c.clientHeight;c.width=W*d;c.height=H*d;x.setTransform(d,0,0,d,0,0)};size();addEventListener('resize',size);
     const types=[['#3f7fe6',5.5],['#d14d8a',3.6],['#7c879a',3.4],['#5fb58a',3.4],['#c9801c',4.6]];
     const N=60,P=[];for(let i=0;i<N;i++){const y=1-(i/(N-1))*2,r=Math.sqrt(1-y*y),t=i*2.39996;P.push({x:Math.cos(t)*r,y,z:Math.sin(t)*r,t:i%9===0?4:i%5===0?0:i%3===0?1:i%2?2:3})}
@@ -1214,7 +1205,7 @@ document.querySelectorAll('.spot').forEach(el=>el.addEventListener('pointermove'
         if(labels[i]&&q.z>-.1){x.font='600 12px "Inter",sans-serif';const tw=x.measureText(labels[i]).width;x.fillStyle='rgba(255,255,255,.92)';x.beginPath();x.roundRect?x.roundRect(q.sx+9,q.sy-10,tw+12,20,6):x.rect(q.sx+9,q.sy-10,tw+12,20);x.fill();x.fillStyle='#0f1a2b';x.fillText(labels[i],q.sx+15,q.sy+4)}
         x.globalAlpha=1})})();
     const F=['<b>Run 07</b>: CHIR 4 µM, VEGF 100, P12 → CD31+ high','<b>Run 09</b>: lot B, passage 18 → CD31+ low','<b>Protocol v3</b>: day 4 feeding changed','<b>Run 12</b>: dilution sheet says 80, not 100','<b>Run 14</b>: no outcome recorded','<b>12 photos</b>: no run label'];
-    const L=document.getElementById('feedL');let k=0;const show=()=>{L.innerHTML=[0,1,2].map(j=>`<div>${F[(k+j)%F.length]}</div>`).join('')};show();
+    const L=document.getElementById('feedL');if(!L)return;let k=0;const show=()=>{L.innerHTML=[0,1,2].map(j=>`<div>${F[(k+j)%F.length]}</div>`).join('')};show();
     setInterval(()=>{if(isOn(1)){k=(k+1)%F.length;show()}},1600)})();
 
   // 03: scan line moves down the runs and flags issues
